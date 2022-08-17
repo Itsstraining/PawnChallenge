@@ -11,7 +11,10 @@ export class AppComponent {
   title = 'PawnChallengeClient';
   constructor(public dialog: MatDialog){}
   openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: 'auto',
+      height: 'auto',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
