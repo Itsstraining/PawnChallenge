@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "chess-db-d7bb3": {
+      "hosting": {
+        "PawnChallengeClient": [
+          "chess-db-d7bb3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "chess-db-d7bb3"
+  }
+}

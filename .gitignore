@@ -1,0 +1,55 @@
+/pawn-challenge-client/node_modules
+/pawn-challenge-server/node_modules
+/pawn-challenge-server/dist
+/pawn-challenge-server/key-admin.json
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/pawn-challenge-client/dist
+/pawn-challenge-client/tmp
+/pawn-challenge-client/out-tsc
+/pawn-challenge-client/bazel-out
+
+# Node
+/pawn-challenge-client/npm-debug.log
+/pawn-challenge-client/yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/pawn-challenge-client/.angular/cache
+/pawn-challenge-client.sass-cache/
+/pawn-challenge-client/connect.lock
+/pawn-challenge-client/coverage
+/pawn-challenge-client/libpeerconnection.log
+testem.log
+/pawn-challenge-client/typings
+
+# System files
+/pawn-challenge-client.DS_Store
+Thumbs.db
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+
+/pawn-challenge-server/dist
+/pawn-challenge-server/key-admin.json
