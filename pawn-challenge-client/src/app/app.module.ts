@@ -8,7 +8,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogComponent } from './components/dialogGamemode/dialog.component';
 import { MaterialExampleModule } from './material.module';
 
 @NgModule({
