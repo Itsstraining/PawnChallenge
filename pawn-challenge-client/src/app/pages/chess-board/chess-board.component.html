@@ -1,0 +1,30 @@
+<!-- <div>
+  <div class="grid-container">
+    <div *ngFor="let i of board1">
+      <div *ngFor="let j of board1" class="grid-item">aa</div>
+    </div>
+    <br>
+  </div>
+</div> -->
+<div style="width: 200px; height: 200px">
+  <div class="container">
+    <div *ngFor="let i of [0,1,2,3,4,5,6,7]" class="rows">
+      <div
+        *ngFor="let j of [0,1,2,3,4,5,6,7]"
+        class="item"
+        (drop)="drop($event)"
+        (dragover)="allowDrop($event)"
+      >
+        <img
+          *ngIf="board[i][j].hasChess"
+          src="../../../assets/chess/{{board[i][j].chess.img}}"
+          draggable="true"
+          (dragstart)="drag($event)"
+          style="width: calc(40vw / 8); height: calc(40vw / 8)"
+          id="{{board[i][j].chess.id}}"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="item" (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
