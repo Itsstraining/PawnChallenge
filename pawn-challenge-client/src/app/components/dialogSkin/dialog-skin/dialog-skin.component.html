@@ -1,0 +1,377 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+<h2 mat-dialog-title>
+    <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
+        style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;">
+</h2>
+
+<mat-dialog-content class="mat-typography" >
+    <div >
+        <div class="component">
+            <label class="label">Pieces</label>
+            <select class="select" icon="caret-down">
+                <option value="8_bit">
+                    8-Bit
+                </option>
+                <option value="alpha">
+                    Alpha
+                </option>
+                <option value="bases">
+                    Bases
+                </option>
+                <option value="blindfold">
+                    Blindfold
+                </option>
+                <option value="book">
+                    Book
+                </option>
+                <option value="bubblegum">
+                    Bubblegum
+                </option>
+                <option value="cases">
+                    Cases
+                </option>
+                <option value="classic">
+                    Classic
+                </option>
+                <option value="club">
+                    Club
+                </option>
+                <option value="condal">
+                    Condal
+                </option>
+                <option value="dash">
+                    Dash
+                </option>
+                <option value="game_room">
+                    Game Room
+                </option>
+                <option value="glass">
+                    Glass
+                </option>
+                <option value="gothic">
+                    Gothic
+                </option>
+                <option value="graffiti">
+                    Graffiti
+                </option>
+                <option value="icy_sea">
+                    Icy Sea
+                </option>
+                <option value="light">
+                    Light
+                </option>
+                <option value="lolz">
+                    Lolz
+                </option>
+                <option value="marble">
+                    Marble
+                </option>
+                <option value="maya">
+                    Maya
+                </option>
+                <option value="metal">
+                    Metal
+                </option>
+                <option value="modern2">
+                    Modern
+                </option>
+                <option value="nature">
+                    Nature
+                </option>
+                <option value="neon">
+                    Neon
+                </option>
+                <option value="neo">
+                    Neo
+                </option>
+                <option value="neo_wood">
+                    Neo-Wood
+                </option>
+                <option value="newspaper">
+                    Newspaper
+                </option>
+                <option value="ocean">
+                    Ocean
+                </option>
+                <option value="sky">
+                    Sky
+                </option>
+                <option value="space">
+                    Space
+                </option>
+                <option value="tigers">
+                    Tigers
+                </option>
+                <option value="tournament">
+                    Tournament
+                </option>
+                <option value="vintage">
+                    Vintage
+                </option>
+                <option value="wood">
+                    Wood
+                </option>
+                <option value="3dwood">
+                    3D - Wood
+                </option>
+                <option value="3d_staunton">
+                    3D - Staunton
+                </option>
+                <option value="3dplastic">
+                    3D - Plastic
+                </option>
+                <option value="3dchesskid">
+                    3D - ChessKid
+                </option>
+                <option value="real3d">
+                    Real 3D
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Board</label>
+            <select class="select" icon="caret-down">
+                <option value="8_bit">
+                    8-Bit
+                </option>
+                <option value="bases">
+                    Bases
+                </option>
+                <option value="blue">
+                    Blue
+                </option>
+                <option value="brown">
+                    Brown
+                </option>
+                <option value="bubblegum">
+                    Bubblegum
+                </option>
+                <option value="burled_wood">
+                    Burled Wood
+                </option>
+                <option value="dark_wood">
+                    Dark Wood
+                </option>
+                <option value="dash">
+                    Dash
+                </option>
+                <option value="glass">
+                    Glass
+                </option>
+                <option value="graffiti">
+                    Graffiti
+                </option>
+                <option value="green">
+                    Green
+                </option>
+                <option value="icy_sea">
+                    Icy Sea
+                </option>
+                <option value="light">
+                    Light
+                </option>
+                <option value="lolz">
+                    Lolz
+                </option>
+                <option value="marble">
+                    Marble
+                </option>
+                <option value="metal">
+                    Metal
+                </option>
+                <option value="neon">
+                    Neon
+                </option>
+                <option value="newspaper">
+                    Newspaper
+                </option>
+                <option value="orange">
+                    Orange
+                </option>
+                <option value="overlay">
+                    Overlay
+                </option>
+                <option value="parchment">
+                    Parchment
+                </option>
+                <option value="purple">
+                    Purple
+                </option>
+                <option value="red">
+                    Red
+                </option>
+                <option value="sand">
+                    Sand
+                </option>
+                <option value="sky">
+                    Sky
+                </option>
+                <option value="stone">
+                    Stone
+                </option>
+                <option value="tan">
+                    Tan
+                </option>
+                <option value="tournament">
+                    Tournament
+                </option>
+                <option value="translucent">
+                    Translucent
+                </option>
+                <option value="walnut">
+                    Walnut
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Coordinates</label>
+            <select class="select" icon="caret-down">
+                <option value="off">
+                    None
+                </option>
+                <option value="inside">
+                    Inside
+                </option>
+                <option value="outside">
+                    Outside
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Piece Notation</label>
+            <select class="select" icon="caret-down">
+                <option value="text">
+                    Text
+                </option>
+                <option value="figurine">
+                    Figurine
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Animation Type</label>
+            <select class="select" icon="caret-down">
+                <option value="none">
+                    None
+                </option>
+                <option value="slow">
+                    Slow
+                </option>
+                <option value="default">
+                    Medium (Default)
+                </option>
+                <option value="fast">
+                    Fast
+                </option>
+                <option value="natural">
+                    Natural
+                </option>
+                <option value="arcade">
+                    Arcade
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Move Method</label>
+            <select class="select" icon="caret-down">
+                <option value="drag">
+                    Drag Pieces
+                </option>
+                <option value="click">
+                    Click Squares
+                </option>
+                <option value="drag-only">
+                    Drag Pieces Only
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Highlight Moves</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="component">
+            <label class="label">Play Sounds</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="component">
+            <label class="label">Sound Theme</label>
+            <select class="select" icon="caret-down">
+                <option value="default">
+                    Default
+                </option>
+                <option value="nature">
+                    Nature
+                </option>
+                <option value="metal">
+                    Metal
+                </option>
+                <option value="marble">
+                    Marble
+                </option>
+                <option value="space">
+                    Space
+                </option>
+                <option value="beat">
+                    Beat
+                </option>
+                <option value="silly">
+                    Silly
+                </option>
+                <option value="lolz">
+                    Lolz
+                </option>
+                <option value="newspaper">
+                    Newspaper
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label class="label">Show Legal Moves</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="component">
+            <label class="label">White Always on Bottom</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="component">
+            <label class="label">DGT Smart Board</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<div class="Footer">
+    <button class="buttonCancel">Cancel</button>
+    <button class="buttonSave">Save</button>
+</div>
