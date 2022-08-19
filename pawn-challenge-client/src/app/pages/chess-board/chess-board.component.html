@@ -8,23 +8,40 @@
 </div> -->
 <div style="width: 200px; height: 200px">
   <div class="container">
-    <div *ngFor="let i of [0,1,2,3,4,5,6,7]" class="rows">
+    <div  *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
       <div
-        *ngFor="let j of [0,1,2,3,4,5,6,7]"
+        *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
         class="item"
-        (drop)="drop($event)"
+        (drop)="drop($event,board[i][j].position)"
+
         (dragover)="allowDrop($event)"
       >
         <img
           *ngIf="board[i][j].hasChess"
-          src="../../../assets/chess/{{board[i][j].chess.img}}"
+          src="../../../assets/chess/{{ board[i][j].chess.img }}"
           draggable="true"
-          (dragstart)="drag($event)"
-          style="width: calc(40vw / 8); height: calc(40vw / 8)"
-          id="{{board[i][j].chess.id}}"
+          (mousedown)="mousedownImg(board[i][j].chess,$event)"
+          (dragstart)="drag($event, board[i][j].chess)"
+          style="
+            width: calc(40vw / 8);
+            height: calc(40vw / 8);
+            border-radius: 50px;
+          "
+
+          id="{{ board[i][j].chess.id }}"
         />
+        <img
+          *ngIf="dots[i][j].chess.name == '.'"
+          src="../../../assets/chess/green.png"
+          style="
+            width: calc(20vw / 8);
+            height: calc(20vw / 8);
+            border-radius: 50px;
+            position: absolute;
+          "/>
       </div>
     </div>
   </div>
 </div>
-<div class="item" (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+<!-- <div class="item" (drop)="drop($event,board[i][j].position)" (dragover)="allowDrop($event)"></div> -->
+
