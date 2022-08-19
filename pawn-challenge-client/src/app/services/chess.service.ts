@@ -12,7 +12,7 @@ export class ChessService {
   constructor() {
     this.createChessAccess();
     this.setChessToBoard(
-      'xmthvt x|        |        |   x    |        |   V    |        |XMTH TMX',
+      'xmthvtmx|        |        |        |        |        |        |XMTHVTMX',
 
       this.table
     );
