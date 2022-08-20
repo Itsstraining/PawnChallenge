@@ -32,8 +32,8 @@ p {
     }
 
     img {
-        height: 3rem;
-        margin-left: 10px;
+        height: 2rem;
+        margin-left: 0 auto;
     }
     .title{
         font-size: 15px;
@@ -65,7 +65,7 @@ p {
     
     .bonus-icon{
         height: 12px;
-        margin-left: 30%;
+        margin-left: 50px;
         
     }
 
@@ -73,12 +73,13 @@ p {
         text-align: center;
         display: grid;
         font-size: 9px;
+        margin-left: -19px;
        
     }
 
     .up{
         font-size: 9px;
-        margin-right: 24px;
+        margin-left: 67px;
         margin-top: -10px;
 
     }

@@ -11,12 +11,14 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { DialogComponent } from './components/dialogGamemode/dialog.component';
 import { MaterialExampleModule } from './material.module';
 import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-skin.component';
+import { ChessBoardComponent } from './pages/chess-board/chess-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
-    DialogSkinComponent
+    DialogSkinComponent,
+    ChessBoardComponent
   ],
   imports: [
     BrowserModule,

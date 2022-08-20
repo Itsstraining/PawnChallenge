@@ -11,7 +11,8 @@ import { BattleWithComputerComponent } from './components/battle-with-computer/b
   declarations: [
     HomeComponent,
     PlayChessComponent,
-    BattleWithComputerComponent
+    BattleWithComputerComponent,
+    
   ],
   imports: [
     CommonModule,

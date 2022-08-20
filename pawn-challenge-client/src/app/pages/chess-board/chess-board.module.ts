@@ -5,9 +5,11 @@ import { ChessBoardRoutingModule } from './chess-board-routing.module';
 import { ChessBoardComponent } from './chess-board.component';
 
 
+
 @NgModule({
   declarations: [
-    ChessBoardComponent
+    // ChessBoardComponent,
+  
   ],
   imports: [
     CommonModule,
