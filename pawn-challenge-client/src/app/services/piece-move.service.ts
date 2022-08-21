@@ -161,5 +161,6 @@ export class PieceMoveService {
     this.chessVector.set('rightup', { x: 1, y: -1 });
     this.chessVector.set('leftdown', { x: -1, y: 1 });
     this.chessVector.set('rightdown', { x: 1, y: 1 });
+
   }
 }

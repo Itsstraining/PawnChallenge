@@ -10,25 +10,5 @@ import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-
 })
 export class AppComponent {
   title = 'PawnChallengeClient';
-  constructor(public dialog: MatDialog) { }
-  openDialogGamemode() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: 'auto',
-      height: 'auto',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 
-
-  openDialogSkin() {
-    const dialogRef = this.dialog.open(DialogSkinComponent, {
-      width: 'auto',
-      height: 'auto',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 }
