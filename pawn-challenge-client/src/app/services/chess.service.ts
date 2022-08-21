@@ -73,11 +73,11 @@ export class ChessService {
           icon: '',
         };
         board[i][j].chess.img = chess.img;
-        board[i][j].chess.position = { x: j, y: i };
+        board[i][j].chess.position = { x: j, y: i }
       }
 
     }
-    //console.log(board);
+
   }
 
   newChess(){
