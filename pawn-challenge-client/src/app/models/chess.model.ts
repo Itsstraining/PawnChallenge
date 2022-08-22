@@ -9,7 +9,7 @@ export interface Cell {
 
 
 export interface Chess {
-
+  isPawnUp: boolean
   id: string;
   name: string;
   img: string;

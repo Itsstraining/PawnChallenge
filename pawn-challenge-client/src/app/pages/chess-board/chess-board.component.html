@@ -6,13 +6,20 @@
           <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
               alt="Avatar" />
-            Dog Breeds
+            Dog Breeds <p style="font-size: 3em; color: white;">{{this.playerService.player2.chessControl.currentSecond.currentTime}}</p>
+            <p style="font-size: 3em; color: white;">{{this.gameService.time.currentTime}}</p>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-sm">
       <div class="containers">
+        <div *ngIf="!this.gameService.isGameStart" class="box-start">
+          <div class="bt-start" (click)="startGame()">
+            <p>START</p>
+          </div>
+        </div>
+
         <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
           <div *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]" class="item" (drop)="drop($event, board[i][j].position)"
             (dragover)="allowDrop($event)">
@@ -37,7 +44,7 @@
           <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
               alt="Avatar" />
-            Dog Breeds
+            Dog Breeds <p style="font-size: 3em; color: white;">{{this.playerService.player1.chessControl.currentSecond.currentTime}}</p>
           </li>
         </ul>
       </div>
