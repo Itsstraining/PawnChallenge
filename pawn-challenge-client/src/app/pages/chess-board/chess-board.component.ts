@@ -3,11 +3,6 @@ import { Cell, Chess, Position } from './../../models/chess.model';
 import { Component, OnInit } from '@angular/core';
 
 import { ChessService } from 'src/app/services/chess.service';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-chess-board',
@@ -218,17 +213,12 @@ export class ChessBoardComponent implements OnInit {
   }
 
   mousedownImg(chess: Chess, ev: any) {
-    //console.log('mousedown');
     this.dots= this.chessService.createBoard();
     this.chess = chess;
     if (ev.which != 1) {
       return;
     }
-    //this.pieceService.moveKing(this.chess, this.dots);
     this.pieceService.setTableDots(chess, this.dots, this.board);
-    // if (chess.name == 'c') this.pieceService.moveBlackPawn(chess);
-    // else if (chess.name == 'C') this.pieceService.moveWhitePawn(chess);
-    // else if (chess.name == 'm') this.pieceService.moveBlackKnight(chess);
   }
 
 

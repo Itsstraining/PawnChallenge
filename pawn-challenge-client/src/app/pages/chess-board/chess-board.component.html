@@ -1,48 +1,116 @@
-<!-- <div>
-  <div class="grid-container">
-    <div *ngFor="let i of board1">
-      <div *ngFor="let j of board1" class="grid-item">aa</div>
-    </div>
-    <br>
-  </div>
-</div> -->
-
-<div style="width: 20vw; height: 20vw; margin-top: 5vw; margin-left: 5vw;">
-  <div class="container">
-    <div  *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
-      <div
-        *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
-        class="item"
-        (drop)="drop($event,board[i][j].position)"
-
-        (dragover)="allowDrop($event)"
-      >
-        <img
-          *ngIf="board[i][j].hasChess"
-          src="../../../assets/chess/{{ board[i][j].chess.img }}"
-          draggable="true"
-          (mousedown)="mousedownImg(board[i][j].chess,$event)"
-          (dragstart)="drag($event, board[i][j].chess)"
-          style="
-            width: calc(40vw / 8);
-            height: calc(40vw / 8);
-            border-radius: 50px;
-          "
-
-          id="{{ board[i][j].chess.id }}"
-        />
-        <img
-          *ngIf="dots[i][j].chess.name == '.'"
-          src="../../../assets/chess/green.png"
-          style="
-            width: calc(20vw / 8);
-            height: calc(20vw / 8);
-            border-radius: 50px;
-            position: absolute;
-          "/>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="row">
+        <div class="col-sm" >
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+        <div class="col-sm"  style="display:flex; justify-content: right;">
+          <div class="chart"></div>
+        </div>
       </div>
+
+      <div class="containers">
+        <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
+          <div
+            *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
+            class="item"
+            (drop)="drop($event, board[i][j].position)"
+            (dragover)="allowDrop($event)">
+            <img
+              *ngIf="board[i][j].hasChess"
+              src="../../../assets/chess/{{ board[i][j].chess.img }}"
+              draggable="true"
+              (mousedown)="mousedownImg(board[i][j].chess, $event)"
+              (dragstart)="drag($event, board[i][j].chess)"
+              style="
+                width: calc(40vw / 8);
+                height: calc(40vw / 8);
+                border-radius: 50px;
+                background-size: cover;
+                object-fit: cover;
+                position: relative;
+              "
+              id="{{ board[i][j].chess.id }}"/>
+            <img
+              *ngIf="dots[i][j].chess.name == '.'"
+              src="../../../assets/chess/green.png"
+              style="
+                width: calc(20vw / 8);
+                height: calc(20vw / 8);
+                border-radius: 50px;
+                position: absolute;
+                background-size: cover;
+                object-fit: cover;
+              "/>
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="col-sm">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Shiba Inu</mat-card-title>
+                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+          </div>
+          <div class="col-sm" style="display:flex; justify-content: right;">
+            <div class="chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm" >
+      <mat-card class="example-card-side">
+        <div class="row">
+          <div class="col-sm" style="display:flex; justify-content: left;">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+          </div>
+          <h1 style="color: white;">VS</h1>
+          <div class="col-sm" style="display:flex; justify-content: right;">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+          </div>
+        </div>
+        <mat-card-content>
+          <div class="scrollbar" id="style-1">
+            <div class="force-overflow">
+              <table>
+                <tr *ngFor="let item of graps">
+                  <td>
+                    <fa-icon
+                      [icon]="['fas', 'chess-king']"
+                      class="fa-fw mr-3"
+                    ></fa-icon
+                    >{{ item }}
+                  </td>
+                  <td>
+                    <fa-icon
+                      [icon]="['fas', 'chess-king']"
+                      class="fa-fw mr-3"
+                    ></fa-icon
+                    >{{ item }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
-<!-- <div class="item" (drop)="drop($event,board[i][j].position)" (dragover)="allowDrop($event)"></div> -->
-
