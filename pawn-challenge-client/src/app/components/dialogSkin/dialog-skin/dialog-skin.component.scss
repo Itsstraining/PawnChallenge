@@ -1,29 +1,54 @@
+.containers{
+    width: 35em;
+    max-height: 11em;
+    height: auto;
+    background-image: url("../../../../assets/SkinImage/Board/Parchment/150.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5em 5em 0 0;
+    position: relative;
+    margin: 0 auto;
+    .rows{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .item{
+        //padding-right: 25em;
+        display: block;
+        width: calc(35em / 8);
+        height: calc(35em / 8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
 .component {
     display: flex;
-    margin-bottom: 1.5rem;
-    min-height: 3rem;
+    margin-bottom: 0.5em;
+    min-height: 3em;
     position: relative;
-}
-.custom-modalbox >  mat-dialog-container {
-    padding: 24px 24px 24px 12px;
+    line-height: 3.5;
 }
 //Làm label
 .label {
     color: #312e2b;
-    height: 3rem;
-    min-width: 17.5rem; 
+    height: 3em;
+    min-width: 17.5em; 
     align-content: center;
+    margin-bottom: 0em;
 }
 
 //Làm hộp select
 .select {
     flex: 1;
-    border: 1px solid #e2eded;
+    border: 1em solid #e2eded;
     border-color: #eaf1f1 #e4eded #dbe7e7 #e4eded;
     background-image: linear-gradient(45deg, transparent 49.8%, var(--arrowColor) 0), linear-gradient(135deg, var(--arrowColor) 49.8%, transparent 0);
-    background-position: calc(100% - var(--arrowPosition) - 0.5rem) 50%, calc(100% - var(--arrowPosition)) 50%;
+    background-position: calc(100% - var(--arrowPosition) - 0.5em) 50%, calc(100% - var(--arrowPosition)) 50%;
     background-repeat: no-repeat;
-    background-size: 0.5rem 0.5rem, 0.5rem 0.5rem;
+    background-size: 0.5em 0.5em, 0.5em 0.5em;
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -31,8 +56,8 @@
 .switch {
     position: absolute;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 60em;
+    height: 34em;
     right: 0;
 }
 
@@ -52,16 +77,16 @@
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-    border-radius: 34px;
+    border-radius: 34em;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 26em;
+    width: 26em;
+    left: 4em;
+    bottom: 4em;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -73,7 +98,7 @@ input:checked+.slider {
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1em #2196F3;
 }
 
 input:checked+.slider:before {
@@ -86,33 +111,33 @@ input:checked+.slider:before {
     display: flex;
     height: auto;
     flex: 1;
-    padding: 10px 0 0 0;
+    padding: 10em 0 0 0;
     
 }
 
 .buttonCancel {
     font-weight: 800;
     width: 80%;
-    max-width: 40rem;   
+    max-width: 40em;   
     align-items: center;
     background-color: #dbd9d7;
-    border-radius: 15px;
+    border-radius: 15em;
     border-width: 0;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .05);
+    box-shadow: 0 10em 20em rgba(0, 0, 0, .1), 0 3em 6em rgba(0, 0, 0, .05);
     box-sizing: border-box;
     color: #666463;
     cursor: pointer;
     display: inline-flex;
     flex-direction: column;
     font-family: 'Quicksand', sans-serif;
-    font-size: var(--fontSize, 1.5rem);
+    font-size: var(--fontSize, 1.5em);
     height: 100%;
     justify-content: center;
     line-height: 1;
     margin: 0;
     outline: none;
     overflow: hidden;
-    padding: 0 32px;
+    padding: 0 32em;
     text-align: center;
     text-decoration: none;
     transform: translate3d(0, 0, 0);
@@ -125,7 +150,7 @@ input:checked+.slider:before {
 }
 
 .buttonCancel:hover {
-    box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+    box-shadow: rgba(0, 1, 0, .2) 0 2em 8em;
     opacity: .85;
 }
 
@@ -134,28 +159,28 @@ input:checked+.slider:before {
 }
 
 .buttonCancel:focus {
-    box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+    box-shadow: rgba(0, 0, 0, .5) 0 0 0 3em;
 }
 
 
 .buttonSave {
     background-color: rgb(15, 155, 15);
-    border-radius: 15px;
-    font-size: 1.5rem;
+    border-radius: 15em;
+    font-size: 1.5em;
     font-family: 'Quicksand', sans-serif;
     width:80%;
-    max-width: 30rem;
+    max-width: 30em;
     border-width: 0;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-    outline: 1px solid;
+    box-shadow: inset 0 0 20em rgba(255, 255, 255, 0);
+    outline: 1em solid;
     outline-color: rgba(255, 255, 255, .5);
-    outline-offset: 0px;
+    outline-offset: 0em;
     text-shadow: none;
     transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
     color: rgb(212, 218, 210);
     cursor: pointer;
     line-height: 1;
-    margin: 0 0.7rem;
+    margin: 0 0.7em;
     position: relative;
     height: 100%;
     flex: auto;
@@ -164,9 +189,9 @@ input:checked+.slider:before {
 
 .buttonSave:hover {
     border: 0;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    box-shadow: inset 0 0 20em rgba(255, 255, 255, .5), 0 0 20em rgba(255, 255, 255, .2);
     outline-color: rgba(255, 255, 255, 0);
-    outline-offset: 15px;
-    text-shadow: 1px 1px 2px #427388;
+    outline-offset: 15em;
+    text-shadow: 1em 1em 2em #427388;
 }
 

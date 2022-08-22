@@ -5,8 +5,29 @@
         rel="stylesheet">
 </head>
 <h2 mat-dialog-title>
-    <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
-        style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;">
+    <!-- <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
+        style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;"> -->
+        <div class="containers">
+            <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
+              <div
+                *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
+                class="item">
+                <img
+                  *ngIf="table[i][j].hasChess"
+                  src="../../../../assets/chess/{{table[i][j].chess.img}}"
+                  draggable="true"
+                  style="
+                    width: calc(40vw / 8);
+                    height: calc(40vw / 8);
+                    border-radius: 50px;
+                    background-size: cover;
+                    object-fit: cover;
+                    position: relative;
+                  "/>
+                
+              </div>
+            </div>
+          </div>
 </h2>
 
 <mat-dialog-content class="mat-typography" >
@@ -312,7 +333,7 @@
             </label>
         </div>
 
-        <div class="component">
+        <div class="component" >
             <label class="label">Sound Theme</label>
             <select class="select" icon="caret-down">
                 <option value="default">

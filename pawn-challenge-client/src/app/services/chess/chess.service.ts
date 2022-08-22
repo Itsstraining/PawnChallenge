@@ -96,6 +96,29 @@ export class ChessService {
     }
     return res
   }
+  setChessToBoard1(stringBoard: string, board: Cell[][]) {
+    let temp = stringBoard.split('|');
+    for (let i = 0; i < 8; i++) {
+      let chessName = temp[i].split('');
+      for (let j = 0; j < 8; j++) {
+        if (chessName[j] !== ' ') {
+          board[i][j].hasChess = true;
+        }
+        board[i][j].chess.id = `${chessName[j]}[${i},${j}]`;
+        board[i][j].chess.name = chessName[j];
+        let chess = this.chessAccess.get(chessName[j]) ?? {
+          id: '',
+          name: '',
+          img: '',
+          icon: '',
+        };
+        board[i][j].chess.img = chess.img;
+        board[i][j].chess.position = { x: j, y: i };
+      }
+
+    }
+    //console.log(board);
+  }
 
   newChess() {
     let chess: Chess = {
