@@ -8,11 +8,10 @@ export class ChessService {
   table: Cell[][] = this.createBoard();
   chessAccess: Map<string, Chess> = new Map<string, Chess>();
 
-
   constructor() {
     this.createChessAccess();
     this.setChessToBoard(
-      'xmthvtmx|        |        |        |        |        |        |XMTHVTMX',
+      'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX',
 
       this.table
     );
@@ -36,7 +35,6 @@ export class ChessService {
             firstStep: true,
             position: { x: 0, y: 0 },
           },
-
         };
         temp.push(newCell);
       }
@@ -71,17 +69,16 @@ export class ChessService {
           name: '',
           img: '',
           icon: '',
+          firstStep: '',
+          position: { x: 0, y: 0 },
         };
         board[i][j].chess.img = chess.img;
-        board[i][j].chess.position = { x: j, y: i }
+        board[i][j].chess.position = { x: j, y: i };
       }
-
     }
-
   }
-
-  newChess(){
-    let chess:Chess = {
+  newChess() {
+    let chess: Chess = {
       id: '',
       name: '',
       img: '',
@@ -93,7 +90,9 @@ export class ChessService {
   }
 
   onBoard(position: Position) {
-    return position.x >= 0 && position.x < 8 && position.y >= 0 && position.y < 8;
+    return (
+      position.x >= 0 && position.x < 8 && position.y >= 0 && position.y < 8
+    );
   }
 
   createChessAccess() {

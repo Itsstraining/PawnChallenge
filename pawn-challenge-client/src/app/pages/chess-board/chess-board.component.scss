@@ -26,10 +26,10 @@
   .containers {
     width: 85em;
     height: 85em;
+    border-radius: 15px;
     background-image: url("../../../assets/chess/150.png");
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0.15em;
     position: relative;
     .rows {
       display: flex;
@@ -47,6 +47,7 @@
     }
   }
   .graps {
+    border-radius: 15px;
     width: 70em;
     height: 80em;
     margin-top: 1.7em;
@@ -96,9 +97,11 @@
 }
 /*==========*/
 .scrollbar {
-  background-color: #262421;
-  height: 500px;
-  width: 355px;
+  background-color: rgb(18, 16, 16);
+  height: 30em;
+  width: 50em;
+  margin-left: 2em;
+  margin-right: 2em;
   overflow-y: scroll;
 }
 
@@ -140,6 +143,9 @@ th {
 
 tr:nth-child(even) {
   background-color: #312e2b;
+}
+.Icon {
+  font-size: 2em;
 }
 /*==========*/
 @property --percentage {

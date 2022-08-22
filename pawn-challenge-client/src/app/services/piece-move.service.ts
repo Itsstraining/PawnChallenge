@@ -5,6 +5,7 @@ import { ChessService } from './chess.service';
 @Injectable({
   providedIn: 'root',
 })
+
 export class PieceMoveService {
   dots: Cell[][];
   chessVector: Map<string, Position> = new Map<string, Position>();
@@ -28,8 +29,6 @@ export class PieceMoveService {
     } else if (chess.name.toLowerCase() == 'h') {
       ruleStr =
         '* up/* down/* left/* right/* leftup/* rightup/* leftdown/* rightdown';
-    } else if (chess.name.toLowerCase() == 'c') {
-      ruleStr = '1 up-up';
     }
     let rules = ruleStr.split('/');
     for (let i = 0; i < rules.length; i++) {
@@ -97,13 +96,9 @@ export class PieceMoveService {
         }
       }
 
-      // let vector = this.chessVector.get(rule)??{x: 0, y: 0};
-      // //let newVector = {x: chess.position.x + vector.x, y: chess.position.y + vector.y};
-      // if(this.chessService.onBoard(newVector)){
-      //   dots[chess.position.y + vector.y][chess.position.x + vector.x].chess.name = '.';
-      // }
+
     }
-    //this.chessService.printBoard(dots);
+
   }
 
   /* convert 2 way to 1 way
@@ -115,26 +110,26 @@ export class PieceMoveService {
         return prev.concat(next);
       })
       console.log(merged);
+  */
 
-*/
-  moveKing(chess: Chess, dots: Cell[][]) {
-    let ruleStr = 'up/down/left/right/leftup/rightup/leftdown/rightdown';
-    let rules = ruleStr.split('/');
-    for (let i = 0; i < rules.length; i++) {
-      let rule = rules[i];
-      let vector = this.chessVector.get(rule) ?? { x: 0, y: 0 };
-      let newVector = {
-        x: chess.position.x + vector.x,
-        y: chess.position.y + vector.y,
-      };
-      if (this.chessService.onBoard(newVector)) {
-        dots[chess.position.y + vector.y][
-          chess.position.x + vector.x
-        ].chess.name = '.';
-      }
-    }
-    this.chessService.printBoard(dots);
-  }
+  // moveKing(chess: Chess, dots: Cell[][]) {
+  //   let ruleStr = 'up/down/left/right/leftup/rightup/leftdown/rightdown';
+  //   let rules = ruleStr.split('/');
+  //   for (let i = 0; i < rules.length; i++) {
+  //     let rule = rules[i];
+  //     let vector = this.chessVector.get(rule) ?? { x: 0, y: 0 };
+  //     let newVector = {
+  //       x: chess.position.x + vector.x,
+  //       y: chess.position.y + vector.y,
+  //     };
+  //     if (this.chessService.onBoard(newVector)) {
+  //       dots[chess.position.y + vector.y][
+  //         chess.position.x + vector.x
+  //       ].chess.name = '.';
+  //     }
+  //   }
+  //   this.chessService.printBoard(dots);
+  // }
 
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2;
