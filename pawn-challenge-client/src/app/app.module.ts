@@ -27,6 +27,7 @@ import {
   faNewspaper,
   faUserGroup,
   faEllipsis,
+  faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare as farSquare,
@@ -64,6 +65,7 @@ export class AppModule {
       faNewspaper,
       faUserGroup,
       faEllipsis,
+      faCaretRight
     );
   }
 }
