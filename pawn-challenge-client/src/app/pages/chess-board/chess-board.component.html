@@ -1,18 +1,6 @@
 <div class="content-chess-app">
   <div class="row">
     <div class="col-sm">
-      <div style="width: 18em">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-              alt="Avatar" />
-            Dog Breeds <p style="font-size: 3em; color: white;">{{this.playerService.player2.chessControl.currentSecond.currentTime}}</p>
-            <p style="font-size: 3em; color: white;">{{this.gameService.time.currentTime}}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-sm">
       <div class="containers">
         <div *ngIf="!this.gameService.isGameStart" class="box-start">
           <div class="bt-start" (click)="startGame()">
@@ -21,52 +9,32 @@
         </div>
 
         <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
-          <div *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]" class="item" (drop)="drop($event, board[i][j].position)"
-            (dragover)="allowDrop($event)">
-            <img *ngIf="board[i][j].hasChess" src="../../../assets/chess/{{ board[i][j].chess.img }}" draggable="true"
-              (mousedown)="mousedownImg(board[i][j].chess, $event)" (dragstart)="drag($event, board[i][j].chess)"
-              class="img-chess" id="{{ board[i][j].chess.id }}" />
+          <div
+            *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
+            class="item"
+            (drop)="drop($event, board[i][j].position)"
+            (dragover)="allowDrop($event)"
+          >
+            <img
+              *ngIf="board[i][j].hasChess"
+              src="../../../assets/chess/{{ board[i][j].chess.img }}"
+              draggable="true"
+              (mousedown)="mousedownImg(board[i][j].chess, $event)"
+              (dragstart)="drag($event, board[i][j].chess)"
+              class="img-chess"
+              id="{{ board[i][j].chess.id }}"
+            />
             <div *ngIf="dots[i][j].chess.name == '.'" class="dot"></div>
+            />
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm">
-      <div style="width: 18em">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-              alt="Avatar" />
-            Dog Breeds <p style="font-size: 3em; color: white;">{{this.playerService.player1.chessControl.currentSecond.currentTime}}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
+
+
   </div>
 
   <div class="graps">
-    <div class="row" style="display: flex; justify-content: space-between; margin-left: 2em; margin-right: 2em;">
-      <ul class="">
-        <li style="width: 18rem; background-color: rgb(18, 16, 16)">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-            alt="Avatar" />
-          <br />
-          Dog Breeds
-        </li>
-      </ul>
-      <p style="
-          font-size: 4em;
-          color: aqua;
-          margin-top: 1em;
-          margin-left: 0.5em;"> VS </p>
-      <ul class="">
-        <li style="width: 18rem; background-color: rgb(18, 16, 16)">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-            alt="Avatar" />
-          <br />
-          Dog Breeds
-        </li>
-      </ul>
-    </div>
+    <app-graps></app-graps>
   </div>
 </div>
