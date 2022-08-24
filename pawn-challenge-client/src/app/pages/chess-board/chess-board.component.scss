@@ -24,6 +24,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.32);
+  border-radius: 15px;
   .bt-start {
     cursor: pointer;
     border-radius: 0.3em;
@@ -45,16 +46,16 @@
   background-color: #312e2b;
   display: flex;
   justify-content: space-between;
-  margin-top: 5em;
+  margin-top: 1em;
   margin-left: 0;
   padding: 0 10em;
   .containers {
-    width: 85em;
-    height: 85em;
+    width: 80em;
+    height: 80em;
+    border-radius: 15px;
     background-image: url("../../../assets/chess/150.png");
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0.15em;
     position: relative;
     .rows {
       display: flex;
@@ -63,8 +64,8 @@
       .item {
         //padding-right: 25px;
         display: block;
-        width: calc(85em / 8);
-        height: calc(85em / 8);
+        width: calc(80em / 8);
+        height: calc(80em / 8);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -72,9 +73,10 @@
     }
   }
   .graps {
-    width: 70em;
+    border-radius: 15px;
+    width: 55em;
     height: 80em;
-    margin-top: 1.7em;
+    margin-top: 0em;
     background-color: rgb(18, 16, 16);
   }
 }
@@ -121,9 +123,11 @@
 }
 /*==========*/
 .scrollbar {
-  background-color: #262421;
-  height: 500px;
-  width: 355px;
+  background-color: rgb(18, 16, 16);
+  height: 30em;
+  width: 50em;
+  margin-left: 2em;
+  margin-right: 2em;
   overflow-y: scroll;
 }
 
@@ -166,18 +170,22 @@ th {
 tr:nth-child(even) {
   background-color: #312e2b;
 }
+.Icon {
+  font-size: 2em;
+}
 /*==========*/
 @property --percentage {
-  initial-value: 0%;
+  initial-value: 100%;
   inherits: false;
   syntax: "<percentage>";
 }
 .chart {
-  background: conic-gradient(red var(--percentage), white 0);
-  border-radius: 50%;
-  width: 1vmin;
-  height: 1vmin;
-  animation: timer 10s infinite linear;
+  background-image: conic-gradient(rgba(64, 46, 46, 0.825) var(--percentage), rgba(255, 255, 255, 0) 0 );
+  // background: conic-gradient(red var(--percentage), white 0);
+  //border-radius: 50%;
+  width: 10em;
+  height: 10em;
+  //animation: timer ;
   margin: 0;
   display: grid;
   place-items: center;
@@ -186,7 +194,7 @@ tr:nth-child(even) {
 }
 @keyframes timer {
   to {
-    --percentage: 100%;
+    --percentage: 0%;
   }
 }
 

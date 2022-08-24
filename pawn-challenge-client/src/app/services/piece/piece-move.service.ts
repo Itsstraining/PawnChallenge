@@ -129,6 +129,7 @@ export class PieceMoveService {
 
 */
 
+
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
