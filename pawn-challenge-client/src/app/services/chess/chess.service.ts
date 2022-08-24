@@ -10,7 +10,7 @@ export class ChessService {
   kingB!:Chess
   kingW!:Chess
   table: Cell[][] = this.createBoard();
-  banTable: String[][]
+
   chessAccess: Map<string, Chess> = new Map<string, Chess>();
 
 
@@ -22,7 +22,6 @@ export class ChessService {
       this.table,
       this.playService.player1
     );
-    this.banTable = this.createBanTable()
     this.printBoard(this.table);
   }
 
