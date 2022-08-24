@@ -39,6 +39,7 @@ import {
   faMedium,
   faLeanpub,
 } from '@fortawesome/free-brands-svg-icons';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, DialogComponent, DialogSkinComponent],
   imports: [
@@ -50,9 +51,11 @@ import {
     provideFirestore(() => getFirestore()),
     MaterialExampleModule,
     FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+   
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {

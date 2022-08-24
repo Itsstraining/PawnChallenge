@@ -1,24 +1,18 @@
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-</head>
 <h2 mat-dialog-title>
     <!-- <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
         style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;"> -->
-        <div class="containers">
+        <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../assets/SkinImage/Board/Lolz/150.png)'}">
             <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
               <div
                 *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
                 class="item">
                 <img
                   *ngIf="table[i][j].hasChess"
-                  src="../../../../assets/chess/{{table[i][j].chess.img}}"
+                  src="../../../../assets/SkinImage/Pieces/{{Pieces[indexPiece].folderName}}/{{table[i][j].chess.img}}"
                   draggable="true"
                   style="
-                    width: calc(40vw / 8);
-                    height: calc(40vw / 8);
+                    width: calc(44em / 8);
+                    height: calc(44em / 8);
                     border-radius: 50px;
                     background-size: cover;
                     object-fit: cover;
@@ -34,123 +28,9 @@
     <div >
         <div class="component">
             <label class="label">Pieces</label>
-            <select class="select" icon="caret-down">
-                <option value="8_bit">
-                    8-Bit
-                </option>
-                <option value="alpha">
-                    Alpha
-                </option>
-                <option value="bases">
-                    Bases
-                </option>
-                <option value="blindfold">
-                    Blindfold
-                </option>
-                <option value="book">
-                    Book
-                </option>
-                <option value="bubblegum">
-                    Bubblegum
-                </option>
-                <option value="cases">
-                    Cases
-                </option>
-                <option value="classic">
-                    Classic
-                </option>
-                <option value="club">
-                    Club
-                </option>
-                <option value="condal">
-                    Condal
-                </option>
-                <option value="dash">
-                    Dash
-                </option>
-                <option value="game_room">
-                    Game Room
-                </option>
-                <option value="glass">
-                    Glass
-                </option>
-                <option value="gothic">
-                    Gothic
-                </option>
-                <option value="graffiti">
-                    Graffiti
-                </option>
-                <option value="icy_sea">
-                    Icy Sea
-                </option>
-                <option value="light">
-                    Light
-                </option>
-                <option value="lolz">
-                    Lolz
-                </option>
-                <option value="marble">
-                    Marble
-                </option>
-                <option value="maya">
-                    Maya
-                </option>
-                <option value="metal">
-                    Metal
-                </option>
-                <option value="modern2">
-                    Modern
-                </option>
-                <option value="nature">
-                    Nature
-                </option>
-                <option value="neon">
-                    Neon
-                </option>
-                <option value="neo">
-                    Neo
-                </option>
-                <option value="neo_wood">
-                    Neo-Wood
-                </option>
-                <option value="newspaper">
-                    Newspaper
-                </option>
-                <option value="ocean">
-                    Ocean
-                </option>
-                <option value="sky">
-                    Sky
-                </option>
-                <option value="space">
-                    Space
-                </option>
-                <option value="tigers">
-                    Tigers
-                </option>
-                <option value="tournament">
-                    Tournament
-                </option>
-                <option value="vintage">
-                    Vintage
-                </option>
-                <option value="wood">
-                    Wood
-                </option>
-                <option value="3dwood">
-                    3D - Wood
-                </option>
-                <option value="3d_staunton">
-                    3D - Staunton
-                </option>
-                <option value="3dplastic">
-                    3D - Plastic
-                </option>
-                <option value="3dchesskid">
-                    3D - ChessKid
-                </option>
-                <option value="real3d">
-                    Real 3D
+            <select class="select" icon="caret-down" [(ngModel)]="indexPiece">
+                <option *ngFor="let item of Pieces; let i = index" [value]="i">
+                    {{item.name}}
                 </option>
             </select>
         </div>
@@ -393,6 +273,6 @@
 </mat-dialog-content>
 
 <div class="Footer">
-    <button class="buttonCancel"><p style="padding: 13px 0 0 0;">Cancel</p></button>
-    <button class="buttonSave"><p style="padding: 13px 0 0 0;">Save</p></button>
+    <button class="buttonCancel"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Cancel</p></button>
+    <button class="buttonSave"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Save</p></button>
 </div>
