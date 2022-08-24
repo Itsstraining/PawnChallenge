@@ -7,8 +7,12 @@ import { PlayerService } from '../player/player.service';
   providedIn: 'root',
 })
 export class ChessService {
+  kingB!:Chess
+  kingW!:Chess
   table: Cell[][] = this.createBoard();
+  banTable: String[][]
   chessAccess: Map<string, Chess> = new Map<string, Chess>();
+
 
 
   constructor(private playService: PlayerService) {
@@ -18,6 +22,7 @@ export class ChessService {
       this.table,
       this.playService.player1
     );
+    this.banTable = this.createBanTable()
     this.printBoard(this.table);
   }
 
@@ -39,7 +44,6 @@ export class ChessService {
             position: { x: 0, y: 0 },
             isPawnUp: false,
           },
-
         };
         temp.push(newCell);
       }
@@ -51,11 +55,18 @@ export class ChessService {
   printBoard(board: Cell[][]) {
     let result = '';
     for (let i = 0; i < 8; i++) {
+      result += '-- --- --- --- --- --- --- --- \n'
       for (let j = 0; j < 8; j++) {
-        result += ' ' + board[i][j].chess.name + ' ';
+        if( board[i][j].chess.name == ''){
+          result += '  | ';
+        }
+        else{
+          result += board[i][j].chess.name + ' | ';
+        }
       }
       result += '\n';
     }
+    result += '-- --- --- --- --- --- --- --- \n'
     console.log(result);
   }
   //xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX
@@ -83,6 +94,13 @@ export class ChessService {
               }
               res[i][j].hasChess = true
               res[i][j].chess.position = res[i][j].position
+
+              if(temp.name == 'v'){
+                this.kingB = res[i][j].chess
+              }
+              else if(temp.name == 'V'){
+                this.kingW = res[i][j].chess
+              }
             }
           }
 
@@ -90,6 +108,7 @@ export class ChessService {
             res[i][j].id = `[${res[i][j].position.x},${res[i][j].position.y}]`
           }
         }
+
       }
     } catch (error) {
       console.log(error)
@@ -134,14 +153,15 @@ export class ChessService {
   }
 
   onBoard(position: Position) {
-    return position.x >= 0 && position.x < 8 && position.y >= 0 && position.y < 8;
+    return (
+      position.x >= 0 && position.x < 8 && position.y >= 0 && position.y < 8
+    );
   }
 
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
   }
-
   createChessAccess() {
     //black
     this.chessAccess.set('x', {
