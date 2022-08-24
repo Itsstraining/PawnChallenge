@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cell, Chess, Position } from '../../models/chess.model';
 import { Player } from '../../models/player.model';
 import { ChessService } from '../chess/chess.service';
+import { GameService } from '../game/game.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,12 @@ import { ChessService } from '../chess/chess.service';
 export class PieceMoveService {
   dots: Cell[][];
   chessVector: Map<string, Position> = new Map<string, Position>();
-  constructor(private chessService: ChessService) {
+  constructor(private chessService: ChessService, private gameService: GameService) {
     this.dots = this.chessService.createBoard();
     this.createVectorMove();
   }
-  setTableDots(chess: Chess, table: Cell[][], tableEff: Cell[][]) {
+  setTableDots(chess: Chess, table: Cell[][]) {
+    let tableEff = this.chessService.createBoard()
     let c = chess.position
     let ruleStr = ''
     if (chess.name.toLowerCase() == 'v') {
@@ -77,6 +79,7 @@ export class PieceMoveService {
           }
           boxTemp = { x: (move1.x + boxTemp.x), y: (move1.y + boxTemp.y) }
         }
+
         if (!grapErr) {
           if (
             !table[boxTemp.y][boxTemp.x].hasChess ||
@@ -117,18 +120,6 @@ export class PieceMoveService {
     return tableEff
   }
 
-  /* convert 2 way to 1 way
-      var test2d = [
-        ["foo", "bar"],
-        ["baz", "biz"]
-      ];
-      var merged = test2d.reduce(function(prev,next){
-        return prev.concat(next);
-      })
-      console.log(merged);
-
-*/
-
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
@@ -139,11 +130,11 @@ export class PieceMoveService {
   }
 
 
-  move(chess: Chess, toPosition: Position, table: Cell[][], tableEff: Cell[][], player:Player): boolean {
+  move(chess: Chess, toPosition: Position, table: Cell[][], tableEff: Cell[][], player: Player): boolean {
     let fromP = chess.position
     if (tableEff[toPosition.y][toPosition.x].chess.name == '.') {
-      if(table[toPosition.y][toPosition.x].hasChess){
-        player.chessControl.chessSDie.push({...table[toPosition.y][toPosition.x].chess})
+      if (table[toPosition.y][toPosition.x].hasChess) {
+        player.chessControl.chessSDie.push({ ...table[toPosition.y][toPosition.x].chess })
       }
 
       table[fromP.y][fromP.x].hasChess = false
@@ -154,10 +145,36 @@ export class PieceMoveService {
       table[toPosition.y][toPosition.x].hasChess = true
       table[toPosition.y][toPosition.x].chess = chess
 
+      if (chess.name == 'v') {
+        this.chessService.kingB = chess
+      }
+      else if (chess.name == 'V') {
+        this.chessService.kingW = chess
+      }
+
       return true
     } else {
       return false
     }
+  }
+
+  checkMate(chess: Chess, table: Cell[][]): boolean {
+    console.log(chess)
+    let tableEff = this.setTableDots(chess, table)
+    this.chessService.printBoard(tableEff)
+    let kingArmy: Chess
+    if (this.isAlly(chess.name, 'v')) {
+      kingArmy = this.chessService.kingW
+    } else {
+      kingArmy = this.chessService.kingB
+    }
+
+    if (tableEff[kingArmy.position.y][kingArmy.position.y].chess.name == '.'){
+      console.log('Chiếu!')
+      return true
+    }
+
+    return false
   }
 
   createVectorMove() {

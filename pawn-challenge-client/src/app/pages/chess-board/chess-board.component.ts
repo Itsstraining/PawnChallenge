@@ -208,6 +208,8 @@ export class ChessBoardComponent implements OnInit {
       var data = ev.dataTransfer.getData('text');
       ev.target.appendChild(document.getElementById(data));
       this.gameService.changeCurrentPlayer(this.playerService.player1, this.playerService.player2)
+
+      this.pieceService.checkMate(this.chess, this.board)
     } else {
       console.log('not move');
     }
@@ -228,7 +230,7 @@ export class ChessBoardComponent implements OnInit {
     this.currentPlayer = this.playerService.getUserById(this.gameService.currentUserIDControll)
     if (this.gameService.canPickChess(this.currentPlayer.chessControl.chessID, chess.name)) {
       this.chess = chess
-      this.dots=this.pieceService.setTableDots(chess, this.board, this.dots);
+      this.dots=this.pieceService.setTableDots(chess, this.board);
     }
   }
 

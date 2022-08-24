@@ -26,14 +26,7 @@
             <img *ngIf="board[i][j].hasChess" src="../../../assets/chess/{{ board[i][j].chess.img }}" draggable="true"
               (mousedown)="mousedownImg(board[i][j].chess, $event)" (dragstart)="drag($event, board[i][j].chess)"
               class="img-chess" id="{{ board[i][j].chess.id }}" />
-            <img *ngIf="dots[i][j].chess.name == '.'" src="../../../assets/chess/green.png" style="
-                width: calc(20vw / 8);
-                height: calc(20vw / 8);
-                border-radius: 50px;
-                position: absolute;
-                background-size: cover;
-                object-fit: cover;
-              " />
+            <div *ngIf="dots[i][j].chess.name == '.'" class="dot"></div>
           </div>
         </div>
       </div>

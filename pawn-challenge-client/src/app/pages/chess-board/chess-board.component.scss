@@ -15,6 +15,13 @@
 //   width: 10px;
 //   height: 10px;
 // }
+.dot {
+  width: 2em;
+  height: 2em;
+  border-radius: 50px;
+  background-color: rgb(101, 219, 111);
+  position: absolute;
+}
 .box-start {
   position: absolute;
   z-index: 5;
@@ -26,9 +33,9 @@
   background-color: rgba(0, 0, 0, 0.32);
   .bt-start {
     cursor: pointer;
-    border-radius: 0.3em;
+    border-radius: 0.5em;
     background-color: #769656;
-    padding: 1.5em 2em;
+    padding: 1.5em 3em;
     p {
       color: white;
       padding: 0;
@@ -36,7 +43,7 @@
       font-size: 2em;
     }
   }
-  .bt-start:hover{
+  .bt-start:hover {
     background-color: #79a053;
   }
 }
@@ -80,11 +87,12 @@
 }
 
 .img-chess {
-  width: calc(50em / 8);
-  height: calc(50em / 8);
+  width: 8em;
+  height: 8em;
   background-size: cover;
   object-fit: cover;
   position: relative;
+  margin-top: -1em;
 }
 .clock {
   display: flex;

@@ -10,6 +10,8 @@ export class GameService {
   isGameStart = false
   currentUserIDControll = ''
   time = new Timer()
+  blackCheckmate = false
+  whiteCheckmate = false
 
 
   constructor(private chessService: ChessService) {
