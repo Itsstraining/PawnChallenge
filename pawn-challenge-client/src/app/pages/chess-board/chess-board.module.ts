@@ -7,9 +7,11 @@ import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretRight, faChess, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook } from '@fortawesome/free-solid-svg-icons';
+import { GrapsComponent } from './components/graps/graps.component';
 @NgModule({
   declarations: [
-    ChessBoardComponent
+    ChessBoardComponent,
+    GrapsComponent
   ],
   imports: [
     CommonModule,

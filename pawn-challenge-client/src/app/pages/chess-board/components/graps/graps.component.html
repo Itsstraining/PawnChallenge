@@ -1,0 +1,56 @@
+<div style="display: flex; justify-content: space-between; width: 100%;padding: 1em 6em;">
+  <div>
+    <div class="chart" style="margin-top: 2em; position: absolute"
+      [style]="'animation: timer ' + time + 's infinite linear;'"></div>
+    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="img" alt="Avatar" />
+    <br />
+    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">Dog Breeds</p>
+  </div>
+
+  <p style="font-size: 4em; color: aqua; margin-top: 1.5em; margin-right: 1em">
+    VS
+  </p>
+  <div>
+    <div class="chart" style="margin-top: 2em; position: absolute"
+      [style]="'animation: timer ' + time + 's infinite linear;'"></div>
+    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="img" alt="Avatar" />
+    <br />
+    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">Dog Breeds</p>
+  </div>
+</div>
+<div>
+  <div style="
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1em 7em;
+    ">
+    <div style="display: flex">
+      <i class="Icon fi fi-sr-time-quarter-to" style="color: white; margin-left: 0em; display: flex"></i>
+      <p>
+        10:00
+      </p>
+    </div>
+    <div style="display: flex;">
+      <i class="Icon fi fi-sr-time-quarter-to" style="color: white; margin-right: 0em; display: flex"></i>
+      <p>
+        10:00
+      </p>
+    </div>
+  </div>
+
+  <div class="scrollbar" id="style-1">
+    <div class="force-overflow">
+      <table>
+        <tr *ngFor="let item of graps">
+          <td *ngFor="let foritems of item" class="fa-fw mr-3">
+            <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
+            {{ foritems.grapFrom }}
+            <fa-icon [icon]="['fas', 'caret-right']" class="fa-fw mr-3" style="margin-left: 10px"></fa-icon>
+            {{ foritems.grapTo }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

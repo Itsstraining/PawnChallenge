@@ -1,107 +1,50 @@
 <div class="content-chess-app">
   <div class="row">
     <div class="col-sm">
-      <div style="width: 18em">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-              alt="Avatar" />
-            Dog Breeds
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-sm">
       <div class="containers">
+        <div *ngIf="!this.gameService.isGameStart" class="box-start">
+          <div class="bt-start" (click)="startGame()">
+            <p>START</p>
+          </div>
+        </div>
+
         <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
-          <div *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]" class="item" (drop)="drop($event, board[i][j].position)"
-            (dragover)="allowDrop($event)">
-            <img *ngIf="board[i][j].hasChess" src="../../../assets/chess/{{ board[i][j].chess.img }}" draggable="true"
-              (mousedown)="mousedownImg(board[i][j].chess, $event)" (dragstart)="drag($event, board[i][j].chess)"
-              class="img-chess" id="{{ board[i][j].chess.id }}" />
-            <img *ngIf="dots[i][j].chess.name == '.'" src="../../../assets/chess/green.png" style="
-                width: calc(20vw / 8);
-                height: calc(20vw / 8);
+          <div
+            *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
+            class="item"
+            (drop)="drop($event, board[i][j].position)"
+            (dragover)="allowDrop($event)"
+          >
+            <img
+              *ngIf="board[i][j].hasChess"
+              src="../../../assets/chess/{{ board[i][j].chess.img }}"
+              draggable="true"
+              (mousedown)="mousedownImg(board[i][j].chess, $event)"
+              (dragstart)="drag($event, board[i][j].chess)"
+              class="img-chess"
+              id="{{ board[i][j].chess.id }}"
+            />
+            <img
+              *ngIf="dots[i][j].chess.name == '.'"
+              src="../../../assets/chess/green.png"
+              style="
+                width: 4em;
+                height: 4em;
                 border-radius: 50px;
                 position: absolute;
                 background-size: cover;
                 object-fit: cover;
-              " />
+              "
+            />
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm">
-      <div style="width: 18em">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" style="width: 18rem; background-color: #312e2b">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 5em; border-radius: 10px"
-              alt="Avatar" />
-            Dog Breeds
-          </li>
-        </ul>
-      </div>
-    </div>
+
+
   </div>
 
   <div class="graps">
-    <div style="display: flex; justify-content: space-between">
-      <ul class="" style="margin-left: 4em">
-        <li style="
-            width: 18rem;
-            background-color: rgb(18, 16, 16);
-            margin-left: 2em;
-          ">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="
-              width: 10em;
-              height: 10em;
-              border-radius: 10px;
-              margin-top: 2em;
-            " alt="Avatar" />
-          <br />
-          <p style="margin-top: 0.5em; font-size: 2em; color: aqua">Dog Breeds</p>
-        </li>
-      </ul>
-      <p style="
-          font-size: 4em;
-          color: aqua;
-          margin-top: 1.5em;
-          margin-right: 1em;
-        ">
-        VS
-      </p>
-      <ul class="" style="margin-left: 2em">
-        <li style="width: 18rem; background-color: rgb(18, 16, 16)">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="
-              width: 10em;
-              height: 10em;
-              border-radius: 10px;
-              margin-top: 2em;
-            " alt="Avatar" />
-          <br />
-          <p style="margin-top: 0.5em;font-size: 2em; color: aqua">Dog Breeds</p>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <div class="scrollbar" id="style-1">
-        <div class="force-overflow">
-          <table>
-            <tr *ngFor="let item of graps">
-              <td *ngFor="let foritems of item" class="fa-fw mr-3" >
-                <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-                {{ foritems.grapFrom }}
-                <fa-icon
-                  [icon]="['fas', 'caret-right']"
-                  class="fa-fw mr-3"
-                  style="margin-left: 10px"
-                ></fa-icon>
-                {{ foritems.grapTo }}
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
+    <app-graps></app-graps>
   </div>
 </div>
