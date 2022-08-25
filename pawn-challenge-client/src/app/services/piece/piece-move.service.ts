@@ -159,17 +159,14 @@ export class PieceMoveService {
   }
 
   checkMate(chess: Chess, table: Cell[][]): boolean {
-    console.log(chess)
     let tableEff = this.setTableDots(chess, table)
-    this.chessService.printBoard(tableEff)
     let kingArmy: Chess
     if (this.isAlly(chess.name, 'v')) {
       kingArmy = this.chessService.kingW
     } else {
       kingArmy = this.chessService.kingB
     }
-
-    if (tableEff[kingArmy.position.y][kingArmy.position.y].chess.name == '.'){
+    if (tableEff[kingArmy.position.y][kingArmy.position.x].chess.name == '.'){
       console.log('Chiếu!')
       return true
     }

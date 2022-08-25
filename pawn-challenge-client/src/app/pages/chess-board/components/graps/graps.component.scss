@@ -10,18 +10,23 @@
   inherits: false;
   syntax: "<percentage>";
 }
-.img{
-  width: 9em; height: 9em; border-radius: 10px; margin-top: 2em;
+.img {
+  width: 9em;
+  height: 9em;
+  border-radius: 10px;
+  margin-top: 2em;
+
 }
 .chart {
   background-image: conic-gradient(
-    rgba(64, 46, 46, 0.825) var(--percentage),
+    rgba(100, 100, 100, 0.825) var(--percentage),
     rgba(255, 255, 255, 0) 0
   );
   // background: conic-gradient(red var(--percentage), white 0);
   //border-radius: 50%;
   width: 9em;
   height: 9em;
+  border-radius: 10px;
   //animation: timer ;
   margin: 0;
   display: grid;
