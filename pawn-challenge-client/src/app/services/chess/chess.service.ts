@@ -137,6 +137,7 @@ export class ChessService {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
   }
+
   createChessAccess() {
     //black
     this.chessAccess.set('x', {

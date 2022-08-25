@@ -167,10 +167,9 @@ export class PieceMoveService {
       kingArmy = this.chessService.kingB
     }
     if (tableEff[kingArmy.position.y][kingArmy.position.x].chess.name == '.'){
-      console.log('Chiếu!')
+      //
       return true
     }
-
     return false
   }
 
