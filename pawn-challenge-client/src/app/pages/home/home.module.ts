@@ -6,7 +6,6 @@ import { HomeComponent } from './home.component';
 import { PlayChessComponent } from './components/play-chess/play-chess.component';
 import { BattleWithComputerComponent } from './components/battle-with-computer/battle-with-computer.component';
 import { LearnChessComponent } from './components/learn-chess/learn-chess.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
 
 
 @NgModule({
@@ -16,8 +15,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     BattleWithComputerComponent,
     LearnChessComponent,
     LearnChessComponent,
-    HomePageComponent,
-    HomePageComponent
+
+
     
   ],
   imports: [

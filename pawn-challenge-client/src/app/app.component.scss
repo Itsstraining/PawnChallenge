@@ -81,7 +81,7 @@
 .wrapper .main_content{
   width: 100%;
   // height: 100%;
-  margin-left: 200px;
+  //margin-left: 200px;
   background-color: #312e2b;
   // display: flex;
   flex-direction: column;
@@ -108,9 +108,330 @@
   margin-left: 200px;
   display: list-item;
 }
-
 @media (max-height: 500px){
   .social_media{
     display: none !important;
   }
 }
+
+
+/*------------------------------------------------------------------------------------------------*/
+
+@media (min-width: 960px){
+  .layout-component {
+      padding: 1.5rem;
+      row-gap: 2rem;
+      background-color: #312e2b;
+  }
+  }
+  
+  
+  .layout-component {
+    align-content: start;
+    display: grid;
+    flex: 1 0 auto;
+    gap: 2.4rem;
+    grid-template-columns: 100%;
+    margin: 0 auto;
+    max-width: 108.2rem;
+    width: 100%;
+
+  }
+  
+  .index-component {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+  .block{
+    margin-bottom: 3.2rem;
+    padding-top: .8rem;
+    width: 100%;
+    float:right;
+    @media (min-width: 768px){
+      .index-board {
+        display: block;
+        position: relative;
+        width: 50%;
+    }
+    }
+    .index-guest-board-link {
+      background-color: transparent;
+      border: none;
+      margin: 0;
+      padding: 0
+    }
+  
+    .index-board-img {
+      border-radius: .5rem;
+      height: auto;
+      max-width: 100%;
+      width: 33.6rem;
+    }
+  
+    
+  
+    .intro{
+      padding: 0 4.8rem;
+      width: 29%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      float:right;
+      background-color: #312e2b;
+      margin-top: -137mm;
+      .title span {
+          display: inline-flex;
+      }
+  
+      .title{
+        margin-bottom: 0;
+        padding: 2.7rem 0 2.5rem;
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+        font-size: 4.8rem;
+        font-size: clamp(3rem, 4vw, 2.8rem);
+        font-weight: 700;
+        line-height: 1.13;
+        margin-bottom: 1.6rem;
+        padding: 0;
+        text-align: center;
+        width: 320%;
+      }
+  
+   .info{
+     flex-direction: row;
+     justify-content: space-between;
+     margin-bottom: 3.5rem;
+     width: 22rem;
+     display: flex;
+   }
+  
+   .info-item{
+     color: hsla(0deg, 0%, 100%, 0.4);
+     display: inline-block;
+     font-size: 1rem;
+     position: relative;
+     text-align: center;
+     margin-right: -41px;
+   }
+   .info-item-counter{
+     color: #fff;
+     font-family: "Montserrat", sans-serif;
+     font-size: 1rem;
+     font-weight: 700;
+     margin-right: 7px;
+   }
+  
+   .button-wrap{
+     display: flex;
+     flex-direction: column;
+     max-width: 40rem;
+   }
+  
+   .button-form{
+     margin-bottom: 2.9rem;
+      width: 100%;
+   }
+  
+   .button-content{
+    background-color: #7fa650;
+    color: #fff;
+    width: 27rem;
+    margin-right: -3rem;
+    border-radius: 12px;
+    border: 0;
+    height: 6rem;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding: 1.8rem 2.4rem!important;
+    text-align: left;
+   }
+   .button-title{
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.8rem;
+    font-size: clamp(1rem, 2vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.1rem;
+    width: 13rem;
+    margin-top: -1rem;
+    text-align: left;
+   }
+  
+   .button-subtitle{
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, system-ui, Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    font-size: clamp(1rem, 3vw, 0.4rem);
+    font-weight: 400;
+    margin-top: -1rem;
+   }
+  
+  .playhand-icon{
+    background-image: url(https://www.chess.com/bundles/web/images/v5-index/playhand.fff9e395.png);
+      bottom: -.4rem;
+  }
+  
+  .computer-icon{
+    background-image: url(https://www.chess.com/bundles/web/images/v5-index/computer.99763360.png);
+    margin-left: 2rem;
+    margin-top: -3mm
+  
+  }
+  
+  .basic{
+    background-color: rgba(98, 96, 93, 0.4196078431);
+    color: var(hsla(0deg, 0%, 100%, 0.65), #666463);
+    display: flex;
+    max-width: 40rem;
+    width: 113%;
+    padding-top: 2rem;
+    border-radius: 12px;
+  }
+  .guest-button-icon{
+    background-repeat: no-repeat;
+    background-size: contain;
+    flex-shrink: 0;
+    height: 4.5rem;
+    margin-right: 1.7rem;
+    position: relative;
+    width: 3.5rem;
+  }
+   .button-border{
+      --borderRadius: 1rem;
+      --borderHeight: .5rem;
+      --buttonHeight: 5.5rem;
+      --buttonPaddings: .5rem 3rem;
+   }
+  }
+  
+  }
+  
+  .background-news{
+    grid-column-gap: 4.8rem;
+    background-color: rgba(0,0,0,.2);
+    border-radius: .5rem;
+    display: grid;
+    overflow: hidden;
+    padding: 4.8rem;
+    flex-direction: column;
+    width: 119%;
+  
+    .frame{
+      grid-template-columns: 1fr minmax(auto,40rem);
+      padding-top: 3.8rem;
+    }
+  
+    .news-title{
+      grid-column: 1;
+      padding: 2rem 0 0;
+      color: #fff;
+      font-family:  "Montserrat",sans-serif;
+      font-size: 3.2rem;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 700;
+      text-align: center
+    }
+  
+    .news-board{
+      grid-column: 2;
+      justify-content: flex-end;
+      margin: 0;
+      grid-row: 1/4;
+    }
+    @media (min-width: 480px){
+        .news-board-img{
+          max-width: 40rem;
+          border-radius: .4rem;
+          display: block;
+          height: 28rem; 
+        }
+      }
+  
+      .quote {
+        align-self: flex-end;
+        grid-row: 3/3;
+        margin: 0;
+        display: flex;
+        margin-left: -2rem;
+      }
+  
+      @media (min-width: 960px){
+        .quote-img {
+          height: 9.8rem;
+          margin-right: 3.2rem;
+          min-width: 9.8rem;
+          width: 9.8rem;
+          border-radius: 4px
+      }
+      }
+  
+      @media (min-width: 768px){
+         .quote-inner {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+      }
+      }
+  
+      .quote-body {
+        color: hsla(0deg, 0%, 100%, 0.65);
+        font-size: 1.7rem;
+        font-size: clamp(1.1rem, 4vw, 0.7rem);
+        margin-bottom: 1rem;
+        text-align: left;
+        width: 150%;
+        margin-left: -2rem;
+      }
+  
+      .quote-author {
+        align-items: center;
+        display: inline-flex;
+        font-weight: 600;
+        margin-left: -2rem;
+  
+        .chess-title {
+          background-color: #b33430;
+          border-radius: 0.3rem;
+          color: #fff;
+          font-size: 0.9rem;
+          font-weight: 600;
+          line-height: 1;
+          margin-right: 0.7rem;
+          padding: 0.2rem 0.3rem;
+        }
+      }
+  
+      @media (min-width: 768px){
+          .news-button-wrapper {
+            grid-column: 1;
+            grid-row: 2/3;
+            text-align: center;
+        }
+      }
+  
+      .news-button-title {
+        font-size: clamp(18px, 3vw, 1.2rem);
+        background-color: #7fa650;
+        color: #fff;
+        width: 14rem;
+        margin-right: -3rem; 
+        border-radius: 12px;
+        border: 0;
+        height: 4rem;
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        padding: 1.8rem 2.4rem !important;
+        text-align: left;
+        font-weight: 900;
+        margin-left: 5rem;
+      }
+  
+  }
+  
+  
+
+

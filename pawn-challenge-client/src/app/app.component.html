@@ -1,44 +1,51 @@
 <div class="wrapper">
-  <script src="https://kit.fontawesome.com/27602b8f06.js" crossorigin="anonymous"></script>
+  <script
+    src="https://kit.fontawesome.com/27602b8f06.js"
+    crossorigin="anonymous"
+  ></script>
   <div class="sidebar">
-    <img src="../assets/chess/unknown__1_-removebg-preview.png"
-      style="text-align: center; width: 200px; height: 150px; margin-top: 0px" alt="" />
+    <img
+      src="../assets/chess/unknown__1_-removebg-preview.png"
+      style="text-align: center; width: 200px; height: 150px; margin-top: 0px"
+      alt=""
+    />
     <ul>
       <li>
-        <a href="#"><i class="fa fa-car fa-lg"></i>Play</a>
+        <a href="#"><fa-icon [icon]="['fas', 'chess-king']" class="fa-fw mr-3"></fa-icon>Play</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-user"></i>Puzzles</a>
+        <a href="#"><fa-icon [icon]="['fas', 'puzzle-piece']" class="fa-fw mr-3"></fa-icon>Puzzles</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-address-card"></i>Learn</a>
+        <a href="#"><fa-icon [icon]="['fas', 'graduation-cap']" class="fa-fw mr-3"></fa-icon>Learn</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-project-diagram"></i>Watch</a>
+        <a href="#"><fa-icon [icon]="['fas', 'binoculars']" class="fa-fw mr-3"></fa-icon>Watch</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-blog"></i>News</a>
+        <a href="#"><fa-icon [icon]="['fas', 'newspaper']" class="fa-fw mr-3"></fa-icon>News</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-address-book"></i>Social</a>
+        <a href="#"><fa-icon [icon]="['fas', 'user-group']" class="fa-fw mr-3"></fa-icon>Social</a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-map-pin"></i>More</a>
+        <a href="#"><fa-icon [icon]="['fas', 'ellipsis']" class="fa-fw mr-3"></fa-icon>More</a>
       </li>
     </ul>
-    <div class="social_media">medi</div>
+    <div class="social_media">media</div>
   </div>
 
-<<<<<<< HEAD
-<app-chess-board></app-chess-board>
-=======
   <div class="main_content body">
-    <div class="header">Welcome!! Have a nice day.</div>
+    <!-- <div class="header">Welcome!! Have a nice day.</div> -->
     <div class="info">
       <div>
+        <i class="	fas fa-chess"></i>
         <router-outlet></router-outlet>
       </div>
     </div>
   </div>
+  
+   <!-- <div style="position:fixed;"><img class="image-chess-board" src="https://www.chess.com/bundles/web/images/offline-play/standardboard.1d6f9426.png" alt="" style="height:93%;"></div> -->
 </div>
->>>>>>> 1c16eeef6b91bd590bdb4c11789ebb7a8708fd30
+
+

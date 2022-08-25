@@ -26,8 +26,9 @@ export class PieceMoveService {
     } else if (chess.name.toLowerCase() == 't') {
       ruleStr = '* leftup/* rightup/* leftdown/* rightdown';
     } else if (chess.name.toLowerCase() == 'h') {
-      ruleStr = '* up/* down/* left/* right/* leftup/* rightup/* leftdown/* rightdown';
-    }else if(chess.name.toLowerCase() == 'c'){
+      ruleStr =
+        '* up/* down/* left/* right/* leftup/* rightup/* leftdown/* rightdown';
+    } else if (chess.name.toLowerCase() == 'c') {
       ruleStr = '1 up-up';
     }
     let rules = ruleStr.split('/');
@@ -105,6 +106,17 @@ export class PieceMoveService {
     //this.chessService.printBoard(dots);
   }
 
+  /* convert 2 way to 1 way
+      var test2d = [
+        ["foo", "bar"],
+        ["baz", "biz"]
+      ];
+      var merged = test2d.reduce(function(prev,next){
+        return prev.concat(next);
+      })
+      console.log(merged);
+
+*/
   moveKing(chess: Chess, dots: Cell[][]) {
     let ruleStr = 'up/down/left/right/leftup/rightup/leftdown/rightdown';
     let rules = ruleStr.split('/');
@@ -128,6 +140,7 @@ export class PieceMoveService {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
   }
+
 
   moveChess(
     chess: Chess,
@@ -161,6 +174,5 @@ export class PieceMoveService {
     this.chessVector.set('rightup', { x: 1, y: -1 });
     this.chessVector.set('leftdown', { x: -1, y: 1 });
     this.chessVector.set('rightdown', { x: 1, y: 1 });
-
   }
 }

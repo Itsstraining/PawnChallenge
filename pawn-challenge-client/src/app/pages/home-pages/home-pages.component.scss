@@ -1,0 +1,441 @@
+
+@media (min-width: 960px){
+    .layout-component {
+        padding: 1.5em;
+        background-color: #312e2b;
+    }
+    }
+    
+    
+    .layout-component {
+      align-content: start;
+      display: grid;
+      flex: 1 0 auto;
+      gap: 2.4em;
+      grid-template-columns: 100%;
+      margin: 0 auto;
+      max-width: 108.2em;
+      width: 100%
+    }
+    
+    .index-component {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+    
+    .block{
+      margin-bottom: 3.2em;
+      padding-top: 0.8em;
+      width: 100%;
+      float: right;
+      @media (min-width: 768px){
+        .index-board {
+          display: block;
+          position: relative;
+          width: 50%;
+      }
+      }
+      .index-guest-board-link {
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        padding: 0
+      }
+    
+      .index-board-img {
+        border-radius: 0.5em;
+        height: auto;
+        max-width: 100%;
+        width: 36.6em;
+      }
+    
+      
+    
+      .intro{
+        padding: 0 4.8em;
+        width: 29%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        float: right;
+        background-color: #312e2b;
+        margin-top: -37em;
+        .title span {
+            display: inline-flex;
+        }
+    
+        .title{
+          margin-bottom: 0;
+          padding: 2.7rem 0 2.5rem;
+          color: #fff;
+          font-family: "Montserrat", sans-serif;
+          font-size: 4.8rem;
+          font-size: clamp(3em, 4vw, 3.8em);
+          font-weight: 700;
+          line-height: 1.13;
+          margin-bottom: 0.6em;
+          padding: 0;
+          text-align: center;
+          width: 320%;
+        }
+    
+     .info{
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 2.5em;
+      width: 29em;
+      display: flex;
+     }
+    
+     .info-item{
+      color: hsla(0deg, 0%, 100%, 0.4);
+      display: inline-block;
+      font-size: 1.3em;
+      position: relative;
+      text-align: center;
+      margin-right: -2em;
+     }
+     .info-item-counter{
+      color: #fff;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.9em;
+      font-weight: 700;
+      margin-right: 0.5em;
+     }
+    
+     .button-wrap{
+      display: flex;
+      flex-direction: column;
+      max-width: 40em;
+     }
+    
+     .button-form{
+      margin-bottom: 3.9em;
+      width: 100%;
+     }
+    
+     .button-content{
+      background-color: #7fa650;
+      color: #fff;
+      width: 31em;
+      margin-right: -3.6em;
+      border-radius: 12px;
+      border: 0;
+      height: 7em;
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+      padding: 1.8em 2.4em !important;
+      text-align: left;
+     }
+     .button-title{
+      font-family: "Montserrat", sans-serif;
+      font-size: 2.8rem;
+      font-size: clamp(1em, 2vw, 2.8em);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.9em;
+      width: 9em;
+      margin-top: -0.5em;
+      text-align: left;
+     }
+    
+     .button-subtitle{
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, system-ui, Helvetica, Arial, sans-serif;
+      font-size: 1.4rem;
+      font-size: clamp(1.2em, 3vw, 0.4em);
+      font-weight: 400;
+      margin-top: -1em;
+     }
+    
+    .playhand-icon{
+      background-image: url(https://www.chess.com/bundles/web/images/v5-index/playhand.fff9e395.png);
+        bottom: -.4rem;
+    }
+    
+    .computer-icon{
+      background-image: url(https://www.chess.com/bundles/web/images/v5-index/computer.99763360.png);
+      margin-left: 2rem;
+      margin-top: -3mm
+    
+    }
+    
+    .basic{
+      background-color: rgba(98, 96, 93, 0.4196078431);
+      color: var(hsla(0deg, 0%, 100%, 0.65), #666463);
+      display: flex;
+      max-width: 40rem;
+      width: 113%;
+      padding-top: 2rem;
+      border-radius: 12px;
+    }
+    .guest-button-icon{
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex-shrink: 0;
+      height: 5.5em;
+      margin-right: 1.7em;
+      position: relative;
+      width: 4.5em;
+    }
+     .button-border{
+        --borderRadius: 1rem;
+        --borderHeight: .5rem;
+        --buttonHeight: 5.5rem;
+        --buttonPaddings: .5rem 3rem;
+     }
+    }
+    
+    }
+    
+    .background-news{
+      grid-column-gap: 4.8rem;
+      background-color: rgba(0,0,0,.2);
+      border-radius: .5rem;
+      display: grid;
+      overflow: hidden;
+      padding: 4.8rem;
+      flex-direction: column;
+      width: 119%;
+    
+      .frame{
+        grid-template-columns: 1fr minmax(auto,40rem);
+        padding-top: 3.8rem;
+      }
+    
+      .news-title{
+        grid-column: 1;
+        padding: 1em 0 0;
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+        font-size: 3.2rem;
+        font-size: clamp(2.4em, 4vw, 2.2em);
+        font-weight: 700;
+        text-align: center;
+      }
+    
+      .news-board{
+        grid-column: 2;
+        justify-content: flex-end;
+        margin: 0;
+        grid-row: 1/4;
+      }
+      @media (min-width: 480px){
+          .news-board-img{
+            max-width: 40em;
+            border-radius: 0.4em;
+            display: block;
+            height: 31em;
+          }
+        }
+    
+        .quote {
+          align-self: flex-end;
+          grid-row: 3/3;
+          margin: 0;
+          display: flex;
+          margin-left: -2rem;
+        }
+    
+        @media (min-width: 960px){
+          .quote-img {
+            height: 10.8em;
+            margin-right: 4.2em;
+            min-width: 10.8em;
+            width: 9.8em;
+            border-radius: 4px;
+        }
+        }
+    
+        @media (min-width: 768px){
+           .quote-inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        }
+    
+        .quote-body {
+          color: hsla(0deg, 0%, 100%, 0.65);
+          font-size: 1.7rem;
+          font-size: clamp(1.4em, 4vw, 0.7em);
+          margin-bottom: 1em;
+          text-align: left;
+          width: 150%;
+          margin-left: -1.7em;
+        }
+    
+        .quote-author {
+          align-items: center;
+          display: inline-flex;
+          font-weight: 600;
+          margin-left: -2.5em;
+    
+          .chess-title {
+            background-color: #b33430;
+            border-radius: 0.3em;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            line-height: 1;
+            margin-right: 0.7em;
+            padding: 0.2em 0.3em;
+          }
+        }
+    
+        @media (min-width: 768px){
+            .news-button-wrapper {
+              grid-column: 1;
+              grid-row: 2/3;
+              text-align: center;
+          }
+        }
+    
+        .news-button-title {
+          font-size: clamp(1.4em, 3vw, 1.2em);
+          background-color: #7fa650;
+          color: #fff;
+          width: 11em;
+          margin-right: -3em;
+          border-radius: 12px;
+          border: 0;
+          height: 3em;
+          align-items: center;
+          display: flex;
+          justify-content: flex-start;
+          padding: 0.8em 1.4em !important;
+          text-align: left;
+          font-weight: 900;
+          margin-left: 4em;
+        }
+    
+        
+    }
+    
+    @media (min-width: 768px){
+        .index-suggestion-component {
+             margin-top: 3.2rem;
+             grid-column-gap: 4.8rem;
+             background-color: rgba(0,0,0,.2);
+             border-radius: .5rem;
+             display: grid;
+             overflow: hidden;
+             padding: 4.8rem;
+             flex-direction: column;
+             width: 119%;
+
+             .frame{
+     grid-template-columns: 1fr minmax(auto,40rem);
+     padding-top: 3.8rem;
+   }
+           
+
+         }
+     }
+
+     @media (min-width: 768px){
+          .index-suggestion-title {
+            grid-column: 2;
+            padding: 2rem 0 0;
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: 3.2rem;
+            font-size: clamp(1.4em, 4vw, 2.7em);
+            font-weight: 700;
+            padding: 1.4em 0;
+            text-align: center;
+     }
+     
+     }
+
+     .index-suggestion-board {
+         grid-column: 0;
+         justify-content: flex-start;
+         margin: 0;
+         grid-row: 1/4;
+         display: flex;
+     }
+
+     .index-suggestion-board-img {
+      max-width: 30em;
+      border-radius: 0.4em;
+      display: block;
+      height: auto;
+     }
+
+     .index-quote {
+         align-self: flex-end;;
+         grid-column: 2;
+         grid-row: 3/3;
+         margin: 0;
+         display: flex;
+     }
+
+     .index-quote-img {
+        height: 9.8rem;
+        margin-right: 3.2rem;
+        min-width: 9.8rem;
+        width: 9.8rem;
+        border-radius: 4px;
+        margin-left: -2em;
+     }
+     .index-quote-inner {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+     }
+
+         .index-quote-body {
+          color: hsla(0deg, 0%, 100%, 0.65);
+          font-size: 1.7rem;
+          font-size: clamp(1.5em, 4vw, 0.7em);
+          margin-bottom: 1em;
+          text-align: left;
+          width: 148%;
+          margin-left: -2em;
+            
+     }
+
+     .index-quote-author {
+         align-items: center;
+         display: inline-flex;
+         font-weight: 600;
+         margin-left: -2.1em;
+     }
+
+     .index-chess-title {
+        background-color: #b33430;
+        border-radius: 0.3rem;
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1;
+        margin-right: 0.7rem;
+        padding: 0.2rem 0.3rem;
+     }
+
+     .index-suggestion-button-wrapper {
+         grid-column: 2;
+         grid-row: 2/3;
+         margin-left: 3rem;
+     }
+
+     .index-button-title {
+        font-size: clamp(18px, 3vw, 1.2rem);
+        background-color: #7fa650;
+        color: #fff;
+        width: 14rem;
+        margin-right: -3rem; 
+        border-radius: 12px;
+        border: 0;
+        height: 4rem;
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        padding: 1.8rem 2.4rem !important;
+        text-align: left;
+        font-weight: 900;
+        margin-left: 2em;
+        margin-top: -4em;
+     }
