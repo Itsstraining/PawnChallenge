@@ -6,11 +6,17 @@ import { ChessBoardComponent } from './chess-board.component';
 import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChess, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight, faChess, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook } from '@fortawesome/free-solid-svg-icons';
+import { GrapsComponent } from './components/graps/graps.component';
 @NgModule({
   declarations: [
+<<<<<<< HEAD
     // ChessBoardComponent,
   
+=======
+    ChessBoardComponent,
+    GrapsComponent
+>>>>>>> 6142c0d906ed660d610263ffeeda716b0422f31a
   ],
   imports: [
     CommonModule,
@@ -30,6 +36,7 @@ export class ChessBoardModule {
       faChessKnight,
       faChessQueen,
       faChessRook,
+      faCaretRight
     );
   }
  }

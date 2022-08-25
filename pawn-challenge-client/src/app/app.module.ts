@@ -28,6 +28,7 @@ import {
   faNewspaper,
   faUserGroup,
   faEllipsis,
+  faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare as farSquare,
@@ -39,10 +40,17 @@ import {
   faMedium,
   faLeanpub,
 } from '@fortawesome/free-brands-svg-icons';
+
 import { ChessBoardComponent } from './pages/chess-board/chess-board.component';
 import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 
 
+
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { authEffects } from './effects/auth.effect';
+import { AuthReducer } from './reudcers/auth.reducer';
 
 @NgModule({
   declarations: [AppComponent, DialogComponent, DialogSkinComponent,ChessBoardComponent,HomePagesComponent],
@@ -55,6 +63,10 @@ import { HomePagesComponent } from './pages/home-pages/home-pages.component';
     provideFirestore(() => getFirestore()),
     MaterialExampleModule,
     FontAwesomeModule,
+    StoreModule.forRoot({
+      auth: AuthReducer,
+    }, {}),
+    EffectsModule.forRoot([authEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -70,6 +82,7 @@ export class AppModule {
       faNewspaper,
       faUserGroup,
       faEllipsis,
+      faCaretRight
     );
   }
 }
