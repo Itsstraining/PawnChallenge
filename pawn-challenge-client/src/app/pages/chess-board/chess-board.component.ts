@@ -12,7 +12,6 @@ import { HistoryMoveService } from 'src/app/services/history/history-move.servic
 import { Grap } from 'src/app/models/grap.model';
 import { ShareService } from 'src/app/services/share/share.service';
 
-
 @Component({
   selector: 'app-chess-board',
   templateUrl: './chess-board.component.html',
@@ -36,7 +35,7 @@ export class ChessBoardComponent implements OnInit {
     public playerService: PlayerService,
     public gameService: GameService,
     private historyService: HistoryMoveService,
-    private shareService:ShareService
+    private shareService: ShareService
   ) {
     //console.log(this.x1[this.x[0]]);
     //this.chessService.createBoard();
@@ -54,8 +53,7 @@ export class ChessBoardComponent implements OnInit {
       playerService.player1
     );
     this.board = chessService.table;
-    this.grap = this.historyService.newGrap1();
-    this.historyService.createGrapPosition();
+    this.grap = this.historyService.newGrap();
   }
 
   allowDrop(ev: any) {
@@ -88,10 +86,9 @@ export class ChessBoardComponent implements OnInit {
       this.grap.id = Date.now().toString();
       this.historyService.addGrap(this.grap);
       // console.log(this.historyService.grapHistory(this.grap));
-      this.historyService.grapHistory(this.grap);
       this.pieceService.checkMate(this.chess, this.board);
     } else {
-      this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK')
+      this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
     }
     this.dots = this.chessService.createBoard();
   }
@@ -117,8 +114,11 @@ export class ChessBoardComponent implements OnInit {
         chess.name
       )
     ) {
+      this.grap = this.historyService.newGrap();
       this.chess = chess;
       this.dots = this.pieceService.setTableDots(chess, this.board);
+
+      this.historyService.createGrapPosition();
       this.grap.grapFrom = this.historyService.toFormatPosition(chess.position);
       // console.log(this.grap.grapFrom);
     }

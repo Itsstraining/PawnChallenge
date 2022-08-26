@@ -1,3 +1,4 @@
+import { PlayerService } from 'src/app/services/player/player.service';
 import { Injectable } from '@angular/core';
 import { Position } from 'src/app/models/chess.model';
 import { Grap } from 'src/app/models/grap.model';
@@ -9,7 +10,10 @@ export class HistoryMoveService {
   grapPositionX : Map<number,string> = new Map();
   grapPositionY : Map<number,string> = new Map();
   graps:Grap[] = [];
-  constructor() {
+
+  grapsHalf:Grap[] = [];
+
+  constructor(private playerSerivce:PlayerService) {
    }
   createGrapPosition(){
     //x
@@ -31,29 +35,16 @@ export class HistoryMoveService {
     this.grapPositionY.set(6,'2')
     this.grapPositionY.set(7,'1')
   }
-  // newGrap(grapFrom: Position, grapTo: Position, nameChess: string, uid: string){
-  //   let grap : Grap = {
-  //     id: '',
-  //     grapFrom: this.toFormatPosition(grapFrom),
-  //     grapTo: this.toFormatPosition(grapTo),
-  //     nameChess: nameChess,
-  //     uid: uid,
-  //     icon: ''
-  //   }
-  //   return grap;
-  // }
-
-  grapHistory(grap : Grap){
-    this.graps.push(grap);
-    console.log(this.graps);
-  }
   addGrap(grap : Grap){
     this.graps.push(grap);
+    if(grap.uid == this.playerSerivce.player1.id){
+       this.grapsHalf.push(grap);
+    }
+    console.log(this.graps);
   }
-  newGrap1(){
+  newGrap (){
     let grap : Grap = {
       id: '',
-      // numGrap: numGrap,
       grapFrom: '',
       grapTo: '',
       nameChess: '',
