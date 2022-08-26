@@ -17,15 +17,15 @@ p {
         padding-bottom: 1px;
     }
     float: right;
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 .row {
     display: flex;
     background-color: #62605d6b;
-    padding: 10px 0 10px 10px;
-    border-radius: 2px;
-
+    padding: 10px 0 10px 28px;
+    border-radius: 4px;
+    margin-left: 0;
     p {
         color: white;
         
@@ -33,17 +33,16 @@ p {
 
     img {
         height: 3rem;
-        margin-left: 10px;
+        margin-left: 0 auto;
     }
     .title{
-        font-size: 15px;
+        font-size: 21px;
         text-align: left;
         margin-left: 10px;
-        margin-top: 5px;
         
     }
     .content{
-        font-size: 9px;
+        font-size: 12px;
         margin-left: 10px;
         margin-top: 4px;
     }
@@ -62,8 +61,25 @@ p {
     display: grid;
     text-align: center;
     border-radius: 3px;
-    
-   
+    width: 31rem;
+    height: 100%;
+    margin-top: -19px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    .menu-header-title{
+    font-size: 3.1rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 1.2rem;
+    position: relative;
+    z-index: 1   
+    } 
+ 
+
+
+
 }
 
 .background-img {
@@ -72,11 +88,10 @@ p {
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: 100%;
-    height: 4rem;
+    height: 7rem;
     margin: 0 auto;
-    margin-top: 4px;
     position: relative;
-    width: 5rem;
+    width: 6rem;
     z-index: 1;
     margin-top: -13px;
 }
@@ -99,12 +114,3 @@ p {
     padding: 2rem;
 }
 
-.image-chess-board{
-    width: 42%;
-      margin-left: 2mm;
-      position: fixed;
-      margin-top: 5mm
-  }
-
-
-  
