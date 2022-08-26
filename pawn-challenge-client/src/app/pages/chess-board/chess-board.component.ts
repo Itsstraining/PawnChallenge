@@ -6,6 +6,7 @@ import { ChessService } from 'src/app/services/chess/chess.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { Player } from 'src/app/models/player.model';
+import { ShareService } from 'src/app/services/share/share.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ChessBoardComponent implements OnInit {
     private pieceService: PieceMoveService,
     private chessService: ChessService,
     public playerService: PlayerService,
-    public gameService: GameService
+    public gameService: GameService,
+    private shareService:ShareService
   ) {
     //this.chessService.createBoard();
     this.currentPlayer = this.playerService.getUserById(this.gameService.currentUserIDControll)
@@ -62,7 +64,7 @@ export class ChessBoardComponent implements OnInit {
 
       this.pieceService.checkMate(this.chess, this.board)
     } else {
-      console.log('not move');
+      this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK')
     }
     this.dots = this.chessService.createBoard();
   }
