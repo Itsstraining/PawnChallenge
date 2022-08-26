@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Cell } from 'src/app/models/chess.model';
 import { ChessService } from 'src/app/services/chess/chess.service';
 
@@ -13,7 +14,9 @@ export class DialogSkinComponent implements OnInit {
   Board: any[];
   indexPiece = 26;
   indexBoard = 10;
-  constructor(private chessService: ChessService) {
+  constructor(
+    private chessService: ChessService,
+    public dialogRef: MatDialogRef<DialogSkinComponent>) {
     this.indexPiece= parseInt(localStorage.getItem('indexPiece')??'26')
     this.indexBoard = parseInt(localStorage.getItem('indexBoard')??'10')
     this.table = this.chessService.createBoard()
@@ -239,12 +242,12 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name:'Burled Wood',
-        folderName: 'Burled Wood',
+        folderName: 'BurledWood',
         isSelect: false
       },
       {
         name:'Dark Wood',
-        folderName: 'Dark Wood',
+        folderName: 'DarkWood',
         isSelect: false
       },
       {
@@ -269,7 +272,7 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name:'Icy Sea',
-        folderName: 'Icy Sea',
+        folderName: 'IcySea',
         isSelect: false
       },
       {
@@ -370,5 +373,19 @@ export class DialogSkinComponent implements OnInit {
   }
   tooglePlaySound() {
     this.showPlaySound = !this.showPlaySound;
+  }
+
+  changeIndexBorad(){
+    console.log(this.indexBoard);
+  }
+
+  save(){
+    localStorage.setItem('indexPiece',this.indexPiece.toString())
+    localStorage.setItem('indexBoard',this.indexBoard.toString())
+    this.dialogRef.close()
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
   }
 }

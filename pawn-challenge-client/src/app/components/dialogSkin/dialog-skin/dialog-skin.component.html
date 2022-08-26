@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>
     <!-- <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
         style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;"> -->
-        <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../assets/SkinImage/Board/Lolz/150.png)'}">
+        <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../assets/SkinImage/Board/'+ Board[indexBoard].folderName +'/150.png)'}">
             <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
               <div
                 *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
@@ -37,96 +37,9 @@
 
         <div class="component">
             <label class="label">Board</label>
-            <select class="select" icon="caret-down">
-                <option value="8_bit">
-                    8-Bit
-                </option>
-                <option value="bases">
-                    Bases
-                </option>
-                <option value="blue">
-                    Blue
-                </option>
-                <option value="brown">
-                    Brown
-                </option>
-                <option value="bubblegum">
-                    Bubblegum
-                </option>
-                <option value="burled_wood">
-                    Burled Wood
-                </option>
-                <option value="dark_wood">
-                    Dark Wood
-                </option>
-                <option value="dash">
-                    Dash
-                </option>
-                <option value="glass">
-                    Glass
-                </option>
-                <option value="graffiti">
-                    Graffiti
-                </option>
-                <option value="green">
-                    Green
-                </option>
-                <option value="icy_sea">
-                    Icy Sea
-                </option>
-                <option value="light">
-                    Light
-                </option>
-                <option value="lolz">
-                    Lolz
-                </option>
-                <option value="marble">
-                    Marble
-                </option>
-                <option value="metal">
-                    Metal
-                </option>
-                <option value="neon">
-                    Neon
-                </option>
-                <option value="newspaper">
-                    Newspaper
-                </option>
-                <option value="orange">
-                    Orange
-                </option>
-                <option value="overlay">
-                    Overlay
-                </option>
-                <option value="parchment">
-                    Parchment
-                </option>
-                <option value="purple">
-                    Purple
-                </option>
-                <option value="red">
-                    Red
-                </option>
-                <option value="sand">
-                    Sand
-                </option>
-                <option value="sky">
-                    Sky
-                </option>
-                <option value="stone">
-                    Stone
-                </option>
-                <option value="tan">
-                    Tan
-                </option>
-                <option value="tournament">
-                    Tournament
-                </option>
-                <option value="translucent">
-                    Translucent
-                </option>
-                <option value="walnut">
-                    Walnut
+            <select class="select" icon="caret-down" [(ngModel)]="indexBoard">
+                <option *ngFor="let item of Board; let i = index" [value]="i">
+                    {{item.name}}
                 </option>
             </select>
         </div>
@@ -273,6 +186,6 @@
 </mat-dialog-content>
 
 <div class="Footer">
-    <button class="buttonCancel"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Cancel</p></button>
-    <button class="buttonSave"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Save</p></button>
+    <button class="buttonCancel" type="button" (click)="closeDialog()"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Cancel</p></button>
+    <button (click)="save()" class="buttonSave"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Save</p></button>
 </div>
