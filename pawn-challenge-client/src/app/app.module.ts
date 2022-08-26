@@ -40,6 +40,10 @@ import {
   faLeanpub,
 } from '@fortawesome/free-brands-svg-icons';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { authEffects } from './effects/auth.effect';
+import { AuthReducer } from './reudcers/auth.reducer';
 @NgModule({
   declarations: [AppComponent, DialogComponent, DialogSkinComponent],
   imports: [
@@ -51,7 +55,11 @@ import { FormsModule } from '@angular/forms';
     provideFirestore(() => getFirestore()),
     MaterialExampleModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({
+      auth: AuthReducer,
+    }, {}),
+    EffectsModule.forRoot([authEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
