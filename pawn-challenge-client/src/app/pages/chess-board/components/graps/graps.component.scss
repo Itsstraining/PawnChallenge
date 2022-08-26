@@ -47,7 +47,7 @@ p {
   }
 }
 .scrollbar {
-  background-color: rgb(18, 16, 16);
+  background-color: #2C2929;
   height: 50em;
   width: 100%;
   padding: auto;
@@ -102,4 +102,17 @@ tr:nth-child(even) {
 }
 .Icon {
   font-size: 1.2em;
+}
+.row-setting{
+  width: 100%;
+  display: flex;
+  padding: 3.5em 4em;
+  i{
+    font-size: 3em;
+    color: #838383;
+    cursor: pointer;
+  }
+  i:hover{
+    color: #c9c9c9;
+  }
 }
