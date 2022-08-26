@@ -6,7 +6,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: '', loadChildren: () => import('./pages/home-pages/home-pages.module').then(m => m.HomePagesModule) },
   { path: 'login', loadChildren: () => import('./pages/home/login/login.module').then(m => m.LoginModule) },
-  { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chesss/learn-chesss.module').then(m => m.LearnChesssModule) }
+
+  { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chesss/learn-chesss.module').then(m => m.LearnChesssModule) },
+  { path: 'dialog-test', loadChildren: () => import('./pages/dialog-test/dialog-test.module').then(m => m.DialogTestModule) },
 ];
 
 @NgModule({
