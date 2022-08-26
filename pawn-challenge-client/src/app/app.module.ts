@@ -41,9 +41,9 @@ import {
   faLeanpub,
 } from '@fortawesome/free-brands-svg-icons';
 
-import { ChessBoardComponent } from './pages/chess-board/chess-board.component';
-import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 
+import { HomePagesComponent } from './pages/home-pages/home-pages.component';
+import { LoginComponent } from './pages/home/login/login.component';
 
 
 
@@ -52,8 +52,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
 
+
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,ChessBoardComponent,HomePagesComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
