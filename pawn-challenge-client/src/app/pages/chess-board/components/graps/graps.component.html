@@ -1,21 +1,23 @@
 <div style="display: flex; justify-content: space-between; width: 100%;padding: 1em 6em;">
   <div>
-    <div class="chart" style="margin-top: 2em; position: absolute"
-      [style]="'animation: timer ' + time + 's infinite linear;'"></div>
-    <img src="../../../../../assets/chess/avatar/a13.png" class="img" alt="Avatar" />
+    <div *ngIf="gameService.isGameStart && playerService.player1.id == this.gameService.currentUserIDControll"
+      class="chart" style="margin-top: 2em; position: absolute"
+      [style]="'animation: timer ' + gameService.timePerTurn + 's infinite linear;'"></div>
+    <img src="../../../../../assets/chess/avatar/{{playerService.player1.img}}.png" class="img" alt="Avatar" />
     <br />
-    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">Dog Breeds</p>
+    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">{{playerService.player1.name}}</p>
   </div>
 
   <p style="font-size: 4em; color: aqua; margin-top: 1.5em; margin-right: 1em">
     VS
   </p>
   <div>
-    <div class="chart" style="margin-top: 2em; position: absolute"
-      [style]="'animation: timer ' + time + 's infinite linear;'"></div>
-    <img src="../../../../../assets/chess/avatar/a5.png" class="img" alt="Avatar" />
+    <div *ngIf="gameService.isGameStart && playerService.player2.id == this.gameService.currentUserIDControll"
+      class="chart" style="margin-top: 2em; position: absolute"
+      [style]="'animation: timer ' + gameService.timePerTurn + 's infinite linear;'"></div>
+    <img src="../../../../../assets/chess/avatar/{{playerService.player2.img}}.png" class="img" alt="Avatar" />
     <br />
-    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">Dog Breeds</p>
+    <p style="margin-top: 0.5em; font-size: 2em; color: aqua">{{playerService.player2.name}}</p>
   </div>
 </div>
 <div>
@@ -28,13 +30,13 @@
     <div style="display: flex">
       <i class="Icon fi fi-sr-time-quarter-to" style="color: white; margin-left: 0em; display: flex"></i>
       <p>
-        10:00
+        {{playerService.player1.chessControl.time.getFormatTime()}}
       </p>
     </div>
     <div style="display: flex;">
       <i class="Icon fi fi-sr-time-quarter-to" style="color: white; margin-right: 0em; display: flex"></i>
       <p>
-        10:00
+        {{playerService.player2.chessControl.time.getFormatTime()}}
       </p>
     </div>
   </div>
@@ -42,12 +44,19 @@
   <div class="scrollbar" id="style-1">
     <div class="force-overflow">
       <table>
-        <tr *ngFor="let item of graps">
-          <td *ngFor="let foritems of item" class="fa-fw mr-3">
+        <tr *ngFor="let item of grapsHalf; let i = index">
+          <td class="fa-fw mr-3">
             <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-            {{ foritems.grapFrom }}
+            {{ graps1[i*2].grapFrom }}
             <fa-icon [icon]="['fas', 'caret-right']" class="fa-fw mr-3" style="margin-left: 10px"></fa-icon>
-            {{ foritems.grapTo }}
+            {{ graps1[i].grapTo }}
+          </td>
+
+          <td *ngIf="graps1[i*2+1] != undefined" class="fa-fw mr-3">
+            <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
+            {{ graps1[i*2+1].grapFrom }}
+            <fa-icon [icon]="['fas', 'caret-right']" class="fa-fw mr-3" style="margin-left: 10px"></fa-icon>
+            {{ graps1[i*2+1].grapTo }}
           </td>
         </tr>
       </table>

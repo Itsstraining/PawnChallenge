@@ -9,17 +9,13 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { DialogComponent } from './components/dialogGamemode/dialog.component';
-import { MaterialExampleModule } from './material.module';
+import { MaterialModule } from './material.module';
 import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-skin.component';
-
 import {
   FaIconLibrary,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import {
-  faSquare,
-  faCheckSquare,
-  faCoffee,
   faChess,
   faChessKing,
   faPuzzlePiece,
@@ -30,16 +26,6 @@ import {
   faEllipsis,
   faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  faSquare as farSquare,
-  faCheckSquare as farCheckSquare,
-} from '@fortawesome/free-regular-svg-icons';
-import {
-  faStackOverflow,
-  faGithub,
-  faMedium,
-  faLeanpub,
-} from '@fortawesome/free-brands-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 import { LoginComponent } from './pages/home/login/login.component';
@@ -60,7 +46,7 @@ import { DialogWinComponent } from './components/dialog-win/dialog-win.component
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    MaterialExampleModule,
+    MaterialModule,
     FontAwesomeModule,
     FormsModule,
     StoreModule.forRoot({
