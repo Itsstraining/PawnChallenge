@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Grap } from 'src/app/models/grap.model';
+import { HistoryMoveService } from 'src/app/services/history/history-move.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 @Component({
   selector: 'app-graps',
@@ -244,9 +246,17 @@ export class GrapsComponent implements OnInit {
     }],
   ];
   time=10;
-  constructor(public playerService: PlayerService,) { }
+  grap:Grap;
+  constructor(public playerService: PlayerService,
+    private historyService: HistoryMoveService) {
+      // this.historyService.newGrap();
+      this.grap = this.historyService.newGrap1();
+      // console.log(this.grap);
+     }
 
   ngOnInit(): void {
   }
+
+
 
 }
