@@ -10,8 +10,10 @@ import { faCaretRight, faChess, faChessBishop, faChessKing, faChessKnight, faChe
 import { GrapsComponent } from './components/graps/graps.component';
 @NgModule({
   declarations: [
+
     ChessBoardComponent,
     GrapsComponent
+
   ],
   imports: [
     CommonModule,

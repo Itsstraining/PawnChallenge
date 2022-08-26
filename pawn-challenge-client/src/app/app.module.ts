@@ -11,6 +11,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { DialogComponent } from './components/dialogGamemode/dialog.component';
 import { MaterialExampleModule } from './material.module';
 import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-skin.component';
+
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -40,12 +41,16 @@ import {
   faLeanpub,
 } from '@fortawesome/free-brands-svg-icons';
 import { FormsModule } from '@angular/forms';
+import { HomePagesComponent } from './pages/home-pages/home-pages.component';
+import { LoginComponent } from './pages/home/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
+
+
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
