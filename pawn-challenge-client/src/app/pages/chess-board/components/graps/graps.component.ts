@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/services/game/game.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 @Component({
   selector: 'app-graps',
@@ -243,8 +244,7 @@ export class GrapsComponent implements OnInit {
       icon: '',
     }],
   ];
-  time=10;
-  constructor(public playerService: PlayerService,) { }
+  constructor(public playerService: PlayerService, public gameService: GameService) { }
 
   ngOnInit(): void {
   }
