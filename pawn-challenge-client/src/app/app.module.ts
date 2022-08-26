@@ -51,10 +51,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
+import { LearnChesssComponent } from './pages/home/learn-chesss/learn-chesss.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent,LearnChesssComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
