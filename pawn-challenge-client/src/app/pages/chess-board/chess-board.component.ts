@@ -7,6 +7,7 @@ import { PlayerService } from 'src/app/services/player/player.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { Player } from 'src/app/models/player.model';
 import { ShareService } from 'src/app/services/share/share.service';
+import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class ChessBoardComponent implements OnInit {
     private chessService: ChessService,
     public playerService: PlayerService,
     public gameService: GameService,
-    private shareService:ShareService
+    private shareService:ShareService,
+    public skinChess: ChessSkinService
   ) {
     //this.chessService.createBoard();
     this.currentPlayer = this.playerService.getUserById(this.gameService.currentUserIDControll)

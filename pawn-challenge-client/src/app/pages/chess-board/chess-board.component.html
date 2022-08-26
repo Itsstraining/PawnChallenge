@@ -1,7 +1,7 @@
 <div class="content-chess-app">
   <div class="row">
     <div class="col-sm">
-      <div class="containers">
+      <div class="containers" [ngStyle]="{'background-image': 'url(../../../assets/SkinImage/Board/'+ skinChess.currenSkinTable +'/150.png)'}">
         <div *ngIf="!this.gameService.isGameStart" class="box-start">
           <div class="bt-start" (click)="startGame()">
             <p>START</p>
@@ -17,7 +17,8 @@
           >
             <img
               *ngIf="board[i][j].hasChess"
-              src="../../../assets/chess/{{ board[i][j].chess.img }}"
+              src="../../../assets/SkinImage/Pieces/{{skinChess.currenSkinChess}}/{{ board[i][j].chess.img }}"
+
               draggable="true"
               (mousedown)="mousedownImg(board[i][j].chess, $event)"
               (dragstart)="drag($event, board[i][j].chess)"
