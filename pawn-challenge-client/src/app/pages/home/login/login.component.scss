@@ -13,7 +13,7 @@
     height: 7.4em;
     margin-bottom: 3em;
     width: 24.8em;
-    margin-top: -3em;
+    margin-top: 3em;
 }
 
 .login-logo {
@@ -94,7 +94,7 @@
 .icon-font-chess {
     -webkit-font-smoothing: antialiased;
     display: inline-block;
-    font-family: Chess New;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 400;
     line-height: 1;
     text-align: center;
@@ -189,7 +189,7 @@
 }
 
 .ui_v5-button-component.ui_v5-button-large {
-    font-family: var("Montserrat", sans-serif, "Montserrat"), sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 4em;
     font-weight: 600;
     line-height: 1.2;

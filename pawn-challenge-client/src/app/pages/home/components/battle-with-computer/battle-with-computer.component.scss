@@ -14,7 +14,7 @@
 
 .background-main{
     background-color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Quicksand', sans-serif;
     color: white;
     font-size: 20px;
     font-weight: 600px;
@@ -74,38 +74,38 @@
 
 .talkbubble {
     position: relative;
-    height: 60px;
-    margin-left: 26px;
-    margin-top: 9px;
-    padding: 10px;
+    height: 4.9em;
+    margin-left: 2em;
+    margin-top: 1em;
+    padding: 0.4em -0.8em 2.4em 0.5em;
     border-radius: 5px;
     border: solid rgba(98, 96, 93, 0.4196078431);
     background: rgba(98, 96, 93, 0.4196078431);
+    font-size: 2em;
   }
   
   .talkbubble:before {
     content:"";
     position: absolute;
     right: 100%;
-    margin-right: 3px;
+    margin-right: 0.2em;
     width: 0;
     height: 0;
     
     border-top: 13px solid transparent;
     border-right: 26px solid #62605d6b;
     border-bottom: 13px solid transparent;
+    margin-top: 1em;
   }
   
   .talkbubble textarea {
     position: inherit;
-    margin-top: -10px;
-    height: 54px;
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-top: 0em;
+    height: 4.6em;
     background: rgba(98, 96, 93, 0.4196078431);
     color: white;
     padding: 0;
     border: none;
     resize: none;
-    width:294px;
+    width: 22em;
   }
