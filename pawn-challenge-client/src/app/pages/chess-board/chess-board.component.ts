@@ -10,6 +10,8 @@ import { formatNumber } from '@angular/common';
 import { map } from 'rxjs';
 import { HistoryMoveService } from 'src/app/services/history/history-move.service';
 import { Grap } from 'src/app/models/grap.model';
+import { ShareService } from 'src/app/services/share/share.service';
+
 
 @Component({
   selector: 'app-chess-board',
@@ -33,7 +35,8 @@ export class ChessBoardComponent implements OnInit {
     private chessService: ChessService,
     public playerService: PlayerService,
     public gameService: GameService,
-    private historyService: HistoryMoveService
+    private historyService: HistoryMoveService,
+    private shareService:ShareService
   ) {
     //console.log(this.x1[this.x[0]]);
     //this.chessService.createBoard();
@@ -88,7 +91,7 @@ export class ChessBoardComponent implements OnInit {
       this.historyService.grapHistory(this.grap);
       this.pieceService.checkMate(this.chess, this.board);
     } else {
-      console.log('not move');
+      this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK')
     }
     this.dots = this.chessService.createBoard();
   }

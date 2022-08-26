@@ -246,11 +246,11 @@ export class GrapsComponent implements OnInit {
     }],
   ];
   time=10;
-  grap:Grap;
+  grap:Grap[] = [];
   constructor(public playerService: PlayerService,
     private historyService: HistoryMoveService) {
       // this.historyService.newGrap();
-      this.grap = this.historyService.newGrap1();
+      this.historyService.grapHistory(this.grap);
       // console.log(this.grap);
      }
 

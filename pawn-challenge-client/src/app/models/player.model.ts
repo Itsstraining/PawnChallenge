@@ -12,7 +12,7 @@ export interface Player{
 
 export interface ChessControl{
   chessID: string
-  currentSecond: Timer
+  time: Timer
   canMoveChess: boolean
   chessSDie: Chess[]
 }

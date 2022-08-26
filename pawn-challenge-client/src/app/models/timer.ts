@@ -3,15 +3,11 @@ import { Observable } from "rxjs"
 export class Timer {
   currentTime = 0
   isStart = false
-  isPause = false
-  intervalId: any
-  timeout$: Observable<number>
+  private isPause = false
+  private intervalId: any
   isTimeOut = false
 
   constructor() {
-    this.timeout$ = new Observable(e => {
-      e.next(1)
-    })
   }
   startCountDown() {
     this.isStart = true
@@ -34,5 +30,14 @@ export class Timer {
   }
   clean() {
 
+  }
+
+  getFormatTime(): string {
+    let minutes = Math.floor(this.currentTime / 60)
+    let res = ''
+    minutes < 10 ? res += '0' + minutes : res += minutes
+    let seconds = this.currentTime - minutes * 60;
+    seconds < 10 ? res += ': 0' + seconds : res += ': ' + seconds
+    return res
   }
 }
