@@ -26,16 +26,19 @@ import {
   faEllipsis,
   faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { FormsModule } from '@angular/forms';
 import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 import { LoginComponent } from './pages/home/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
+import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
+import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,6 +48,7 @@ import { AuthReducer } from './reudcers/auth.reducer';
     provideFirestore(() => getFirestore()),
     MaterialModule,
     FontAwesomeModule,
+    FormsModule,
     StoreModule.forRoot({
       auth: AuthReducer,
     }, {}),
@@ -52,6 +56,7 @@ import { AuthReducer } from './reudcers/auth.reducer';
   ],
   providers: [],
   bootstrap: [AppComponent],
+   
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
