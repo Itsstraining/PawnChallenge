@@ -35,6 +35,7 @@ export class DialogTestComponent implements OnInit {
 
   openDialogWin() {
     const dialogRef = this.dialog.open(DialogWinComponent, {
+      panelClass: 'dialogWin', 
       width: 'auto',
       height: 'auto',
     });

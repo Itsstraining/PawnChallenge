@@ -47,10 +47,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
+import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
+import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,HomePagesComponent,LoginComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
