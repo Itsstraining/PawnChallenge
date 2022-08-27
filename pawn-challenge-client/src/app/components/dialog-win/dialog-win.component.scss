@@ -3,6 +3,7 @@
     text-align: center;
     color: white;
 }
+
 .title {
     font-size: 3.1em;
     font-family: Quicksand, sans-serif;
@@ -14,13 +15,48 @@
 }
 
 .x {
-    
+
     font-weight: lighter;
     position: absolute;
     top: 4%;
-    right: 2%;    
+    right: 2%;
     cursor: pointer;
+
     i {
         font-size: 1.5em;
     }
+}
+
+.avatar {
+    width: 10em;
+    height: 10em;
+}
+
+.avatar-position {
+    position: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score {
+    font-size: 2em;
+    font-family: Quicksand, sans-serif;
+}
+.score-position {
+    display: flex;
+    justify-content: center;
+}
+
+.nickname {
+    font-size: 1.8em;
+    font-family: Quicksand, sans-serif;
+    padding: 0.3em 0 0 0;
+}
+
+.gray {
+    border: 0.6em solid gray;
+}
+
+.green {
+    border: 0.6em solid rgb(29, 156, 29);
 }
