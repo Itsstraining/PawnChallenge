@@ -11,7 +11,9 @@ import { DialogSkinComponent } from 'src/app/components/dialogSkin/dialog-skin/d
   styleUrls: ['./dialog-test.component.scss']
 })
 export class DialogTestComponent implements OnInit {
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {
+    this.openDialogWin();
+   }
   openDialogGamemode() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: 'auto',
@@ -36,8 +38,8 @@ export class DialogTestComponent implements OnInit {
   openDialogWin() {
     const dialogRef = this.dialog.open(DialogWinComponent, {
       panelClass: 'dialogWin', 
-      width: 'auto',
-      height: 'auto',
+      width: '42em',
+      height: '45em',
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
