@@ -1,13 +1,14 @@
-import { Observable } from "rxjs"
+import { ReplaySubject, Observable } from 'rxjs';
 
 export class Timer {
   currentTime = 0
   isStart = false
   private isPause = false
   private intervalId: any
-  isTimeOut = false
+  isTimeOut :ReplaySubject<boolean>
 
   constructor() {
+    this.isTimeOut = new ReplaySubject(3);
   }
   startCountDown() {
     this.isStart = true
@@ -16,7 +17,7 @@ export class Timer {
         this.currentTime--
         // console.log(this.currentTime)
         if (this.currentTime === 0) {
-          this.isTimeOut = true
+          this.isTimeOut.next(true)
           clearInterval(this.intervalId)
         }
       }

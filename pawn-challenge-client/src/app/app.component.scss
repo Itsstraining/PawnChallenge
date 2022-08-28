@@ -19,7 +19,7 @@
   }
   .main_content1{
     width: calc(100% - 20em);
-    min-height: 170vh;
+    min-height: 100vh;
     background-color: #312e2b;
   }
 }
@@ -118,8 +118,8 @@
       background-color: #312e2b;
   }
   }
-  
-  
+
+
   .layout-component {
     align-content: start;
     display: grid;
@@ -131,13 +131,13 @@
     width: 100%;
 
   }
-  
+
   .index-component {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
   }
-  
+
   .block{
     margin-bottom: 3.2rem;
     padding-top: .8rem;
@@ -156,16 +156,16 @@
       margin: 0;
       padding: 0
     }
-  
+
     .index-board-img {
       border-radius: .5rem;
       height: auto;
       max-width: 100%;
       width: 33.6rem;
     }
-  
-    
-  
+
+
+
     .intro{
       padding: 0 4.8rem;
       width: 29%;
@@ -178,7 +178,7 @@
       .title span {
           display: inline-flex;
       }
-  
+
       .title{
         margin-bottom: 0;
         padding: 2.7rem 0 2.5rem;
@@ -193,7 +193,7 @@
         text-align: center;
         width: 320%;
       }
-  
+
    .info{
      flex-direction: row;
      justify-content: space-between;
@@ -201,7 +201,7 @@
      width: 22rem;
      display: flex;
    }
-  
+
    .info-item{
      color: hsla(0deg, 0%, 100%, 0.4);
      display: inline-block;
@@ -217,18 +217,18 @@
      font-weight: 700;
      margin-right: 7px;
    }
-  
+
    .button-wrap{
      display: flex;
      flex-direction: column;
      max-width: 40rem;
    }
-  
+
    .button-form{
      margin-bottom: 2.9rem;
       width: 100%;
    }
-  
+
    .button-content{
     background-color: #7fa650;
     color: #fff;
@@ -254,7 +254,7 @@
     margin-top: -1rem;
     text-align: left;
    }
-  
+
    .button-subtitle{
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, system-ui, Helvetica, Arial, sans-serif;
     font-size: 1.4rem;
@@ -262,19 +262,19 @@
     font-weight: 400;
     margin-top: -1rem;
    }
-  
+
   .playhand-icon{
     background-image: url(https://www.chess.com/bundles/web/images/v5-index/playhand.fff9e395.png);
       bottom: -.4rem;
   }
-  
+
   .computer-icon{
     background-image: url(https://www.chess.com/bundles/web/images/v5-index/computer.99763360.png);
     margin-left: 2rem;
     margin-top: -3mm
-  
+
   }
-  
+
   .basic{
     background-color: rgba(98, 96, 93, 0.4196078431);
     color: var(hsla(0deg, 0%, 100%, 0.65), #666463);
@@ -300,9 +300,9 @@
       --buttonPaddings: .5rem 3rem;
    }
   }
-  
+
   }
-  
+
   .background-news{
     grid-column-gap: 4.8rem;
     background-color: rgba(0,0,0,.2);
@@ -312,12 +312,12 @@
     padding: 4.8rem;
     flex-direction: column;
     width: 119%;
-  
+
     .frame{
       grid-template-columns: 1fr minmax(auto,40rem);
       padding-top: 3.8rem;
     }
-  
+
     .news-title{
       grid-column: 1;
       padding: 2rem 0 0;
@@ -328,7 +328,7 @@
       font-weight: 700;
       text-align: center
     }
-  
+
     .news-board{
       grid-column: 2;
       justify-content: flex-end;
@@ -340,10 +340,10 @@
           max-width: 40rem;
           border-radius: .4rem;
           display: block;
-          height: 28rem; 
+          height: 28rem;
         }
       }
-  
+
       .quote {
         align-self: flex-end;
         grid-row: 3/3;
@@ -351,7 +351,7 @@
         display: flex;
         margin-left: -2rem;
       }
-  
+
       @media (min-width: 960px){
         .quote-img {
           height: 9.8rem;
@@ -361,7 +361,7 @@
           border-radius: 4px
       }
       }
-  
+
       @media (min-width: 768px){
          .quote-inner {
           display: flex;
@@ -369,7 +369,7 @@
           justify-content: center;
       }
       }
-  
+
       .quote-body {
         color: hsla(0deg, 0%, 100%, 0.65);
         font-size: 1.7rem;
@@ -379,13 +379,13 @@
         width: 150%;
         margin-left: -2rem;
       }
-  
+
       .quote-author {
         align-items: center;
         display: inline-flex;
         font-weight: 600;
         margin-left: -2rem;
-  
+
         .chess-title {
           background-color: #b33430;
           border-radius: 0.3rem;
@@ -397,7 +397,7 @@
           padding: 0.2rem 0.3rem;
         }
       }
-  
+
       @media (min-width: 768px){
           .news-button-wrapper {
             grid-column: 1;
@@ -405,13 +405,13 @@
             text-align: center;
         }
       }
-  
+
       .news-button-title {
         font-size: clamp(18px, 3vw, 1.2rem);
         background-color: #7fa650;
         color: #fff;
         width: 14rem;
-        margin-right: -3rem; 
+        margin-right: -3rem;
         border-radius: 12px;
         border: 0;
         height: 4rem;
@@ -423,9 +423,9 @@
         font-weight: 900;
         margin-left: 5rem;
       }
-  
+
   }
-  
-  
+
+
 
 

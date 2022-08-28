@@ -1,12 +1,10 @@
 export interface Cell {
-
   id: string;
   position: Position;
   hasChess: boolean;
   chess: Chess;
+  hasDot: boolean;
 }
-
-
 
 export interface Chess {
   isPawnUp: boolean

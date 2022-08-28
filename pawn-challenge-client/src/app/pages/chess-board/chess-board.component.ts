@@ -16,29 +16,23 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
   styleUrls: ['./chess-board.component.scss'],
 })
 export class ChessBoardComponent implements OnInit {
-  board: Cell[][];
-  dots: Cell[][];
-  chess: Chess;
+  chess!: Chess;
   currentPlayer: Player
-  time=10;
-  photo= 'https://mdbcdn.b-cdn.net/img/new/avatars/2.webp';
+  table = this.chessService.table
+  turn1: Position = { x: -1, y: -1 }
+  turn2: Position = { x: -1, y: -1 }
+
 
   constructor(
     private pieceService: PieceMoveService,
-    private chessService: ChessService,
+    public chessService: ChessService,
     public playerService: PlayerService,
     public gameService: GameService,
-    private shareService:ShareService,
+    private shareService: ShareService,
     public skinChess: ChessSkinService
   ) {
     //this.chessService.createBoard();
     this.currentPlayer = this.playerService.getUserById(this.gameService.currentUserIDControll)
-    this.dots = this.chessService.createBoard();
-    this.chess = this.chessService.newChess();
-    this.chessService.table = this.chessService.createBoard();
-    let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
-    this.chessService.table = this.chessService.setChessToBoard(strBoard,chessService.table, playerService.player1)
-    this.board = chessService.table
   }
 
 
@@ -50,25 +44,21 @@ export class ChessBoardComponent implements OnInit {
     ev.dataTransfer.setData('text', ev.target.id);
   }
 
+  //Thả 1 con cờ
   drop(ev: any, toPostion: Position) {
     ev.preventDefault();
-    let ismove = this.pieceService.move(
-      this.chess,
-      toPostion,
-      this.board,
-      this.dots,
-      this.playerService.player1
-    );
+    let fromP = this.chess.position
+    let ismove = this.pieceService.move(this.chess, toPostion);
     if (ismove) {
       var data = ev.dataTransfer.getData('text');
       ev.target.appendChild(document.getElementById(data));
       this.gameService.changeCurrentPlayer(this.playerService.player1, this.playerService.player2)
-
-      this.pieceService.checkMate(this.chess, this.board)
+      this.backgroundTurn(fromP, toPostion)
+      // this.pieceService.checkMate(this.chess, this.board)
     } else {
       this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK')
     }
-    this.dots = this.chessService.createBoard();
+    this.chessService.clearDot()
   }
 
   dragend(ev: any) {
@@ -77,15 +67,16 @@ export class ChessBoardComponent implements OnInit {
     }
   }
 
+  //Cầm 1 con cờ
   mousedownImg(chess: Chess, ev: any) {
-    this.dots = this.chessService.createBoard();
+    this.chessService.clearDot()
     if (ev.which != 1) {
       return;
     }
     this.currentPlayer = this.playerService.getUserById(this.gameService.currentUserIDControll)
+    this.chess = chess
     if (this.gameService.canPickChess(this.currentPlayer.chessControl.chessID, chess.name)) {
-      this.chess = chess
-      this.dots=this.pieceService.setTableDots(chess, this.board);
+      this.pieceService.setDotsToTable(this.pieceService.getEffDots(chess));
     }
   }
 
@@ -93,5 +84,18 @@ export class ChessBoardComponent implements OnInit {
     this.gameService.startGame(this.playerService.player1, this.playerService.player2)
   }
 
-  ngOnInit(): void { }
+  backgroundTurn(fromP: Position, toP: Position) {
+    this.turn1 = fromP
+    this.turn2 = toP
+    console.log({ 1: this.turn1 })
+    console.log({ 2: this.turn1 })
+  }
+
+  ngOnInit(): void {
+    this.gameService.time.isTimeOut.subscribe(isTimeOut=>{
+      if(isTimeOut == true){
+        alert('het gio!!!!!')
+      }
+    })
+  }
 }
