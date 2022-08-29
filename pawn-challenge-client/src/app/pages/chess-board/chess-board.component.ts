@@ -57,28 +57,37 @@ export class ChessBoardComponent implements OnInit {
   drop(ev: any, toPostion: Position) {
     ev.preventDefault();
     let fromP = this.chess.position;
+
+    //kiểm tra uy hiếp vua
+    //...
+
     let ismove = this.pieceService.move(this.chess, toPostion);
+    // di chuyển
     if (ismove) {
-      var data = ev.dataTransfer.getData('text');
-      ev.target.appendChild(document.getElementById(data));
       this.gameService.changeCurrentPlayer(
         this.playerService.player1,
         this.playerService.player2
       );
-      // this.grap = this.historyMoveService.newGrap();
-      this.grap.grapTo = this.historyMoveService.toFormatPosition(toPostion);
-      this.grap.nameChess = this.chess.name;
-      this.grap.uid = this.currentPlayer.id;
-      this.grap.id = Date.now().toString();
-      this.historyMoveService.addGrap(this.grap);
-      // this.gameService.changeCurrentPlayer(this.playerService.player1, this.playerService.player2)
+      // lưu nước đi
+      this.addGrap(toPostion)
+
+      // lưu màu nước đi
       this.backgroundTurn(fromP, toPostion);
-      // this.addGrap(toPostion)
-      // this.pieceService.checkMate(this.chess, this.board)
-    } else {
+
+    // di chuyển lỗi
+    } else if(fromP != toPostion) {
       this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
     }
+
+    //xoá dots gợi ý
     this.chessService.clearDot();
+
+    //kiểm tra chiếu vua
+    let isCheckmat = this.gameService.isCheckmat(this.chess)
+    if(isCheckmat){
+      let user = this.playerService.getUserById(this.gameService.currentUserIDControll)
+      user.chessControl.isCheckmat = true
+    }
   }
 
   dragend(ev: any) {
@@ -127,10 +136,10 @@ export class ChessBoardComponent implements OnInit {
 
   addGrap(toPostion: Position) {
     this.grap.grapTo = this.historyMoveService.toFormatPosition(toPostion);
-    this.grap.nameChess = this.chess.name;
-    this.grap.uid = this.currentPlayer.id;
-    this.grap.id = Date.now().toString();
-    this.historyMoveService.addGrap(this.grap);
+      this.grap.nameChess = this.chess.name;
+      this.grap.uid = this.currentPlayer.id;
+      this.grap.id = Date.now().toString();
+      this.historyMoveService.addGrap(this.grap);
   }
 
   ngOnInit(): void {

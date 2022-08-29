@@ -9,7 +9,7 @@ import { GameService } from '../game/game.service';
 })
 export class PieceMoveService {
   chessVector: Map<string, Position> = new Map<string, Position>();
-  constructor(private chessService: ChessService, public gameService: GameService) {
+  constructor(private chessService: ChessService) {
     this.createVectorMove();
   }
   getEffDots(chess: Chess) {
@@ -143,8 +143,7 @@ export class PieceMoveService {
 
 
   move(chess: Chess, toPosition: Position): boolean {
-    //kiểm tra uy hiếp vua
-    //...
+
     let fromP = chess.position
     let table = this.chessService.table
     if (table[toPosition.y][toPosition.x].hasDot == true) {
@@ -156,9 +155,7 @@ export class PieceMoveService {
       table[toPosition.y][toPosition.x].hasChess = true
       table[toPosition.y][toPosition.x].chess = chess
 
-      //kiểm tra chiếu vua
-      // let isCheckmat = this.gameService.isCheckmat(chess)
-      // if(isCheckmat) console.log('chieu')
+
 
       return true
 

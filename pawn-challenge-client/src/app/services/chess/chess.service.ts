@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { faGalacticSenate } from '@fortawesome/free-brands-svg-icons';
 import { Cell, Chess, Position } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
 import { PlayerService } from '../player/player.service';
@@ -40,6 +41,7 @@ export class ChessService {
             isPawnUp: false,
           },
           hasDot: false,
+          isCheckmat: false,
         };
         temp.push(newCell);
       }

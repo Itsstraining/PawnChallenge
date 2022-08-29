@@ -35,8 +35,6 @@ import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
 import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
-import { PieceMoveService } from './services/piece/piece-move.service';
-import { GameService } from './services/game/game.service';
 
 // service
 
@@ -59,8 +57,6 @@ import { GameService } from './services/game/game.service';
     EffectsModule.forRoot([authEffects]),
   ],
   providers: [
-    PieceMoveService,
-    GameService
   ],
   bootstrap: [AppComponent],
 
