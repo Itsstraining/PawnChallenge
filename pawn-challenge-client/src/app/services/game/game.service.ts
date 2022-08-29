@@ -74,6 +74,8 @@ export class GameService {
     for (let i = 0; i < dots.length; i++) {
       for (let j = 0; j < dots[i].length; j++) {
         if (dots[i][j] && this.chessService.table[i][j].chess.name.toLowerCase() == 'v') {
+          this.chessService.table[i][j].isCheckmat = true
+          console.log(this.chessService.table)
           res = true
         }
       }
