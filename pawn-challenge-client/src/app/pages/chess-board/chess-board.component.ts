@@ -11,6 +11,7 @@ import { map } from 'rxjs';
 import { HistoryMoveService } from 'src/app/services/history/history-move.service';
 import { Grap } from 'src/app/models/grap.model';
 import { ShareService } from 'src/app/services/share/share.service';
+import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service';
 
 @Component({
   selector: 'app-chess-board',
@@ -35,7 +36,8 @@ export class ChessBoardComponent implements OnInit {
     public playerService: PlayerService,
     public gameService: GameService,
     private historyService: HistoryMoveService,
-    private shareService: ShareService
+    private shareService:ShareService,
+    public skinChess: ChessSkinService
   ) {
     //console.log(this.x1[this.x[0]]);
     //this.chessService.createBoard();

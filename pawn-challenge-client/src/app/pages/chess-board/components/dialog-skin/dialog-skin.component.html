@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>
     <!-- <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
         style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;"> -->
-        <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../assets/SkinImage/Board/'+ Board[indexBoard].folderName +'/150.png)'}">
+        <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../../assets/SkinImage/Board/'+ skinService.Board[indexBoard].folderName +'/150.png)'}">
             <div *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]" class="rows">
               <div
                 *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
                 class="item">
                 <img
                   *ngIf="table[i][j].hasChess"
-                  src="../../../../assets/SkinImage/Pieces/{{Pieces[indexPiece].folderName}}/{{table[i][j].chess.img}}"
+                  src="../../../../../assets/SkinImage/Pieces/{{skinService.Pieces[indexPiece].folderName}}/{{table[i][j].chess.img}}"
                   draggable="true"
                   style="
                     width: calc(44em / 8);
@@ -18,7 +18,7 @@
                     object-fit: cover;
                     position: relative;
                   "/>
-                
+
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@
         <div class="component">
             <label class="label">Pieces</label>
             <select class="select" icon="caret-down" [(ngModel)]="indexPiece">
-                <option *ngFor="let item of Pieces; let i = index" [value]="i">
+                <option *ngFor="let item of skinService.Pieces; let i = index" [value]="i">
                     {{item.name}}
                 </option>
             </select>
@@ -38,7 +38,7 @@
         <div class="component">
             <label class="label">Board</label>
             <select class="select" icon="caret-down" [(ngModel)]="indexBoard">
-                <option *ngFor="let item of Board; let i = index" [value]="i">
+                <option *ngFor="let item of skinService.Board; let i = index" [value]="i">
                     {{item.name}}
                 </option>
             </select>

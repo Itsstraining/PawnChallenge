@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Cell } from 'src/app/models/chess.model';
-import { ChessService } from 'src/app/services/chess/chess.service';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-dialog-skin',
-  templateUrl: './dialog-skin.component.html',
-  styleUrls: ['./dialog-skin.component.scss']
-},)
-export class DialogSkinComponent implements OnInit {
-  table: Cell[][];
-  Pieces: any[];
-  Board: any[];
-  indexPiece = 26;
-  indexBoard = 10;
-  constructor(
-    private chessService: ChessService,
-    public dialogRef: MatDialogRef<DialogSkinComponent>) {
+@Injectable({
+  providedIn: 'root'
+})
+export class ChessSkinService {
+  currenSkinChess = ''
+  currenSkinTable = ''
+  Pieces!: any[];
+  Board!: any[];
+  indexPiece = 0
+  indexBoard = 0
+  constructor() {
+    this.create()
     this.indexPiece= parseInt(localStorage.getItem('indexPiece')??'26')
     this.indexBoard = parseInt(localStorage.getItem('indexBoard')??'10')
-    this.table = this.chessService.createBoard()
-    this.chessService.setChessToBoard1('XMTHVTMX|CCCCCCCC|        |        |        |        |        |        ', this.table)
+    this.currenSkinChess = this.Pieces[this.indexPiece].folderName
+    this.currenSkinTable = this.Board[this.indexBoard].folderName
+
+  }
+  create(){
     this.Pieces = [
       {
         name: '3D-ChessKid',
@@ -94,7 +92,7 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name: 'Game Room',
-        folderName: 'Game Room',
+        folderName: 'Game-Room',
         isSelect: false
       },
       {
@@ -114,7 +112,7 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name: 'Icy Sea',
-        folderName: 'Icy Sea',
+        folderName: 'Icy-Sea',
         isSelect: false
       },
       {
@@ -179,7 +177,7 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name: 'Real 3D',
-        folderName: 'Real 3D',
+        folderName: 'Real-3D',
         isSelect: false
       },
       {
@@ -366,26 +364,5 @@ export class DialogSkinComponent implements OnInit {
         isSelect: false
       },
     ]
-  }
-  showPlaySound: boolean = false;
-
-  ngOnInit(): void {
-  }
-  tooglePlaySound() {
-    this.showPlaySound = !this.showPlaySound;
-  }
-
-  changeIndexBorad(){
-    console.log(this.indexBoard);
-  }
-
-  save(){
-    localStorage.setItem('indexPiece',this.indexPiece.toString())
-    localStorage.setItem('indexBoard',this.indexBoard.toString())
-    this.dialogRef.close()
-  }
-
-  closeDialog(){
-    this.dialogRef.close();
   }
 }
