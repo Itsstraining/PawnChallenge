@@ -17,6 +17,7 @@ export class ChessService {
     this.createChessAccess();
     this.table = this.createBoard()
     let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
+    // let strBoard = 'v       |        |        |        |        |        |CCCCCCCC|XMTHVTMX'
     this.table = this.setChessToBoard(strBoard, this.table, this.playerService.player1)
   }
 
