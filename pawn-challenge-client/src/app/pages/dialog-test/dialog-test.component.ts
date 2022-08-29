@@ -39,7 +39,6 @@ export class DialogTestComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogWinComponent, {
       panelClass: 'dialogWin', 
       width: '42em',
-      height: '45em',
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -48,8 +47,8 @@ export class DialogTestComponent implements OnInit {
 
   openDialogLose() {
     const dialogRef = this.dialog.open(DialogLoseComponent, {
-      width: 'auto',
-      height: 'auto',
+      panelClass: 'dialogLose',
+      width: '42em',
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

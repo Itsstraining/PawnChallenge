@@ -1,8 +1,9 @@
 export interface Grap {
   id: string,
-  numGrap: number,
+  // numGrap: number,
   grapFrom: string,
   grapTo: string,
   nameChess: string,
-  uid: string
+  uid: string,
+  icon: string
 }

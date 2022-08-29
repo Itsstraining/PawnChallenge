@@ -4,6 +4,12 @@
     color: white;
 }
 
+.position {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3em 0 3em;
+}
+
 .title {
     font-size: 3.1em;
     font-family: Quicksand, sans-serif;
@@ -42,6 +48,7 @@
     font-size: 2em;
     font-family: Quicksand, sans-serif;
 }
+
 .score-position {
     display: flex;
     justify-content: center;
@@ -59,4 +66,49 @@
 
 .green {
     border: 0.6em solid rgb(29, 156, 29);
+}
+
+.buttonNew {
+    cursor: pointer;
+    width: 80%;
+    font-family: Quicksand, sans-serif;
+    padding: 0.3em 0;
+    border-radius: 0.3em;
+}
+
+
+.buttonNew1 {
+    font-family: Quicksand, sans-serif;
+    background-color: rgb(29, 156, 29);
+    border: 0.1em solid rgb(6, 51, 6);
+    border-radius: 0.3em;
+    box-shadow: rgb(6, 51, 6) 0 0.2em 0 0;
+    color: rgb(211, 205, 205);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 2em;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.buttonNew1:hover {
+    background-color: rgb(20, 212, 20);
+    color: white;
+}
+
+.buttonNew1:active {
+    box-shadow: rgb(3, 27, 3) 0 0.1em 0 0;
+    transform: translate(0.1em, 0.1em);
+}
+
+@media (min-width: 768px) {
+    .buttonNew1 {
+        min-width: 120px;
+        padding: 0 1em;
+    }
 }

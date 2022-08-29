@@ -2,6 +2,7 @@
 /pawn-challenge-server/node_modules
 /pawn-challenge-server/dist
 /pawn-challenge-server/key-admin.json
+/pawn-challenge-server/environment.ts
 
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.

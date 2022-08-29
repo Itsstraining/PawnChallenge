@@ -40,6 +40,8 @@
   margin-top: 1em;
   margin-left: 0;
   padding: 0 10em;
+  min-height: 95vh;
+  align-items: center;
   .containers {
     width: 80em;
     height: 80em;
@@ -79,7 +81,9 @@
   object-fit: cover;
   position: relative;
   margin-top: -1em;
+
 }
+
 .clock {
   display: flex;
   justify-content: right;
@@ -195,4 +199,11 @@ tr:nth-child(even) {
   height: 100%;
   float: left;
   background-color: rgb(170, 105, 105);
+}
+
+.turn1{
+  background-color: #4343438f;
+}
+.turn2{
+  background-color: #282828a3;
 }
