@@ -8,7 +8,6 @@ import { Message as MessageModel } from './../../models/message.model'
 export class MessageService {
     constructor(@InjectModel(Message.name) private messModel: Model<MessageDocument>){
     }
-
     async create(newMessage: MessageModel){
         newMessage.createAt = Date.now()
         let createMessage = new this.messModel(newMessage)
