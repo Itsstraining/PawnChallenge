@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { Cell, Chess, Position } from '../../models/chess.model';
 import { Player } from '../../models/player.model';
 import { ChessService } from '../chess/chess.service';
-import { GameService } from '../game/game.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PieceMoveService {
-  dots: Cell[][];
   chessVector: Map<string, Position> = new Map<string, Position>();
-  constructor(private chessService: ChessService, private gameService: GameService) {
-    this.dots = this.chessService.createBoard();
+  constructor(private chessService: ChessService) {
     this.createVectorMove();
   }
-  setTableDots(chess: Chess, table: Cell[][]) {
-    let tableEff = this.chessService.createBoard()
-    let c = chess.position
+  getEffDots(chess: Chess) {
+    let dots = []
+    let table = this.chessService.table
+    for (let i = 0; i < 8; i++) {
+      dots.push(Array(8).fill(false))
+    }
+    let p = chess.position
     let ruleStr = ''
     if (chess.name.toLowerCase() == 'v') {
       ruleStr = '1 up/1 down/1 left/1 right/1 up-left/1 up-right/1 down-left/1 down-right'
@@ -52,8 +53,8 @@ export class PieceMoveService {
       }
       vLeft = this.chessVector.get(base + 'left') ?? { x: 0, y: 0 }
       vRight = this.chessVector.get(base + 'right') ?? { x: 0, y: 0 }
-      let pLeft: Position = { x: vLeft.x + c.x, y: vLeft.y + c.y }
-      let pRight: Position = { x: vRight.x + c.x, y: vRight.y + c.y }
+      let pLeft: Position = { x: vLeft.x + p.x, y: vLeft.y + p.y }
+      let pRight: Position = { x: vRight.x + p.x, y: vRight.y + p.y }
       if (this.onBoard(pLeft) && table[pLeft.y][pLeft.x].hasChess) {
         ruleStr += `/1 ${base}left`
       }
@@ -68,7 +69,7 @@ export class PieceMoveService {
       if (time == '1') {
 
         let graps = grapStr.split('-')
-        let boxTemp = c
+        let boxTemp = p
         let grapErr = false
 
         for (let j = 0; j < graps.length; j++) {
@@ -85,12 +86,12 @@ export class PieceMoveService {
             !table[boxTemp.y][boxTemp.x].hasChess ||
             (table[boxTemp.y][boxTemp.x].hasChess && !this.isAlly(table[boxTemp.y][boxTemp.x].chess.name, chess.name))
           ) {
-            tableEff[boxTemp.y][boxTemp.x].chess.name = '.'
+            dots[boxTemp.y][boxTemp.x] = true
           }
         }
       }
       else if (time == '*') {
-        let pTemp = c
+        let pTemp = p
         let move1 = this.chessVector.get(grapStr) ?? { x: 0, y: 0 }
         let isStop = false
         let j = 0
@@ -98,11 +99,11 @@ export class PieceMoveService {
           pTemp = { x: pTemp.x + move1.x, y: pTemp.y + move1.y }
           if (this.onBoard(pTemp)) {
             if (!table[pTemp.y][pTemp.x].hasChess) {
-              tableEff[pTemp.y][pTemp.x].chess.name = '.'
+              dots[pTemp.y][pTemp.x] = true
             }
             else {
               if (!this.isAlly(chess.name, table[pTemp.y][pTemp.x].chess.name)) {
-                tableEff[pTemp.y][pTemp.x].chess.name = '.'
+                dots[pTemp.y][pTemp.x] = true
               }
               isStop = true
             }
@@ -117,7 +118,17 @@ export class PieceMoveService {
         }
       }
     }
-    return tableEff
+    return dots
+  }
+
+  setDotsToTable(dots: any[]) {
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = 0; j < dots[i].length; j++) {
+        if(dots[i][j] == true){
+          this.chessService.table[i][j].hasDot = true
+        }
+      }
+    }
   }
 
   isAlly(c1: string, c2: string) {
@@ -130,13 +141,10 @@ export class PieceMoveService {
   }
 
 
-  move(chess: Chess, toPosition: Position, table: Cell[][], tableEff: Cell[][], player: Player): boolean {
+  move(chess: Chess, toPosition: Position): boolean {
     let fromP = chess.position
-    if (tableEff[toPosition.y][toPosition.x].chess.name == '.') {
-      if (table[toPosition.y][toPosition.x].hasChess) {
-        player.chessControl.chessSDie.push({ ...table[toPosition.y][toPosition.x].chess })
-      }
-
+    let table = this.chessService.table
+    if (table[toPosition.y][toPosition.x].hasDot == true) {
       table[fromP.y][fromP.x].hasChess = false
       table[fromP.y][fromP.x].chess = this.chessService.newChess()
 
@@ -156,21 +164,6 @@ export class PieceMoveService {
     } else {
       return false
     }
-  }
-
-  checkMate(chess: Chess, table: Cell[][]): boolean {
-    let tableEff = this.setTableDots(chess, table)
-    let kingArmy: Chess
-    if (this.isAlly(chess.name, 'v')) {
-      kingArmy = this.chessService.kingW
-    } else {
-      kingArmy = this.chessService.kingB
-    }
-    if (tableEff[kingArmy.position.y][kingArmy.position.x].chess.name == '.'){
-      //
-      return true
-    }
-    return false
   }
 
   createVectorMove() {

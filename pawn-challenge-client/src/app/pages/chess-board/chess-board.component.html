@@ -12,20 +12,21 @@
           <div
             *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]"
             class="item"
-            (drop)="drop($event, board[i][j].position)"
+            (drop)="drop($event, table[i][j].position)"
             (dragover)="allowDrop($event)"
+            [ngClass]="{'turn1': turn1.y == i && turn1.x == j, 'turn2' : turn2.y == i && turn2.x == j }"
           >
             <img
-              *ngIf="board[i][j].hasChess"
-              src="../../../assets/SkinImage/Pieces/{{skinChess.currenSkinChess}}/{{ board[i][j].chess.img }}"
+              *ngIf="table[i][j].hasChess"
+              src="../../../assets/SkinImage/Pieces/{{skinChess.currenSkinChess}}/{{ table[i][j].chess.img }}"
 
               draggable="true"
-              (mousedown)="mousedownImg(board[i][j].chess, $event)"
-              (dragstart)="drag($event, board[i][j].chess)"
+              (mousedown)="mousedownImg(table[i][j].chess, $event)"
+              (dragstart)="drag($event, table[i][j].chess)"
               class="img-chess"
-              id="{{ board[i][j].chess.id }}"
+              id="{{ table[i][j].chess.id }}"
             />
-            <div *ngIf="dots[i][j].chess.name == '.'" class="dot"></div>
+            <div *ngIf="table[i][j].hasDot == true" class="dot"></div>
           </div>
         </div>
       </div>

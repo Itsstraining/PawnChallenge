@@ -7,21 +7,18 @@ import { PlayerService } from '../player/player.service';
   providedIn: 'root',
 })
 export class ChessService {
-  kingB!:Chess
-  kingW!:Chess
-  table: Cell[][] = this.createBoard();
-    chessAccess: Map<string, Chess> = new Map<string, Chess>();
+  kingB!: Chess
+  kingW!: Chess
+  chessAccess: Map<string, Chess> = new Map<string, Chess>();
+  table: Cell[][]
 
 
-
-  constructor(private playService: PlayerService) {
+  constructor(private playerService: PlayerService) {
     this.createChessAccess();
-    this.setChessToBoard(
-      'xmtvhtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTVHTMX',
-      this.table,
-      this.playService.player1
-    );
-    this.printBoard(this.table);
+    this.table = this.createBoard()
+    let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
+    // let strBoard = 'v       |        |        |        |        |        |CCCCCCCC|XMTHVTMX'
+    this.table = this.setChessToBoard(strBoard, this.table, this.playerService.player1)
   }
 
   createBoard() {
@@ -42,6 +39,7 @@ export class ChessService {
             position: { x: 0, y: 0 },
             isPawnUp: false,
           },
+          hasDot: false,
         };
         temp.push(newCell);
       }
@@ -55,10 +53,10 @@ export class ChessService {
     for (let i = 0; i < 8; i++) {
       result += ' --- --- --- --- --- --- --- --- \n| '
       for (let j = 0; j < 8; j++) {
-        if( board[i][j].chess.name == ''){
+        if (board[i][j].chess.name == '') {
           result += '  | ';
         }
-        else{
+        else {
           result += board[i][j].chess.name + ' | ';
         }
       }
@@ -93,10 +91,10 @@ export class ChessService {
               res[i][j].hasChess = true
               res[i][j].chess.position = res[i][j].position
 
-              if(temp.name == 'v'){
+              if (temp.name == 'v') {
                 this.kingB = res[i][j].chess
               }
-              else if(temp.name == 'V'){
+              else if (temp.name == 'V') {
                 this.kingW = res[i][j].chess
               }
             }
@@ -136,7 +134,6 @@ export class ChessService {
     }
     //console.log(board);
   }
-
   newChess() {
     let chess: Chess = {
       id: '',
@@ -149,18 +146,22 @@ export class ChessService {
     };
     return chess;
   }
-
   onBoard(position: Position) {
     return (
       position.x >= 0 && position.x < 8 && position.y >= 0 && position.y < 8
     );
   }
-
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2;
     return c3.toUpperCase() == c3 || c3.toLowerCase() == c3;
   }
-
+  clearDot(){
+    for(let i=0;i<this.table.length;i++){
+      for(let j=0;j<this.table[i].length;j++){
+        this.table[i][j].hasDot = false
+      }
+    }
+  }
   createChessAccess() {
     //black
     this.chessAccess.set('x', {

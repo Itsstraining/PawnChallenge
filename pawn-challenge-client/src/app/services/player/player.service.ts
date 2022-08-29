@@ -11,11 +11,11 @@ export class PlayerService {
 
 
   constructor() {
-    this.player1 = this.newPlayer('user1','Vinh123','a13' ,'VHTMXC', true)
-    this.player2 = this.newPlayer('user2','Phat123','a5' ,'vhtmxc', false)
+    this.player1 = this.newPlayer('user1', 'Vinh123', 'a13', 'VHTMXC', true)
+    this.player2 = this.newPlayer('user2', 'Phat123', 'a5', 'vhtmxc', false)
   }
 
-  newPlayer(id: string,name:string,img:string, control: string, isBase: boolean) {
+  newPlayer(id: string, name: string, img: string, control: string, isBase: boolean) {
     let player: Player = {
       id: id,
       name: name,
@@ -25,8 +25,9 @@ export class PlayerService {
       chessControl: {
         chessID: control,
         time: new Timer(),
-        canMoveChess: false,
-        chessSDie: []
+        chessSDie: [],
+        isCheckmat: false,
+        threatChess: []
       }
     }
     return player
@@ -47,6 +48,6 @@ export class PlayerService {
       }
       return this.player2
     }
-    return this.newPlayer('', '', '','', false)
+    return this.newPlayer('', '', '', '', false)
   }
 }
