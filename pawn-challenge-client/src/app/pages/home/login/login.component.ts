@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import * as AuthActions from '../../../actions/auth.action';
 import { Auth } from '../../../states/auth.state';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   photourl = '';
   constructor(
     private store: Store<{ auth: Auth }>,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    public dialog: MatDialog
   ) {
     this.AuthService.getCurrentUser().then(
       (user) =>
@@ -50,5 +52,16 @@ export class LoginComponent implements OnInit {
   logOut() {
     this.store.dispatch(AuthActions.logout());
     console.log('logout');
+  }
+
+  openDialogLogin() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      panelClass: 'dialogLogin', 
+      width: '70em',
+      height: '68em',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
