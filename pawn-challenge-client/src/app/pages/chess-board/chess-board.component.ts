@@ -6,8 +6,6 @@ import { ChessService } from 'src/app/services/chess/chess.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 import { GameService } from 'src/app/services/game/game.service';
 import { Player } from 'src/app/models/player.model';
-import { formatNumber } from '@angular/common';
-import { map } from 'rxjs';
 import { HistoryMoveService } from 'src/app/services/history/history-move.service';
 import { Grap } from 'src/app/models/grap.model';
 import { ShareService } from 'src/app/services/share/share.service';
@@ -120,8 +118,8 @@ export class ChessBoardComponent implements OnInit {
   backgroundTurn(fromP: Position, toP: Position) {
     this.turn1 = fromP;
     this.turn2 = toP;
-    console.log({ 1: this.turn1 });
-    console.log({ 2: this.turn1 });
+    // console.log({ 1: this.turn1 });
+    // console.log({ 2: this.turn1 });
   }
 
   addGrap(toPostion: Position) {
@@ -135,7 +133,7 @@ export class ChessBoardComponent implements OnInit {
   ngOnInit(): void {
     this.gameService.time.isTimeOut.subscribe((isTimeOut) => {
       if (isTimeOut == true) {
-        alert('het gio!!!!!');
+        console.log('hetgio')
       }
     });
   }
