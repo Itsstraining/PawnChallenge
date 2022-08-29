@@ -11,9 +11,7 @@ import { DialogSkinComponent } from 'src/app/components/dialogSkin/dialog-skin/d
   styleUrls: ['./dialog-test.component.scss']
 })
 export class DialogTestComponent implements OnInit {
-  constructor(public dialog: MatDialog) {
-    this.openDialogWin();
-   }
+  constructor(public dialog: MatDialog) {}
   openDialogGamemode() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: 'auto',
