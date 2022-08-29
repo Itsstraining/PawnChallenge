@@ -35,6 +35,10 @@ import { authEffects } from './effects/auth.effect';
 import { AuthReducer } from './reudcers/auth.reducer';
 import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
+import { PieceMoveService } from './services/piece/piece-move.service';
+import { GameService } from './services/game/game.service';
+
+// service
 
 
 @NgModule({
@@ -54,9 +58,12 @@ import { DialogWinComponent } from './components/dialog-win/dialog-win.component
     }, {}),
     EffectsModule.forRoot([authEffects]),
   ],
-  providers: [],
+  providers: [
+    PieceMoveService,
+    GameService
+  ],
   bootstrap: [AppComponent],
-   
+
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {

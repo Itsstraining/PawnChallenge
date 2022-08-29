@@ -15,6 +15,9 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
   selector: 'app-chess-board',
   templateUrl: './chess-board.component.html',
   styleUrls: ['./chess-board.component.scss'],
+  providers: [
+
+  ]
 })
 export class ChessBoardComponent implements OnInit {
   chess!: Chess;

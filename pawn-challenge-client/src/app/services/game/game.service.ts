@@ -73,11 +73,11 @@ export class GameService {
     let dots = this.pieceService.getEffDots(chess)
     for (let i = 0; i < dots.length; i++) {
       for (let j = 0; j < dots[i].length; j++) {
-        if(dots[i][j] && this.chessService.table[i][j].chess.name.toLowerCase() == 'v'){
+        if (dots[i][j] && this.chessService.table[i][j].chess.name.toLowerCase() == 'v') {
           res = true
-          return
         }
       }
     }
+    return res
   }
 }
