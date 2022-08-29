@@ -1,14 +1,15 @@
-.rule-app{
+.rule-app {
   padding: 0 10em;
   font-size: calc(100vw * (14 / 2560));
 }
 
-
-.row1{
+.row {
   display: flex;
-  .item{
-    padding: 1em;
-    background-color: aquamarine;
-    margin: 1em;
-  }
 }
+
+.item {
+  padding: 1em;
+  background-color: aquamarine;
+  margin: 1em;
+}
+
