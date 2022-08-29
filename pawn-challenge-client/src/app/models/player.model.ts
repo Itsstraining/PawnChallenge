@@ -13,7 +13,8 @@ export interface Player{
 export interface ChessControl{
   chessID: string
   time: Timer
-  canMoveChess: boolean
-  chessSDie: Chess[]
+  chessSDie: String[]
+  threatChess: Chess[]
+  isCheckmat: boolean
 }
 

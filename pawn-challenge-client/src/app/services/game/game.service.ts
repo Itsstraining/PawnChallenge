@@ -10,8 +10,7 @@ export class GameService {
   isGameStart = false
   currentUserIDControll = ''
   time = new Timer()
-  blackCheckmate = false
-  whiteCheckmate = false
+
 
   //
   timePerTurn = 30

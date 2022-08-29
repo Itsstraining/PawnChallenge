@@ -19,43 +19,29 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
   styleUrls: ['./chess-board.component.scss'],
 })
 export class ChessBoardComponent implements OnInit {
-  board: Cell[][];
-  dots: Cell[][];
-  chess: Chess;
-  grap: Grap;
+  chess!: Chess;
   currentPlayer: Player;
-  time = 10;
-  photo = 'https://mdbcdn.b-cdn.net/img/new/avatars/2.webp';
-  x = [0, 1, 2, 3, 4, 5, 6, 7];
-  y = [0, 1, 2, 3, 4, 5, 6, 7];
-  grapPosition: Map<string, number> = new Map();
+  table = this.chessService.table;
+  turn1: Position = { x: -1, y: -1 };
+  turn2: Position = { x: -1, y: -1 };
+  grap: Grap;
 
   constructor(
     private pieceService: PieceMoveService,
-    private chessService: ChessService,
+    public chessService: ChessService,
     public playerService: PlayerService,
     public gameService: GameService,
-    private historyService: HistoryMoveService,
-    private shareService:ShareService,
-    public skinChess: ChessSkinService
+    private shareService: ShareService,
+    public skinChess: ChessSkinService,
+    private historyMoveService: HistoryMoveService
   ) {
     //console.log(this.x1[this.x[0]]);
     //this.chessService.createBoard();
+    this.grap = this.historyMoveService.newGrap();
+
     this.currentPlayer = this.playerService.getUserById(
       this.gameService.currentUserIDControll
     );
-    this.dots = this.chessService.createBoard();
-    this.chess = this.chessService.newChess();
-    this.chessService.table = this.chessService.createBoard();
-    let strBoard =
-      'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX';
-    this.chessService.table = this.chessService.setChessToBoard(
-      strBoard,
-      chessService.table,
-      playerService.player1
-    );
-    this.board = chessService.table;
-    this.grap = this.historyService.newGrap();
   }
 
   allowDrop(ev: any) {
@@ -66,15 +52,11 @@ export class ChessBoardComponent implements OnInit {
     ev.dataTransfer.setData('text', ev.target.id);
   }
 
+  //Thả 1 con cờ
   drop(ev: any, toPostion: Position) {
     ev.preventDefault();
-    let ismove = this.pieceService.move(
-      this.chess,
-      toPostion,
-      this.board,
-      this.dots,
-      this.playerService.player1
-    );
+    let fromP = this.chess.position;
+    let ismove = this.pieceService.move(this.chess, toPostion);
     if (ismove) {
       var data = ev.dataTransfer.getData('text');
       ev.target.appendChild(document.getElementById(data));
@@ -82,17 +64,20 @@ export class ChessBoardComponent implements OnInit {
         this.playerService.player1,
         this.playerService.player2
       );
-      this.grap.grapTo = this.historyService.toFormatPosition(toPostion);
+      // this.grap = this.historyMoveService.newGrap();
+      this.grap.grapTo = this.historyMoveService.toFormatPosition(toPostion);
       this.grap.nameChess = this.chess.name;
       this.grap.uid = this.currentPlayer.id;
       this.grap.id = Date.now().toString();
-      this.historyService.addGrap(this.grap);
-      // console.log(this.historyService.grapHistory(this.grap));
-      this.pieceService.checkMate(this.chess, this.board);
+      this.historyMoveService.addGrap(this.grap);
+      // this.gameService.changeCurrentPlayer(this.playerService.player1, this.playerService.player2)
+      this.backgroundTurn(fromP, toPostion);
+      // this.addGrap(toPostion)
+      // this.pieceService.checkMate(this.chess, this.board)
     } else {
       this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
     }
-    this.dots = this.chessService.createBoard();
+    this.chessService.clearDot();
   }
 
   dragend(ev: any) {
@@ -101,28 +86,27 @@ export class ChessBoardComponent implements OnInit {
     }
   }
 
+  //Cầm 1 con cờ
   mousedownImg(chess: Chess, ev: any) {
-    // console.log(chess);
-    this.dots = this.chessService.createBoard();
+    this.chessService.clearDot();
     if (ev.which != 1) {
       return;
     }
     this.currentPlayer = this.playerService.getUserById(
       this.gameService.currentUserIDControll
     );
+    this.chess = chess;
     if (
       this.gameService.canPickChess(
         this.currentPlayer.chessControl.chessID,
         chess.name
       )
     ) {
-      this.grap = this.historyService.newGrap();
+      this.grap = this.historyMoveService.newGrap();
       this.chess = chess;
-      this.dots = this.pieceService.setTableDots(chess, this.board);
-
-      this.historyService.createGrapPosition();
-      this.grap.grapFrom = this.historyService.toFormatPosition(chess.position);
-      // console.log(this.grap.grapFrom);
+      this.pieceService.setDotsToTable(this.pieceService.getEffDots(chess));
+      this.historyMoveService.createGrapPosition();
+      this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
     }
   }
 
@@ -133,5 +117,26 @@ export class ChessBoardComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  backgroundTurn(fromP: Position, toP: Position) {
+    this.turn1 = fromP;
+    this.turn2 = toP;
+    console.log({ 1: this.turn1 });
+    console.log({ 2: this.turn1 });
+  }
+
+  addGrap(toPostion: Position) {
+    this.grap.grapTo = this.historyMoveService.toFormatPosition(toPostion);
+    this.grap.nameChess = this.chess.name;
+    this.grap.uid = this.currentPlayer.id;
+    this.grap.id = Date.now().toString();
+    this.historyMoveService.addGrap(this.grap);
+  }
+
+  ngOnInit(): void {
+    this.gameService.time.isTimeOut.subscribe((isTimeOut) => {
+      if (isTimeOut == true) {
+        alert('het gio!!!!!');
+      }
+    });
+  }
 }

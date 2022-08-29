@@ -9,12 +9,12 @@
           </a>
         </li>
         <li>
-          <a href="#"><i class="Icon fi fi-ss-puzzle-piece fa-fw mr-3"></i>
+          <a href="home"><i class="Icon fi fi-ss-puzzle-piece fa-fw mr-3"></i>
             <p>Puzzles</p>
           </a>
         </li>
         <li>
-          <a href="#"><i class="Icon fi fi-sr-graduation-cap fa-fw mr-3"></i>
+          <a href="learn-chesss"><i class="Icon fi fi-sr-graduation-cap fa-fw mr-3"></i>
             <p>Learn</p>
           </a>
         </li>
@@ -41,12 +41,15 @@
 
         <li>
           <div>
-            <!-- <button (click)="logIn()">Login</button> -->
+           <a href="login"> <button  class="button-footer-title" *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span style="font-size: 1em; margin-left: -1em;">Login </span> </button></a>
+           <ng-template #elseBlock>
+            <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button>
+           </ng-template>
           <!-- <p>{{idToken$|async}}</p> -->
           <!-- <br>
           <p>{{displayName}}</p>
           <img src="{{photourl}}" alt=""> -->
-          <!-- <button (click)="logOut()">Logout</button> -->
+          <!-- <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button> -->
           </div>
         </li>
       </ul>
@@ -56,15 +59,20 @@
 
   <div class="main_content1" id="main">
     <div class="info">
-      <div>
+      <!-- <div> -->
         <router-outlet>
-          <!-- <button (click)="logIn()">Login</button>
-          <br>
-          <p>{{displayName}}</p>
+          <!-- <button (click)="logIn()">Login</button> -->
+          <!-- <p>{{idToken$|async}}</p> -->
+          <!-- <br> -->
+          <!-- <p>{{displayName}}</p> -->
+          <!-- <img src="{{photourl}}" alt="">
+          <-- <button (click)="logIn()">Login</button>-->
+          <!-- <br>
+          <p>{{displayName}}</p
           <img src="{{photourl}}" alt="">
           <button (click)="logOut()">Logout</button> -->
         </router-outlet>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 
