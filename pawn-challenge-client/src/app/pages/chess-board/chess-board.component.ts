@@ -120,8 +120,8 @@ export class ChessBoardComponent implements OnInit {
   backgroundTurn(fromP: Position, toP: Position) {
     this.turn1 = fromP;
     this.turn2 = toP;
-    console.log({ 1: this.turn1 });
-    console.log({ 2: this.turn1 });
+    // console.log({ 1: this.turn1 });
+    // console.log({ 2: this.turn1 });
   }
 
   addGrap(toPostion: Position) {
