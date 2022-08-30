@@ -1,7 +1,7 @@
 import { AuthService } from './services/auth/auth.service';
 import { Component } from '@angular/core';
-import * as AuthActions from './actions/auth.action';
-import { Auth } from './states/auth.state';
+import * as AuthActions from './RxJs/actions/auth.action';
+import { Auth } from './RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './pages/home/login/login.component';

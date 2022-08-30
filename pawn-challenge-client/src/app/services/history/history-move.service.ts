@@ -40,7 +40,6 @@ export class HistoryMoveService {
     if(grap.uid == this.playerSerivce.player1.id){
        this.grapsHalf.push(grap);
     }
-    console.log(this.graps);
   }
   newGrap (){
     let grap : Grap = {
