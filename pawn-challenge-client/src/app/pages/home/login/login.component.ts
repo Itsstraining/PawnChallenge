@@ -4,6 +4,7 @@ import * as AuthActions from '../../../RxJs/actions/auth.action';
 import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<{ auth: Auth }>,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    public dialog: MatDialog
   ) {
     this.AuthService.getCurrentUser().then(
       (user) =>
@@ -60,7 +62,6 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(AuthActions.logout());
     console.log('logout');
   }
-
   registerAccount() {
     let newForm = {
       ...this.formRegister.value,
@@ -75,5 +76,14 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.store.dispatch(AuthActions.register({ user: newForm }));
+  openDialogLogin() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      panelClass: 'dialogLogin', 
+      width: '70em',
+      height: '68em',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

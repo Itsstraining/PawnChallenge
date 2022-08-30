@@ -39,12 +39,15 @@
           </a>
         </li>
 
-        <li>
+        <li> 
           <div>
-           <a href="login"> <button  class="button-footer-title" *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span style="font-size: 1em; margin-left: -1em;">Login </span> </button></a>
+            <button (click)="openDialogLogin()"  class="button-footer-title" *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span style="font-size: 1em;margin-left: 2.8em;">Login </span> </button>
+            <div style="margin-top: 1em;"><button class="button-footer-title-2"  *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up </span></button></div>
            <ng-template #elseBlock>
-            <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button>
+            <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;"> Logout</span></button>
+            
            </ng-template>
+           
           <!-- <p>{{idToken$|async}}</p> -->
           <!-- <br>
           <p>{{displayName}}</p>
@@ -60,18 +63,7 @@
   <div class="main_content1" id="main">
     <div class="info">
       <!-- <div> -->
-        <router-outlet>
-          <!-- <button (click)="logIn()">Login</button> -->
-          <!-- <p>{{idToken$|async}}</p> -->
-          <!-- <br> -->
-          <!-- <p>{{displayName}}</p> -->
-          <!-- <img src="{{photourl}}" alt="">
-          <-- <button (click)="logIn()">Login</button>-->
-          <!-- <br>
-          <p>{{displayName}}</p
-          <img src="{{photourl}}" alt="">
-          <button (click)="logOut()">Logout</button> -->
-        </router-outlet>
+        <router-outlet></router-outlet>
       <!-- </div> -->
     </div>
   </div>

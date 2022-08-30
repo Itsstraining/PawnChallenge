@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Chess } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
 import { Timer } from 'src/app/models/timer';
 import { ChessService } from '../chess/chess.service';
+import { PieceMoveService } from '../piece/piece-move.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,12 @@ export class GameService {
   isGameStart = false
   currentUserIDControll = ''
   time = new Timer()
-
-
   //
   timePerTurn = 30
-  constructor(private chessService: ChessService) {
+
+  constructor(private chessService: ChessService, private pieceService: PieceMoveService) {
   }
+
   startGame(player1: Player, player2: Player) {
     this.isGameStart = true;
 
@@ -64,5 +66,18 @@ export class GameService {
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2
     return c3.toUpperCase() == c3 || c3.toLocaleLowerCase() == c3
+  }
+
+  isCheckmat(chess: Chess) {
+    let res = false
+    let dots = this.pieceService.getEffDots(chess)
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = 0; j < dots[i].length; j++) {
+        if(dots[i][j] && this.chessService.table[i][j].chess.name.toLowerCase() == 'v'){
+          res = true
+          return
+        }
+      }
+    }
   }
 }
