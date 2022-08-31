@@ -4,6 +4,7 @@ import * as AuthActions from '../../../RxJs/actions/auth.action';
 import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +12,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  formRegister!: FormGroup;
+  form: FormGroup;
   title = 'PawnChallengeClient';
   displayName = '';
   photourl = '';
-  email: string = '';
-  password: string = '';
+  // email: string = '';
+  // password: string = '';
+  // userName: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<{ auth: Auth }>,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    public dialog: MatDialog
   ) {
     this.AuthService.getCurrentUser().then(
       (user) =>
@@ -42,10 +45,10 @@ export class LoginComponent implements OnInit {
         this.displayName = 'null';
       }
     });
-    this.formRegister = this.formBuilder.group({
-      userName: '',
-      email: '',
-      password: '',
+    this.form = this.formBuilder.group({
+      userName: [''],
+      email: [''],
+      password: [''],
     });
   }
   ngOnInit(): void {
@@ -63,17 +66,19 @@ export class LoginComponent implements OnInit {
 
   registerAccount() {
     let newForm = {
-      ...this.formRegister.value,
-    };
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
+      ...this.form.value,
     }
+    this.store.dispatch(AuthActions.register({user: newForm}));
+  }
 
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-    this.store.dispatch(AuthActions.register({ user: newForm }));
+  openDialogLogin() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      panelClass: 'dialogLogin',
+      width: '70em',
+      height: '68em',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

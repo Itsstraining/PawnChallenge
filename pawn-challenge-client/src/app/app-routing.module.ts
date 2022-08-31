@@ -9,6 +9,7 @@ const routes: Routes = [
 
   { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chesss/learn-chesss.module').then(m => m.LearnChesssModule) },
   { path: 'dialog-test', loadChildren: () => import('./pages/dialog-test/dialog-test.module').then(m => m.DialogTestModule) },
+  { path: 'rule', loadChildren: () => import('./pages/rule/rule.module').then(m => m.RuleModule) },
 ];
 
 @NgModule({
