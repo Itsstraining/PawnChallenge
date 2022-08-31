@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { MessageService } from 'src/message/service/message/message.service';
 import { Message } from '../../models/message.model';
 
@@ -14,6 +14,7 @@ export class MessageController {
 
     @Get('')
     public async getAll(){
+        throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
         return await this.messageService.findAll()
     }
 
