@@ -25,7 +25,7 @@
             <img *ngIf="table[i][j].hasChess"
               src="../../../assets/SkinImage/Pieces/{{skinChess.currenSkinChess}}/{{ table[i][j].chess.img }}"
               draggable="true" (mousedown)="mousedownImg(table[i][j].chess, $event)"
-              (dragstart)="drag($event, table[i][j].chess)" class="img-chess" id="{{ table[i][j].chess.id }}" />
+              (dragstart)="drag($event, table[i][j].chess)" class="img-chess" id="{{ table[i][j].chess.id }}"/>
 
             <div *ngIf="table[i][j].hasDot == true" class="dot"></div>
 

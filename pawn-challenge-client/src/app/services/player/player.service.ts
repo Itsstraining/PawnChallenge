@@ -27,7 +27,15 @@ export class PlayerService {
         time: new Timer(),
         chessSDie: [],
         isCheckmat: false,
-        threatChess: []
+        chessCheckmat: {
+          id: '',
+          name: '',
+          img: '',
+          icon: '',
+          firstStep: true,
+          position: { x: 0, y: 0 },
+          isPawnUp: false
+        }
       }
     }
     return player

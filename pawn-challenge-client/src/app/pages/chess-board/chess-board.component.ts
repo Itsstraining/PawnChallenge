@@ -1,7 +1,6 @@
 import { Timer } from './../../models/timer';
 import { Cell, Chess, Position } from './../../models/chess.model';
 import { Component, OnInit } from '@angular/core';
-import { PieceMoveService } from 'src/app/services/piece/piece-move.service';
 import { ChessService } from 'src/app/services/chess/chess.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 import { GameService } from 'src/app/services/game/game.service';
@@ -22,13 +21,12 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
 export class ChessBoardComponent implements OnInit {
   chess!: Chess;
   currentPlayer: Player;
-  table = this.chessService.table;
   turn1: Position = { x: -1, y: -1 };
   turn2: Position = { x: -1, y: -1 };
+  table: Cell[][] = this.chessService.table
   grap: Grap;
 
   constructor(
-    private pieceService: PieceMoveService,
     public chessService: ChessService,
     public playerService: PlayerService,
     public gameService: GameService,
@@ -36,13 +34,11 @@ export class ChessBoardComponent implements OnInit {
     public skinChess: ChessSkinService,
     private historyMoveService: HistoryMoveService
   ) {
-    //console.log(this.x1[this.x[0]]);
-    //this.chessService.createBoard();
     this.grap = this.historyMoveService.newGrap();
-
     this.currentPlayer = this.playerService.getUserById(
       this.gameService.currentUserIDControll
     );
+
   }
 
   allowDrop(ev: any) {
@@ -58,10 +54,10 @@ export class ChessBoardComponent implements OnInit {
     ev.preventDefault();
     let fromP = this.chess.position;
 
-    //kiểm tra uy hiếp vua
-    //...
+    //kiểm tra uy hiếp vua(trừ quân vua)
+    //kiểm tra nước đi vua(quân vua)
 
-    let ismove = this.pieceService.move(this.chess, toPostion);
+    let ismove = this.chessService.move(this.chess, toPostion, this.table);
     // di chuyển
     if (ismove) {
       this.gameService.changeCurrentPlayer(
@@ -74,8 +70,8 @@ export class ChessBoardComponent implements OnInit {
       // lưu màu nước đi
       this.backgroundTurn(fromP, toPostion);
 
-    // di chuyển lỗi
-    } else if(fromP != toPostion) {
+      // di chuyển lỗi
+    } else if (fromP != toPostion) {
       this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
     }
 
@@ -83,10 +79,11 @@ export class ChessBoardComponent implements OnInit {
     this.chessService.clearDot();
 
     //kiểm tra chiếu vua
-    let isCheckmat = this.gameService.isCheckmat(this.chess)
-    if(isCheckmat){
+    let isCheckmat = this.chessService.isCheckmat(this.chess,this.table)
+    if (isCheckmat) {
       let user = this.playerService.getUserById(this.gameService.currentUserIDControll)
       user.chessControl.isCheckmat = true
+      user.chessControl.chessCheckmat = this.chess
     }
   }
 
@@ -114,7 +111,10 @@ export class ChessBoardComponent implements OnInit {
     ) {
       this.grap = this.historyMoveService.newGrap();
       this.chess = chess;
-      this.pieceService.setDotsToTable(this.pieceService.getEffDots(chess));
+      this.chessService.setDotsToTable(this.chessService.getEffDots(chess,this.table),this.table);
+      this.chessService.getDotban(chess,this.table)
+
+
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
     }
@@ -136,10 +136,10 @@ export class ChessBoardComponent implements OnInit {
 
   addGrap(toPostion: Position) {
     this.grap.grapTo = this.historyMoveService.toFormatPosition(toPostion);
-      this.grap.nameChess = this.chess.name;
-      this.grap.uid = this.currentPlayer.id;
-      this.grap.id = Date.now().toString();
-      this.historyMoveService.addGrap(this.grap);
+    this.grap.nameChess = this.chess.name;
+    this.grap.uid = this.currentPlayer.id;
+    this.grap.id = Date.now().toString();
+    this.historyMoveService.addGrap(this.grap);
   }
 
   ngOnInit(): void {

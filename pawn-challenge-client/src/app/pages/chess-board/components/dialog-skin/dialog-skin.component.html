@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>
+<div style="padding: 1.8em 3em 1.5em">
+  <h2 mat-dialog-title>
     <!-- <img src="../../../../assets/ImageGamemode/ChessBoard.png" alt="Chess board"
         style="display: block;margin-left: auto;margin-right: auto; width: 70%; margin-bottom:2% ;"> -->
         <div class="containers"  [ngStyle]="{'background-image': 'url(../../../../../assets/SkinImage/Board/'+ skinService.Board[indexBoard].folderName +'/150.png)'}">
@@ -188,4 +189,6 @@
 <div class="Footer">
     <button class="buttonCancel" type="button" (click)="closeDialog()"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Cancel</p></button>
     <button (click)="save()" class="buttonSave"><p style="padding: 13px 0 0 0;font-size: 1.2em;">Save</p></button>
+</div>
+
 </div>
