@@ -1,8 +1,8 @@
-import { UserSchema } from './../message/schemas/user.shema';
 import { Module } from '@nestjs/common';
-import { UserController } from './controller/user/user.controller';
-import { UserService } from './service/user/user.service';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserController } from '../message/controller/user/user.controller';
+import { UserSchema } from '../schemas/user.schema';
+import { UserService } from '../services/user.service';
 @Module({
     imports: [
         MongooseModule.forFeature([

@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { User } from 'src/message/schemas/user.shema';
-import { UserService } from 'src/user/service/user/user.service';
+import { UserService } from 'src/services/user.service';
+
 @Controller('user')
 export class UserController {
     constructor(private UserService: UserService) {}

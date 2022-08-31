@@ -1,4 +1,3 @@
-import { User, UserDocument } from './../../../message/schemas/user.shema';
 import { Injectable, Body, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { Model, Collection } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -6,11 +5,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { MongoClient } from 'mongodb';
 import * as env from 'environment';
 import * as bcrypt from 'bcrypt';
+import { UserSchema } from 'src/schemas/user.schema';
+import { User, UserDocument } from 'src/message/schemas/user.shema';
 
 const client = new MongoClient(env.environment.connectionString);
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) { }
   db = client.db('test');
   collection = this.db.collection('users');
 
@@ -27,7 +28,7 @@ export class UserService {
     }
   }
 
-  async createUser(user: User) {
+  async createUser(user: UserSchema) {
     try {
       let userIn = await this.collection.findOne({ userName: user.userName });
       if (userIn != null) {

@@ -14,7 +14,6 @@ export class MessageController {
 
     @Get('')
     public async getAll(){
-        throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
         return await this.messageService.findAll()
     }
 
