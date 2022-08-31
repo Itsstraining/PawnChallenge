@@ -5,6 +5,7 @@ import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,23 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
   title = 'PawnChallengeClient';
   displayName = '';
   photourl = '';
-  // email: string = '';
-  // password: string = '';
-  // userName: string = '';
+  user: User;
+
   constructor(
-    private formBuilder: FormBuilder,
     private store: Store<{ auth: Auth }>,
     private AuthService: AuthService,
     public dialog: MatDialog
   ) {
+    this.user = {
+      id: '',
+      createAt: '',
+      email: '',
+      password: '',
+      userName: '',
+    }
     this.AuthService.getCurrentUser().then(
       (user) =>
         (this.photourl = user.photourl != null ? user.photourl : user.photo)
@@ -45,11 +50,7 @@ export class LoginComponent implements OnInit {
         this.displayName = 'null';
       }
     });
-    this.form = this.formBuilder.group({
-      userName: [''],
-      email: [''],
-      password: [''],
-    });
+
   }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
@@ -57,27 +58,20 @@ export class LoginComponent implements OnInit {
 
   idToken$ = this.store.select((state) => state.auth.idToken);
   logIn() {
-    this.store.dispatch(AuthActions.login());
+    // this.store.dispatch(AuthActions.login());
+    console.log(this.user)
   }
   logOut() {
     this.store.dispatch(AuthActions.logout());
     console.log('logout');
   }
-
-  registerAccount() {
-    let newForm = {
-      ...this.form.value,
-    }
-    this.store.dispatch(AuthActions.register({user: newForm}));
-  }
-
   openDialogLogin() {
     const dialogRef = this.dialog.open(LoginComponent, {
       panelClass: 'dialogLogin',
       width: '70em',
       height: '68em',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
