@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import * as AuthActions from '../../../RxJs/actions/auth.action';
 import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   constructor(
-    private formBuilder: FormBuilder,
     private store: Store<{ auth: Auth }>,
     private AuthService: AuthService,
     public dialog: MatDialog
@@ -43,11 +42,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.displayName = 'null';
       }
-    });
-    this.formRegister = this.formBuilder.group({
-      userName: '',
-      email: '',
-      password: '',
     });
   }
   ngOnInit(): void {
