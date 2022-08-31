@@ -3,11 +3,10 @@
 <!-- <header class="login-header login-header-o ">
     <p class="login-logo login-logo-o">Chess.com</p>
 </header> -->
-
 <div class="section login-component login-component-o ">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>            
     <div class="login-form-wrapper">
-    
+
         <form class="authentication-login-form login-form-o">
             <div style="width:196%">
                 <div class="input-group-component">
@@ -20,7 +19,7 @@
                     <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;" class='fa fa-lock'></i></span>
                     <button class="input-group-button">
                         <span class="icon-font-chess input-group-icon">
-                            
+
                             <i style="width: 1em;font-size: 1.5em;" class='fa fa-eye'></i>
                             </span>
                     </button>
@@ -34,20 +33,20 @@
                 <p class="authentication-login-forgot  authentication-login-forgot-o">Forgot Password?</p>
             </div>
 
-            <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large">Log In</button>
+            <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large" (click)="registerAccount()">Log In</button>
         </form>
- 
+
         <div class="authentication-social-signin-v5-component">
             <div class="authentication-social-signin-v5-separator">
                 <span></span>
                 <span class="authentication-social-signin-v5-paragraph ">OR</span>
                 <span></span>
             </div>
-            
+
             <div (click)="logIn()" class="authentication-social-signin-v5-options">
                 <div class="authentication-social-signin-v5-social-button authentication-social-signin-v5-google">
                     <span class="authentication-social-signin-v5-social-icon google"></span>
-                    <button style="border: 0;" > <span style="font-size: 1.3em;">Log in with Google</span></button> 
+                    <button style="border: 0;" > <span style="font-size: 1.3em;">Log in with Google</span></button>
                 </div>
             </div>
         </div>

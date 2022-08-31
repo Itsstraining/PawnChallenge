@@ -31,10 +31,13 @@ import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 import { LoginComponent } from './pages/home/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { authEffects } from './effects/auth.effect';
-import { AuthReducer } from './reudcers/auth.reducer';
+import { authEffects } from './RxJs/effects/auth.effect';
+import { AuthReducer } from './RxJs/reudcers/auth.reducer';
 import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
+import { HttpClientModule } from '@angular/common/http';
+import { registerEffects } from './RxJs/effects/register.effect';
+import { RegisterReducer } from './RxJs/reudcers/register.reducer';
 
 // service
 
@@ -53,8 +56,10 @@ import { DialogWinComponent } from './components/dialog-win/dialog-win.component
     FormsModule,
     StoreModule.forRoot({
       auth: AuthReducer,
+      register: RegisterReducer,
     }, {}),
-    EffectsModule.forRoot([authEffects]),
+    EffectsModule.forRoot([authEffects, registerEffects]),
+    HttpClientModule,
   ],
   providers: [
   ],
