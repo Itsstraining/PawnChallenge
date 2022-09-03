@@ -42,9 +42,9 @@
         <li> 
           <div>
             <div (click)="openDialogLogin()"  class="button-footer-title" *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span style="font-size: 1em;margin-left: 2.8em;">Login </span> </div>
-            <div style="margin-top: 1em;" class="button-footer-title-2"  *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up </span></div>
+            <div style="margin-top: 4em;"><button class="button-footer-title-2"  *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up </span></button></div>
            <ng-template #elseBlock>
-            <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;"> Logout</span></button>
+            <div class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;"> Logout</span></div>
             
            </ng-template>
            
