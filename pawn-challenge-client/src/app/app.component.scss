@@ -128,7 +128,7 @@
   display: flex;
   justify-content: flex-start;
   font-weight: 500;
-  margin-top: -1em;
+  cursor: pointer;
  }
 
 
@@ -146,6 +146,7 @@
   justify-content: flex-start;
   font-weight: 500;
   margin-top: -1em;
+  cursor: pointer;
  }
 ::ng-deep.mat-dialog-container {
   padding: 0px !important;
