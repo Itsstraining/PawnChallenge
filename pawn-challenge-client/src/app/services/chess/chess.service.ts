@@ -189,14 +189,13 @@ export class ChessService {
       if (chess.name.toLowerCase() == 'v') {
         if (toPosition.x == 2 && toPosition.y == 0) {
           this.moveNoDot(table[0][0].chess, { x: 3, y: 0 }, table)
-        }else if(toPosition.x == 6 && toPosition.y == 0){
+        } else if (toPosition.x == 6 && toPosition.y == 0) {
           this.moveNoDot(table[0][7].chess, { x: 5, y: 0 }, table)
-        }else if (toPosition.x == 2 && toPosition.y == 7) {
+        } else if (toPosition.x == 2 && toPosition.y == 7) {
           this.moveNoDot(table[7][0].chess, { x: 3, y: 7 }, table)
-        }else if(toPosition.x == 6 && toPosition.y == 7){
+        } else if (toPosition.x == 6 && toPosition.y == 7) {
           this.moveNoDot(table[7][7].chess, { x: 5, y: 7 }, table)
         }
-
       }
       return true
     } else {
@@ -352,9 +351,9 @@ export class ChessService {
 
     if (chess1.name.toLowerCase() == 'v') {
       if (dotsban[0][3]) dotsban[0][2] = true
-      if (dotsban[0][5]) dotsban[0][6] = true
-      if (dotsban[7][3]) dotsban[7][2] = true
-      if (dotsban[7][5]) dotsban[7][6] = true
+      else if (dotsban[0][5]) dotsban[0][6] = true
+      else if (dotsban[7][3]) dotsban[7][2] = true
+      else if (dotsban[7][5]) dotsban[7][6] = true
     }
 
     return dotsban
