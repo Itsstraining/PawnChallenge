@@ -70,9 +70,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.store.dispatch(AuthActions.register({ user: newForm }));
-  
 }
-
 // openDialogLogin() {
 //   const dialogRef = this.dialog.open(LoginComponent, {
 //     panelClass: 'dialogLogin', 
@@ -84,3 +82,4 @@ export class LoginComponent implements OnInit {
 //   });
 // }
 }
+
