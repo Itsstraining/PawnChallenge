@@ -5,7 +5,6 @@ export interface Cell {
   chess: Chess;
   hasDot: boolean;
   hasDotban: boolean
-  isCheckmat: boolean
 }
 
 export interface Chess {

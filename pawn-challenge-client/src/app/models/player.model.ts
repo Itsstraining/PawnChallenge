@@ -11,10 +11,9 @@ export interface Player {
 }
 
 export interface ChessControl {
-  chessID: string
+  chessNameCT: string
   time: Timer
   chessSDie: String[]
   isCheckmat: boolean
-  chessCheckmat: Chess
 }
 

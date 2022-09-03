@@ -2,14 +2,21 @@
   width: 2em;
   height: 2em;
   border-radius: 50px;
-  background-color: rgb(101, 219, 111);
   position: absolute;
 }
+
+.dots{
+  background-color: rgb(101, 219, 111);
+}
+.bans{
+  background-color: rgb(219, 132, 101);
+}
+
 .checkmatImg {
   position: absolute;
   svg {
     width: 8.8em;
-    // fill: red;
+    height: 8.8em;
   }
 }
 
