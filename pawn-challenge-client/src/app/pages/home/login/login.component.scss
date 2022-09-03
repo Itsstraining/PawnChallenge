@@ -350,9 +350,8 @@ input:is(:focus, :valid){
 
 
 .input-box i{
-    right: 15px;
-    cursor: pointer;
-    font-size: 28px;
+    right: -1.9em;
+    top: -0.1em;
 }
 
 input:is(:focus, :valid) ~ i{
