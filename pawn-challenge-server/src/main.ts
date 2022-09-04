@@ -6,7 +6,9 @@ async function bootstrap() {
   admin.initializeApp({
     credential: admin.credential.cert('key-admin.json')
   });
+ 
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();

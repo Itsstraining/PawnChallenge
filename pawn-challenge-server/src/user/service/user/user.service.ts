@@ -1,5 +1,11 @@
 import { User, UserDocument } from './../../../message/schemas/user.shema';
-import { Injectable, Body, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  Body,
+  HttpException,
+  HttpStatus,
+  BadRequestException,
+} from '@nestjs/common';
 import { Model, Collection } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -14,33 +20,47 @@ export class UserService {
   db = client.db('test');
   collection = this.db.collection('users');
 
+  // async loginWithGoogle(user: User) {
+  //   try {
+  //     let userEmail = await this.userModel.findOne({ email: user.email });
+  //     if (userEmail != null) {
+  //       return 'login success';
+  //     } else {
+  //       let createAccount = new this.userModel(user);
+  //       return await createAccount.save();
+  //     }
+  //   } catch (error) {
+  //     throw new BadRequestException('user already exists');
+  //   }
+  // }
+
   async loginWithUserNameAndPassword(user: User) {
     try {
-      let userIn = await this.collection.findOne({ userName: user.userName });
+      let userIn = await this.userModel.findOne({ userName: user.userName });
       let passwordIn = await bcrypt.compare(user.password, userIn.password);
       if (userIn != null && passwordIn) {
         return 'login success';
       }
-      return 'username or password is incorrect';
+      throw new BadRequestException('username or password is incorrect');
     } catch (error) {
-      console.log(error);
+      throw new BadRequestException('username or password is incorrect');
     }
   }
 
   async createUser(user: User) {
     try {
-      let userIn = await this.collection.findOne({ userName: user.userName });
+      let userIn = await this.userModel.findOne({ email: user.email });
       if (userIn != null) {
-        return new BadRequestException('user already exists');
+        throw new BadRequestException('user already exists');
       } else {
         let createUser = new this.userModel(user);
-        createUser.id = createUser._id;
         createUser.createAt = Date.now().toString();
         createUser.password = await bcrypt.hash(user.password, 10);
         return await createUser.save();
       }
     } catch (error) {
-      console.log(error);
+      // return error;
+      throw new BadRequestException('user already exists');
     }
   }
 
@@ -48,7 +68,35 @@ export class UserService {
     return await this.userModel.find().exec();
   }
 
-  async findByUserName(userName: string) {
-    return await this.userModel.findOne({ userName: userName }).exec();
+  async findUserById(id: string) {
+    // try {
+    //   const user = await this.userModel.findById(id);
+    //   if (!user) {
+    //     throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    //   }
+    //   return user;
+    // } catch (error) {
+    //   return new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    // }
+    return await this.userModel.findById(id).exec();
+  }
+
+  async updateUser(id: string, user: User) {
+    // try {
+    //   const updateUser = await this.userModel.findByIdAndUpdate(id, user, {
+    //     new: true,
+    //   });
+    //   if (!updateUser) {
+    //     throw new HttpException('Update Failure', HttpStatus.BAD_REQUEST);
+    //   }
+    //   return updateUser;
+    // } catch (error) {
+    //   return new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    // }
+    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+  }
+
+  async deleteUser(id: string) {
+    return await this.userModel.findByIdAndDelete(id).exec();
   }
 }

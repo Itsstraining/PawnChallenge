@@ -20,6 +20,6 @@ export class User{
 
 }
 
-export type MessageDocument = User & Document
+export type UserDocument = User & Document
 
 export const MessageSchema = SchemaFactory.createForClass(User);

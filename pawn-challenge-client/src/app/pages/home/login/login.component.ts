@@ -1,3 +1,4 @@
+import { register } from './../../../RxJs/actions/auth.action';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import * as AuthActions from '../../../RxJs/actions/auth.action';
@@ -55,11 +56,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-
+  register(){
+    console.log(this.user)
+    this.store.dispatch(AuthActions.register({user: this.user}));
+  }
   idToken$ = this.store.select((state) => state.auth.idToken);
   logIn() {
-    // this.store.dispatch(AuthActions.login());
-    console.log(this.user)
+    this.store.dispatch(AuthActions.login());
+    // console.log(this.user)
   }
   logOut() {
     this.store.dispatch(AuthActions.logout());
