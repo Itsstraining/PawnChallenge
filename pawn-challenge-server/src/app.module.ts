@@ -8,17 +8,14 @@ import {
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MessageModule } from './message/message.module';
-import * as env from 'environment';
-import { UserService } from './user/service/user/user.service';
-import { UserModule } from './user/user.module';
-import { AuthService } from './user/service/auth/auth.service';
+import * as env from 'environment'
+import { UserModule } from './modules/user.module';
+import { AuthService } from './services/auth/auth.service';
 
 @Module({
   imports: [
     MongooseModule.forRoot(env.environment.connectionString),
-    MessageModule,
-    UserModule,
+    UserModule
   ],
 
   controllers: [AppController],

@@ -13,7 +13,7 @@ import { DialogSkinComponent } from 'src/app/components/dialogSkin/dialog-skin/d
 })
 export class DialogTestComponent implements OnInit {
   constructor(public dialog: MatDialog) {
-    this.openDialogWin();
+    this.openDialogSkin();
    }
   openDialogGamemode() {
     const dialogRef = this.dialog.open(DialogComponent, {

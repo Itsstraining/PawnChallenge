@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
-import { AuthService } from 'src/user/service/auth/auth.service';
+import { AuthService } from 'src/services/auth/auth.service';
 import * as admin from 'firebase-admin';
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

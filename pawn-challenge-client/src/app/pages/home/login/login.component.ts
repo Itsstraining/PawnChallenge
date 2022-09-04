@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import * as AuthActions from '../../../RxJs/actions/auth.action';
 import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
 
@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   displayName = '';
   photourl = '';
   user: User;
-
+  email = '';
+  password = '';
+  userName = '';
   constructor(
     private store: Store<{ auth: Auth }>,
     private AuthService: AuthService,
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
       email: '',
       password: '',
       userName: '',
-    }
+    };
     this.AuthService.getCurrentUser().then(
       (user) =>
         (this.photourl = user.photourl != null ? user.photourl : user.photo)
@@ -51,14 +53,13 @@ export class LoginComponent implements OnInit {
         this.displayName = 'null';
       }
     });
-
   }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-  register(){
-    console.log(this.user)
-    this.store.dispatch(AuthActions.register({user: this.user}));
+  register() {
+    console.log(this.user);
+    this.store.dispatch(AuthActions.register({ user: this.user }));
   }
   idToken$ = this.store.select((state) => state.auth.idToken);
   logIn() {
@@ -69,14 +70,30 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(AuthActions.logout());
     console.log('logout');
   }
-  openDialogLogin() {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      panelClass: 'dialogLogin',
-      width: '70em',
-      height: '68em',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  registerAccount() {
+    if (this.userName == '') {
+      alert('Please enter your username');
+      return;
+    }
+    if (this.email == '') {
+      alert('Please enter email');
+      return;
+    }
+
+    if (this.password == '') {
+      alert('Please enter password');
+      return;
+    }
+    this.store.dispatch((register({ user: this.user })));
   }
+  // openDialogLogin() {
+  //   const dialogRef = this.dialog.open(LoginComponent, {
+  //     panelClass: 'dialogLogin',
+  //     width: '70em',
+  //     height: '68em',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
 }

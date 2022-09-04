@@ -1,20 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpStatus,
-  Post,
-  Put,
-  Query,
-  Res,
-  Request,
-} from '@nestjs/common';
-import { User } from 'src/user/model/user.model';
-import { AuthService } from 'src/user/service/auth/auth.service';
-import { UserService } from 'src/user/service/user/user.service';
-import { Response } from 'express';
 
+import { AuthService } from 'src/services/auth/auth.service';
+import { User } from 'src/models/user.model';
+import { UserService } from 'src/services/user/user.service';
+import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res } from '@nestjs/common';
+import { Response } from 'express';
 @Controller('user')
 export class UserController {
   constructor(

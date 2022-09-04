@@ -1,9 +1,9 @@
-import { UserSchema } from './../message/schemas/user.shema';
 import { Module } from '@nestjs/common';
-import { UserController } from './controller/user/user.controller';
-import { UserService } from './service/user/user.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthService } from './service/auth/auth.service';
+import { UserController } from 'src/controllers/user/user.controller';
+import { UserSchema } from 'src/schemas/user.schema';
+import { UserService } from 'src/services/user/user.service';
+import { AuthService } from 'src/services/auth/auth.service';
 @Module({
     imports: [
         MongooseModule.forFeature([

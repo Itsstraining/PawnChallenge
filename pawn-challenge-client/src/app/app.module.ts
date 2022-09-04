@@ -39,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerEffects } from './RxJs/effects/register.effect';
 import { RegisterReducer } from './RxJs/reudcers/register.reducer';
 
+// service
+
 
 @NgModule({
   declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
@@ -59,7 +61,8 @@ import { RegisterReducer } from './RxJs/reudcers/register.reducer';
     EffectsModule.forRoot([authEffects, registerEffects]),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent],
 
 })
