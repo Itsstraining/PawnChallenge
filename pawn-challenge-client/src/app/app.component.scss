@@ -1,10 +1,15 @@
 .img {
   text-align: center;
-  width: 20em;
+  width: 15em;
   height: 15em;
   margin-top: 0em;
+  cursor: pointer;
 }
-
+.imgDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .wrapper {
   display: flex;
 
@@ -23,7 +28,9 @@
   .main_content1 {
     width: calc(100% - 20em);
     min-height: 100vh;
-    background-color: #312e2b;
+    // background-color: #312e2b;
+    background-image: linear-gradient(to top, #312e2b, #817f7e);
+
   }
 }
 
