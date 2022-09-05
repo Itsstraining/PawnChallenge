@@ -5,7 +5,11 @@ import { Auth } from '../../../RxJs/states/auth.state';
 import { Store } from '@ngrx/store';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-
+import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +23,8 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   constructor(
-    private store: Store<{ auth: Auth }>,
+    private store: Store<{ auth: Auth, user:User }>,
+    private Http: HttpClient,
     private AuthService: AuthService,
     public dialog: MatDialog
   ) {
@@ -49,6 +54,8 @@ export class LoginComponent implements OnInit {
   }
 
   idToken$ = this.store.select((state) => state.auth.idToken);
+  users$ = this.store.select((state) => state.user);
+  
   logIn() {
     this.store.dispatch(AuthActions.login());
   }
@@ -81,5 +88,9 @@ export class LoginComponent implements OnInit {
 //     console.log(`Dialog result: ${result}`);
 //   });
 // }
+
+loginWithUserNameAndPassword(user: User): Observable<User[]> {
+  return this.Http.post<User[]>(`${environment.endPoint}/user/login`, user);
+}
 }
 

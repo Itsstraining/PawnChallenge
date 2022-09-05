@@ -56,8 +56,11 @@
                 <p class="authentication-login-forgot  authentication-login-forgot-o">Forgot Password?</p>
             </div>
 
-            <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large"
-                (click)="registerAccount()">Log In</button>
+            <div class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large">
+                <div *ngFor="(users$ |async)as user" >
+                    <span>Log In</span>    
+                </div>
+        </div>
         </form>
 
         <div class="authentication-social-signin-v5-component">

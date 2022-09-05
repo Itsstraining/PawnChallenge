@@ -23,7 +23,8 @@
   .main_content1 {
     width: calc(100% - 20em);
     min-height: 100vh;
-    background-color: #312e2b;
+    // background-color: #312e2b;
+    background-image: linear-gradient(to bottom, #76c1d4, #f7f7f7);
   }
 }
 

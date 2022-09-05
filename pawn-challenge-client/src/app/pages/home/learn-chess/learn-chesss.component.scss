@@ -12,22 +12,20 @@ p {
     background-color: red;
 }
 .rows {
-    width: 96%;
+    width: 100%;
     .space{
         padding-bottom: 1px;
     }
     float: right;
+    margin-top: 1em;
 }
 
 .row {
     display: flex;
-    background-color: #62605d6b;
-    padding: 2em 0 2em 5em;
-    border-radius: 2px;
-    flex-wrap: wrap;
-    margin-right: -15px;
+    background-color: rgba(98, 96, 93, 0.4196078431);
+    padding: 1em 0 1em 3em;
+    border-radius: 4px;
     margin-left: 0;
-
     p {
         color: white;
         font-size: 1em;
@@ -35,80 +33,54 @@ p {
     }
 
     img {
-        height: 7.5em;
+        height: 7em;
         margin-left: 0 auto;
     }
     .title{
         font-size: 3em;
         text-align: left;
-        margin-left: 0.3em;
+        margin-left: 0.39em;
         
     }
     .content{
-        font-size: 2em;
-        margin-left: 0.6em;
-        margin-top: 1em;
+        font-size: 12px;
+        margin-left: 10px;
+        margin-top: 4px;
     }
    
 }
 
 
 .background-main{
-    background-color: black;
+    background-color: rgba(80, 185, 80, 0.295);
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    font-size: 2.5em;
+    font-size: 1em;
     font-weight: 500;
     line-height: 1;
     float: right;
     display: grid;
     text-align: center;
     border-radius: 3px;
-    width: 25em;
-    height: 35em;
+    width: 60em;
+    height: 100%;
+    margin-top: 1em;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 
     .menu-header-title{
         font-size: 3.1em;
         font-weight: 800;
         line-height: 1;
-        margin: 0.2em;
+        margin: 1.2em;
         position: relative;
         z-index: 1;
-    
     } 
  
-    .bonus-icon-1{
-        height: 2.8em;
-        margin-left: 18em
-        
-    }
 
-    .bonus-icon-2{
-        height: 3em;
-        margin-left: 5em;
-        
-    }
 
-    .size-text{
-        text-align: center;
-        display: grid;
-        font-size: 2em;
-        margin-left: -1em;
-       
-    }
 
-    .up-1{
-        font-size: 2em;
-        margin-left: 5.4em;
-        margin-top: -1.2em;
-
-    }
-
-    .up-2{
-        font-size: 0.9em;
-        margin-left: 4.8em;
-        margin-top: -1.5em;
-    }
 }
 
 .background-img {
@@ -117,12 +89,12 @@ p {
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: 100%;
-    height: 15em;
+    height: 11em;
     margin: 0 auto;
     position: relative;
-    width: 12em;
+    width: 11em;
     z-index: 1;
-    margin-top: -1em;
+    margin-top: -3em;
 }
 
 .home-sidebar-items {
@@ -142,4 +114,11 @@ p {
     min-height: 8.8rem;
     padding: 2rem;
 }
+
+.image-chess-board{
+    width: 42%;
+    margin-left: 11em;
+    position: fixed;
+    margin-top: 3em;
+  }
 

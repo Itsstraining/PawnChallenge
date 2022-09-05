@@ -38,12 +38,13 @@ import { DialogWinComponent } from './components/dialog-win/dialog-win.component
 import { HttpClientModule } from '@angular/common/http';
 import { registerEffects } from './RxJs/effects/register.effect';
 import { RegisterReducer } from './RxJs/reudcers/register.reducer';
+import { PlayChesssComponent } from './pages/home/components/play-chesss/play-chesss.component';
 
 // service
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
+  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent,PlayChesssComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

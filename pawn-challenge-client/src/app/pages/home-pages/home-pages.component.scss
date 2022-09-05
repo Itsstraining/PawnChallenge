@@ -2,7 +2,7 @@
 @media (min-width: 960px){
     .layout-component {
         padding: 1.5em;
-        background-color: #312e2b;
+        // background-color: #312e2b;
     }
     }
     
@@ -59,7 +59,7 @@
         display: flex;
         flex-direction: column;
         float: right;
-        background-color: #312e2b;
+        // background-color: #312e2b;
         margin-top: -61em;
 
         .title span {
@@ -129,7 +129,8 @@
       display: flex;
       justify-content: flex-start;
       padding: 1.8em 2.4em !important;
-      text-align: left
+      text-align: left;
+      cursor: pointer;
      }
      .button-title{
       font-family: "Montserrat", sans-serif;
@@ -688,6 +689,14 @@
           content: " | ";
         }
 
+     }
+
+     a:hover {
+      color: #191a1a00;
+     }
+
+     .news-button-title :hover{
+      background-color:#a7ff3d;
      }
 
     
