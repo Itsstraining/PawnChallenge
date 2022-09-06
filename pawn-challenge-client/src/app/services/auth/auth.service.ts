@@ -15,7 +15,9 @@ export class AuthService {
     private Http: HttpClient,
     private auth: Auth,
     private router: Router
-  ) {}
+  ) {
+
+  }
   public isUserLoggedIn: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   getCurrentUser() {
@@ -72,3 +74,4 @@ export class AuthService {
     return this.Http.put<User[]>(`${environment.endPoint}user/?id=${id}`, user);
   }
 }
+

@@ -39,17 +39,17 @@ export class UserController {
   }
 
   @Get('/')
-  public async findUserById(id: string) {
+  public async findUserById(@Query("_id") id: string) {
     return await this.userService.findUserById(id);
   }
 
-  @Put('/update')
-  public async updateUser(@Query(`id`) id: string, @Body() user: User) {
+  @Put('/')
+  public async updateUser(@Query(`_id`) id: string, @Body() user: User) {
     return await this.userService.updateUser(id, user);
   }
 
-  @Delete('/')
-  public async deleteUser(@Query('id') id: string) {
-    return await this.userService.deleteUser(id);
-  }
+  // @Put('/')
+  // public async deleteUser(@Query('_id') id: string, @Body() user: User) {
+  //   return await this.userService.deleteUser(id, user);
+  // }
 }

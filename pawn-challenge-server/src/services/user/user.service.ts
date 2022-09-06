@@ -1,5 +1,11 @@
 import { User, UserDocument } from '../../schemas/user.schema';
-import { Injectable, Body, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  Body,
+  HttpException,
+  HttpStatus,
+  BadRequestException,
+} from '@nestjs/common';
 import { Model, Collection } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -10,7 +16,7 @@ import * as bcrypt from 'bcrypt';
 const client = new MongoClient(env.environment.connectionString);
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) { }
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
   db = client.db('test');
   collection = this.db.collection('users');
 
@@ -43,22 +49,27 @@ export class UserService {
 
   async createUser1(user: User) {
     try {
-      const userCount = await this.userModel.countDocuments({ userName: user.userName });
+      const userCount = await this.userModel.countDocuments({
+        userName: user.userName,
+      });
       if (userCount > 0) {
-        throw new Error("User not exists");
+        throw new Error('User not exists');
       } else {
         let createUser = new this.userModel(user);
         createUser.id = createUser._id;
         createUser.createAt = Date.now().toString();
         createUser.password = await bcrypt.hash(user.password, 10);
         await createUser.save();
-        return {messs: `User [${user.id}] is created`}
+        return { messs: `User [${user.id}] is created` };
       }
     } catch (error) {
-      if(error.message == "User not exists"){
+      if (error.message == 'User not exists') {
         throw new HttpException('username is exist!', HttpStatus.BAD_REQUEST);
-      }else{
-        throw new HttpException('INTERNAL_SERVER_ERROR', HttpStatus.INTERNAL_SERVER_ERROR);
+      } else {
+        throw new HttpException(
+          'INTERNAL_SERVER_ERROR',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       }
     }
   }
@@ -85,34 +96,48 @@ export class UserService {
   }
 
   async findUserById(id: string) {
-    // try {
-    //   const user = await this.userModel.findById(id);
-    //   if (!user) {
-    //     throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
-    //   }
-    //   return user;
-    // } catch (error) {
-    //   return new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    // }
-    return await this.userModel.findById(id).exec();
+    try {
+      const user = await this.userModel.findById(id);
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+      return user;
+    } catch (error) {
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async updateUser(id: string, user: User) {
-    // try {
-    //   const updateUser = await this.userModel.findByIdAndUpdate(id, user, {
-    //     new: true,
-    //   });
-    //   if (!updateUser) {
-    //     throw new HttpException('Update Failure', HttpStatus.BAD_REQUEST);
-    //   }
-    //   return updateUser;
-    // } catch (error) {
-    //   return new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    // }
-    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+    try {
+      const updateUser = await this.userModel
+        .findByIdAndUpdate({ _id: id }, user, {
+          new: true,
+        })
+        .exec();
+      if (!updateUser) {
+        throw new HttpException('Update Failure', HttpStatus.BAD_REQUEST);
+      }
+      return updateUser;
+    } catch (error) {
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
+  
+  // async deleteUser(id: string, user: User) {
+  //   try {
+  //     const updateUser = await this.userModel
+  //       .findByIdAndUpdate({ _id: id }, user, {
+  //         new: true,
+  //       })
+  //       .exec();
+  //     if (!updateUser) {
+  //       throw new HttpException('Update Failure', HttpStatus.BAD_REQUEST);
+  //     }
+  //     return updateUser;
+  //   } catch (error) {
+  //     return new HttpException(error.message, HttpStatus.BAD_REQUEST);
+  //   }
+  // }
 
-  async deleteUser(id: string) {
-    return await this.userModel.findByIdAndDelete(id).exec();
-  }
+
 }
