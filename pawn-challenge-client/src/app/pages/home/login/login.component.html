@@ -74,5 +74,48 @@
                 </div>
             </div>
         </div>
+        <div class="input-group-component form-group">
+          <input class="input-component input-group-space-left login-input" type="userName" id="userName" name="userName"
+            placeholder="Username" [(ngModel)]="user.userName">
+          <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;"
+              class='fa fa-user'></i></span>
+        </div>
+
+        <div class="input-group-component form-group">
+          <input class="input-component input-group-space-left login-input" type="password" id="password"
+            name="password" placeholder="Password" [(ngModel)]="user.password">
+          <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;"
+              class='fa fa-lock'></i></span>
+          <button class="input-group-button">
+            <span class="icon-font-chess input-group-icon">
+              <i style="width: 1em;font-size: 1.5em;" class='fa fa-eye'></i>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="authentication-login-options">
+        <div class="form-checkbox-component">
+          <input type="checkbox" id="remember me" name="remember me" class="form-checkbox-checkbox">
+          <label class="form-checkbox-label">Remember me</label>
+        </div>
+        <p class="authentication-login-forgot  authentication-login-forgot-o">Forgot Password?</p>
+      </div>
+
+      <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large" type="submit"
+      (click)="register()"  > Log In</button>
+
+    <div class="authentication-social-signin-v5-component">
+      <div class="authentication-social-signin-v5-separator">
+        <span></span>
+        <span class="authentication-social-signin-v5-paragraph ">OR</span>
+        <span></span>
+      </div>
+      <div (click)="logIn()" class="authentication-social-signin-v5-options">
+        <div class="authentication-social-signin-v5-social-button authentication-social-signin-v5-google">
+          <span class="authentication-social-signin-v5-social-icon google"></span>
+          <button style="border: 0;"> <span style="font-size: 1.3em;">Log in with Google</span></button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+<h1>{{idToken$|async}}</h1>
