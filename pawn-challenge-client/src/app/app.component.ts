@@ -11,6 +11,7 @@ import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { RegisterComponent } from './pages/home/components/register/register.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -67,6 +68,17 @@ export class AppComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  openDialogRegister() {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      panelClass: 'dialogLogin', 
+      width: 'auto',
+      height: 'auto',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   register(user: User): Observable<User[]> {
     return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
   }
@@ -89,4 +101,6 @@ export class AppComponent {
     }
     this.store.dispatch(AuthActions.register({ user: newForm }));
 }
+
+
 }

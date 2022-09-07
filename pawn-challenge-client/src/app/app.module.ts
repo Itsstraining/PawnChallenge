@@ -39,12 +39,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerEffects } from './RxJs/effects/register.effect';
 import { RegisterReducer } from './RxJs/reudcers/register.reducer';
 import { PlayChesssComponent } from './pages/home/components/play-chesss/play-chesss.component';
+import { LearnComponent } from './pages/home/components/learn/learn.component';
+import { OnlineComponent } from './pages/home/components/play-chesss/online/online.component';
+import { RegisterComponent } from './pages/home/components/register/register.component';
 
 // service
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent,PlayChesssComponent ],
+  declarations: [
+    AppComponent, 
+    DialogComponent, 
+    DialogSkinComponent,
+    DialogLoseComponent,
+    DialogWinComponent,
+    HomePagesComponent,
+    LoginComponent,
+    PlayChesssComponent,
+    LearnComponent,
+    OnlineComponent,
+    RegisterComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
