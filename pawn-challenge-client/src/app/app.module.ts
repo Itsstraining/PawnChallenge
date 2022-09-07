@@ -38,7 +38,8 @@ import { DialogWinComponent } from './components/dialog-win/dialog-win.component
 import { HttpClientModule } from '@angular/common/http';
 import { registerEffects } from './RxJs/effects/register.effect';
 import { RegisterReducer } from './RxJs/reudcers/register.reducer';
-
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 // service
 
 
@@ -60,6 +61,7 @@ import { RegisterReducer } from './RxJs/reudcers/register.reducer';
     }, {}),
     EffectsModule.forRoot([authEffects, registerEffects]),
     HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
   ],

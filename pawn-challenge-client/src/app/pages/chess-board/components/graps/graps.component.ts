@@ -11,7 +11,6 @@ import { DialogSkinComponent } from '../dialog-skin/dialog-skin.component'
 })
 export class GrapsComponent implements OnInit {
   constructor(public dialog: MatDialog,public hs:HistoryMoveService,public playerService: GameService, public gameService: GameService) {
-
   }
 
   ngOnInit(): void {

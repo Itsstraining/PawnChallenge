@@ -96,6 +96,8 @@ export class ChessBoardComponent implements OnInit {
 
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
+      this.historyMoveService.sendDataMove(this.grap);
+      console.log(this.grap.grapFrom);
     }
   }
 
@@ -130,6 +132,8 @@ export class ChessBoardComponent implements OnInit {
     this.grap.uid = this.getCurrentUser().id;
     this.grap.id = Date.now().toString();
     this.historyMoveService.addGrap(this.grap);
+    this.historyMoveService.formatPosition(this.grap);
+    console.log(this.historyMoveService.formatPosition(this.grap));
   }
 
   openDialogToCapture(pawn: Chess) {
