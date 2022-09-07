@@ -15,7 +15,9 @@ export class AuthService {
     private Http: HttpClient,
     private auth: Auth,
     private router: Router
-  ) {}
+  ) {
+
+  }
   public isUserLoggedIn: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   getCurrentUser() {
@@ -60,9 +62,16 @@ export class AuthService {
     );
   }
   register(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
+    return this.Http.post<User[]>(`${environment.endPoint}user/register`, user);
   }
   loginWithUserNameAndPassword(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}/user/login`, user);
+    return this.Http.post<User[]>(`${environment.endPoint}user/login`, user);
+  }
+  getUserById(id: string): Observable<User[]> {
+    return this.Http.get<User[]>(`${environment.endPoint}user/?id=${id}`);
+  }
+  updateUserById(id: string, user: User): Observable<User[]> {
+    return this.Http.put<User[]>(`${environment.endPoint}user/?id=${id}`, user);
   }
 }
+
