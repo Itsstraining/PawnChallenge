@@ -23,17 +23,17 @@ import { ChatGateway } from './socketIO/Gateways/chat.gateway';
   providers: [AppService, AuthService, ChatGateway],
 })
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer
-  //     .apply(AuthMiddleware)
-  //     .forRoutes(
-  //       // { path: '/all', method: RequestMethod.GET },
-  //       // { path: '/login', method: RequestMethod.POST },
-  //       // { path: '/login/google', method: RequestMethod.POST },
-  //       // { path: '/register', method: RequestMethod.POST },
-  //       // { path: '/update', method: RequestMethod.PUT },
-  //       // { path: '/', method: RequestMethod.GET },
-  //       { path: '', method: RequestMethod.ALL },
-  //     );
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes(
+        // { path: '/all', method: RequestMethod.GET },
+        // { path: '/login', method: RequestMethod.POST },
+        // { path: '/login/google', method: RequestMethod.POST },
+        // { path: '/register', method: RequestMethod.POST },
+        // { path: '/update', method: RequestMethod.PUT },
+        // { path: '/', method: RequestMethod.GET },
+        // { path: '', method: RequestMethod.ALL },
+      );
+  }
 }
