@@ -5,7 +5,7 @@ export class Timer {
   isStart = false
   private isPause = false
   private intervalId: any
-  isTimeOut :ReplaySubject<boolean>
+  isTimeOut: ReplaySubject<boolean>
 
   constructor() {
     this.isTimeOut = new ReplaySubject(3);
@@ -15,7 +15,6 @@ export class Timer {
     this.intervalId = setInterval(() => {
       if (!this.isPause) {
         this.currentTime--
-        // console.log(this.currentTime)
         if (this.currentTime === 0) {
           this.isTimeOut.next(true)
           clearInterval(this.intervalId)
@@ -29,8 +28,8 @@ export class Timer {
   unPause() {
     this.isPause = false
   }
-  clean() {
-
+  stop() {
+    clearInterval(this.intervalId)
   }
 
   getFormatTime(): string {

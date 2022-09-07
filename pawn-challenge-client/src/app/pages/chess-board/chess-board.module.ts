@@ -11,13 +11,19 @@ import { GrapsComponent } from './components/graps/graps.component';
 import { DialogSkinComponent } from './components/dialog-skin/dialog-skin.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
+import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
+import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.component';
+import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
+import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
 @NgModule({
   declarations: [
-
     ChessBoardComponent,
     GrapsComponent,
-    DialogSkinComponent
-
+    DialogSkinComponent,
+    DialogToCaptureComponent,
+    DialogWinComponent,
+    DialogDrawComponent,
+    DialogLoseComponent
   ],
   imports: [
     CommonModule,

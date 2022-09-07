@@ -1,13 +1,14 @@
-import { Timer } from './../../models/timer';
 import { Cell, Chess, Position } from './../../models/chess.model';
 import { Component, OnInit } from '@angular/core';
 import { ChessService } from 'src/app/services/chess/chess.service';
 import { GameService } from 'src/app/services/game/game.service';
-import { Player } from 'src/app/models/player.model';
 import { HistoryMoveService } from 'src/app/services/history/history-move.service';
 import { Grap } from 'src/app/models/grap.model';
-import { ShareService } from 'src/app/services/share/share.service';
 import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component'
+import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.component';
+import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
 
 @Component({
   selector: 'app-chess-board',
@@ -19,18 +20,16 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
 })
 export class ChessBoardComponent implements OnInit {
   chess!: Chess;
-  turn1: Position = { x: -1, y: -1 };
-  turn2: Position = { x: -1, y: -1 };
   table: Cell[][] = this.chessService.table
   grap: Grap;
+  catchPawn = false
 
   constructor(
     public chessService: ChessService,
-    public playerService: GameService,
     public gameService: GameService,
-    private shareService: ShareService,
     public skinChess: ChessSkinService,
-    private historyMoveService: HistoryMoveService
+    private historyMoveService: HistoryMoveService,
+    public dialog: MatDialog,
   ) {
     this.grap = this.historyMoveService.newGrap();
   }
@@ -51,25 +50,25 @@ export class ChessBoardComponent implements OnInit {
     // di chuyển
     if (ismove) {
       this.getCurrentUser().chessControl.isCheckmat = false
-      this.gameService.changeCurrentPlayer(this.playerService.player1, this.playerService.player2);
-
       // lưu nước đi
       this.addGrap(toPostion)
-
       // lưu màu nước đi
       this.backgroundTurn(fromP, toPostion);
+      if (this.chess.name.toLowerCase() == 'c' && (this.chess.position.y == 0 || this.chess.position.y == 7)) {
+        this.openDialogToCapture(this.chess)
+      }
+      else {
+        this.gameService.changeCurrentPlayer(this.gameService.player1, this.gameService.player2);
+        let isCheckmat = this.chessService.isCheckmatAll(this.chess, this.table)
+        if (isCheckmat) {
+          this.getCurrentUser().chessControl.isCheckmat = true
+        }
+      }
 
-      // di chuyển lỗi
+      this.chessService.setDrawOrWin(this.table, this.gameService.getCurrentUser())
     }
-
     //xoá dots gợi ý
     this.chessService.clearDot();
-
-    //kiểm tra chiếu vua
-    let isCheckmat = this.chessService.isCheckmatAll(this.chess, this.table)
-    if (isCheckmat) {
-      this.getCurrentUser().chessControl.isCheckmat = true
-    }
   }
 
   dragend(ev: any) {
@@ -95,36 +94,34 @@ export class ChessBoardComponent implements OnInit {
       let dotsban = this.chessService.getDotban(chess, this.table, dots)
       this.chessService.setDotsbanToTable(dotsban, this.table)
 
-
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
     }
   }
 
-  isCheckmat(nameChess:string) {
+  isCheckmat(nameChess: string) {
     let user = this.getCurrentUser()
-    if(user.chessControl.isCheckmat && this.chessService.isAlly(user.chessControl.chessNameCT, nameChess)){
+    if (user.chessControl.isCheckmat && this.chessService.isAlly(user.chessControl.chessNameCT, nameChess)) {
       return true
     }
     return false
   }
 
-  getCurrentUser(){
-    return this.playerService.getCurrentUser()
+
+
+  getCurrentUser() {
+    return this.gameService.getCurrentUser()
   }
 
   startGame() {
-    this.gameService.startGame(
-      this.playerService.player1,
-      this.playerService.player2
-    );
+    // let strBoard = '    v  x|        |        |        |        |        |        |XMTHVTMX'
+    // this.chessService.table = this.chessService.setChessToBoard(strBoard, this.gameService.player1)
+    this.gameService.startGame();
   }
 
   backgroundTurn(fromP: Position, toP: Position) {
-    this.turn1 = fromP;
-    this.turn2 = toP;
-    // console.log({ 1: this.turn1 });
-    // console.log({ 2: this.turn1 });
+    this.chessService.fromPosition = fromP;
+    this.chessService.toPosition = toP;
   }
 
   addGrap(toPostion: Position) {
@@ -135,11 +132,56 @@ export class ChessBoardComponent implements OnInit {
     this.historyMoveService.addGrap(this.grap);
   }
 
-  ngOnInit(): void {
-    this.gameService.time.isTimeOut.subscribe((isTimeOut) => {
-      if (isTimeOut == true) {
-        console.log('hetgio')
+  openDialogToCapture(pawn: Chess) {
+    const dialogRef = this.dialog.open(DialogToCaptureComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: { pawn: pawn },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(chessName => {
+      this.chessService.toCapture(pawn, chessName, this.table)
+      this.gameService.changeCurrentPlayer(this.gameService.player1, this.gameService.player2);
+      this.chess = this.table[pawn.position.y][pawn.position.x].chess
+      let isCheckmat = this.chessService.isCheckmat(this.chess, this.table)
+      if (isCheckmat) {
+        this.getCurrentUser().chessControl.isCheckmat = true
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.gameService.time.isTimeOut.subscribe((isTimeOut) => {
+      // this.gameService.endGame()
+      if (isTimeOut == true) {
+        const dialogRef = this.dialog.open(DialogWinComponent, {
+          panelClass: 'dialogWin',
+          width: '42em',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      }
+    });
+    this.chessService.gameOver.subscribe(e => {
+      this.gameService.endGame()
+      if (e.isDraw) {
+        const dialogRef = this.dialog.open(DialogDrawComponent, {
+          panelClass: 'dialogDraw',
+          width: '42em',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      } else {
+        const dialogRef = this.dialog.open(DialogWinComponent, {
+          panelClass: 'dialogWin',
+          width: '42em',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      }
+    })
   }
 }
