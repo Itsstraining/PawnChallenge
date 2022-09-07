@@ -33,7 +33,7 @@ export class AppModule {
         // { path: '/register', method: RequestMethod.POST },
         // { path: '/update', method: RequestMethod.PUT },
         // { path: '/', method: RequestMethod.GET },
-        // { path: '', method: RequestMethod.ALL },
+        { path: '', method: RequestMethod.ALL },
       );
   }
 }
