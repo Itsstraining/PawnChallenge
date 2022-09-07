@@ -19,10 +19,10 @@ export class UserController {
       data: _user,
     });
   }
-  @Get('/all')
-  public async findAll() {
-    return await this.userService.findAll();
-  }
+  // @Get('/all')
+  // public async findAll() {
+  //   return await this.userService.findAll();
+  // }
 
   @Post('/login')
   public async checkUserNameAndPassword(@Body() user: User) {

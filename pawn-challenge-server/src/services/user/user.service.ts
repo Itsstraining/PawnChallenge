@@ -47,32 +47,6 @@ export class UserService {
     }
   }
 
-  async createUser1(user: User) {
-    try {
-      const userCount = await this.userModel.countDocuments({
-        userName: user.userName,
-      });
-      if (userCount > 0) {
-        throw new Error('User not exists');
-      } else {
-        let createUser = new this.userModel(user);
-        createUser.id = createUser._id;
-        createUser.createAt = Date.now().toString();
-        createUser.password = await bcrypt.hash(user.password, 10);
-        await createUser.save();
-        return { messs: `User [${user.id}] is created` };
-      }
-    } catch (error) {
-      if (error.message == 'User not exists') {
-        throw new HttpException('username is exist!', HttpStatus.BAD_REQUEST);
-      } else {
-        throw new HttpException(
-          'INTERNAL_SERVER_ERROR',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
-    }
-  }
 
   async createUser(user: User) {
     try {
