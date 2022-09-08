@@ -3,7 +3,7 @@ import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from
 import { Server } from "http";
 import { Socket } from "net";
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: '*:*' })
 export class ChatGateway {
   @WebSocketServer()
   server: Server;
@@ -11,6 +11,5 @@ export class ChatGateway {
   @SubscribeMessage('message')
   handleMessage(@MessageBody() message: string): void {
     this.server.emit('message', message);
-    IoAdapter
   }
 }

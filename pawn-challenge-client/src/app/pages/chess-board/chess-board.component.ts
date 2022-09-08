@@ -59,6 +59,7 @@ export class ChessBoardComponent implements OnInit {
       // lưu màu nước đi
       this.backgroundTurn(fromP, toPostion);
       // di chuyển lỗi
+      this.connectSocket(fromP, toPostion);
     }
 
     //xoá dots gợi ý
@@ -97,8 +98,6 @@ export class ChessBoardComponent implements OnInit {
 
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
-      this.historyMoveService.sendDataMove(this.grap);
-      console.log(this.grap.grapFrom);
     }
   }
 
@@ -114,6 +113,9 @@ export class ChessBoardComponent implements OnInit {
     return this.playerService.getCurrentUser()
   }
 
+  connectSocket(formP: Position, toP: Position) {
+    this.historyMoveService.sendDataMove(formP, toP);
+  }
   startGame() {
     this.gameService.startGame(
       this.playerService.player1,

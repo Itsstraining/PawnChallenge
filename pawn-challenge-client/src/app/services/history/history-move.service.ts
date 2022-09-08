@@ -48,13 +48,18 @@ export class HistoryMoveService {
     return 'from: ' + grap.grapFrom + ' to: ' + grap.grapTo;
   }
 
-  sendDataMove(grap: Grap) {
-    this.socket.emit('move', grap);
+  sendDataMove(formP: Position, toP: Position) {
+    console.log(this.socket.emit('message', { formP, toP }));
+    return this.socket.emit('message', { formP, toP });
   }
   getDataMove() {
-    return this.socket.fromEvent('move').pipe(map((data) => data));
+    console.log(this.socket.fromEvent('message'));
+    return this.socket.fromEvent('message').pipe(map((data) => data));
   }
-
+  connect() {
+    console.log(this.socket.connect());
+    return this.socket.connect();
+}
   newGrap() {
     let grap: Grap = {
       id: '',
