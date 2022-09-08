@@ -22,7 +22,7 @@ p {
 
 .row {
     display: flex;
-    background-color: rgba(98, 96, 93, 0.4196078431);
+    background-color: rgb(66 63 55 / 60%);
     padding: 1em 0 1em 3em;
     border-radius: 4px;
     margin-left: 0;
@@ -50,9 +50,9 @@ p {
    
 }
 
-
+.row:hover {opacity: 1}
 .background-main{
-    background-color: rgba(68, 55, 20, 0.247);
+    background-color: rgb(26 24 22);
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     font-size: 1em;

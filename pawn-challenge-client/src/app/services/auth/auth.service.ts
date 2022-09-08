@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Auth, signOut } from '@angular/fire/auth';
+import {
+  Auth,
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  user,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { User } from 'src/app/models/user.model';
-import { environment } from 'src/environments/environment';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,10 +18,9 @@ export class AuthService {
   constructor(
     private Http: HttpClient,
     private auth: Auth,
-    private router: Router
-  ) {
-
-  }
+    private router: Router,
+    private afAuth: AngularFireAuth
+  ) {}
   public isUserLoggedIn: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   getCurrentUser() {
@@ -32,6 +35,7 @@ export class AuthService {
     });
   }
   login() {
+    // console.log(this.getIdToken());
     return from(
       new Promise<string>(async (resolve, reject) => {
         try {
@@ -40,7 +44,7 @@ export class AuthService {
             new GoogleAuthProvider()
           );
           let idToken = await credential.user.getIdToken();
-
+          console.log(idToken);
           resolve(idToken);
         } catch (error) {
           reject('login error');
@@ -48,30 +52,66 @@ export class AuthService {
       })
     );
   }
-  logOut() {
+  async logOut() {
     return from(
       new Promise<string>(async (resolve, reject) => {
         try {
           await signOut(this.auth);
-          resolve('logout success');
-          this.router.navigate(['/chessBoard']);
-        } catch (error) {
-          reject('logout error');
+          resolve('log out successfull');
+        } catch {
+          reject('Can not login with Google');
         }
       })
     );
   }
-  register(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}user/register`, user);
+  getIdToken() {
+    return from(
+      new Promise<string>(async (resolve, reject) => {
+        try {
+          onAuthStateChanged(this.auth, async (user) => {
+            if (user) {
+              let user = getAuth().currentUser;
+              let idToken = await user!.getIdToken(true);
+              console.log(idToken);
+              resolve(idToken);
+            } else {
+              resolve('');
+            }
+          });
+        } catch (err) {
+          reject(err);
+        }
+      })
+    );
   }
-  loginWithUserNameAndPassword(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}user/login`, user);
+
+  register(email: string, password: string): void {
+    this.afAuth.createUserWithEmailAndPassword(email, password).then(
+      () => {
+        alert('Register Successfull!!!');
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        alert(err.message);
+        this.router.navigate(['/']);
+      }
+    );
   }
-  getUserById(id: string): Observable<User[]> {
-    return this.Http.get<User[]>(`${environment.endPoint}user/?id=${id}`);
-  }
-  updateUserById(id: string, user: User): Observable<User[]> {
-    return this.Http.put<User[]>(`${environment.endPoint}user/?id=${id}`, user);
+
+  loginWithAccount(email: string, password: string) {
+    console.log(email, password);
+    this.getIdToken();
+    // this.afAuth.idToken.subscribe((token) => {
+    // });
+    this.afAuth.signInWithEmailAndPassword(email, password).then(
+      () => {
+        localStorage.setItem('token', 'true');
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        alert(err.message);
+        this.router.navigate(['/']);
+      }
+    );
   }
 }
-
