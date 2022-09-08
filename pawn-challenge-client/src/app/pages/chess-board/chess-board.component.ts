@@ -99,7 +99,6 @@ export class ChessBoardComponent implements OnInit {
 
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
-      this.historyMoveService.sendDataMove(this.grap);
     }
   }
 
@@ -110,9 +109,6 @@ export class ChessBoardComponent implements OnInit {
     }
     return false
   }
-
-
-
   getCurrentUser() {
     return this.gameService.getCurrentUser()
   }

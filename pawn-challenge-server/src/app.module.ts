@@ -17,7 +17,7 @@ import { AuthService } from './services/auth/auth.service';
 @Module({
   imports: [
     MongooseModule.forRoot(env.environment.connectionString),
-    UserModule
+    UserModule,
   ],
 
   controllers: [AppController],
@@ -33,13 +33,15 @@ export class AppModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
-      // { path: '/all', method: RequestMethod.GET },
-      // { path: '/login', method: RequestMethod.POST },
-      // { path: '/login/google', method: RequestMethod.POST },
-      // { path: '/register', method: RequestMethod.POST },
-      // { path: '/update', method: RequestMethod.PUT },
-      // { path: '/', method: RequestMethod.GET },
-      // { path: '', method: RequestMethod.ALL },
-    );
+        // { path: '/all', method: RequestMethod.GET },
+        // { path: '/login', method: RequestMethod.POST },
+        // { path: '/login/google', method: RequestMethod.POST },
+        // { path: '/register', method: RequestMethod.POST },
+        // { path: '/update', method: RequestMethod.PUT },
+        // { path: '/', method: RequestMethod.GET },
+        // { path: '*', method: RequestMethod.ALL },
+        
+      );
+      
   }
 }
