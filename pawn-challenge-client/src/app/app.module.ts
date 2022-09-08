@@ -44,7 +44,7 @@ import { OnlineComponent } from './pages/home/components/play-chesss/online/onli
 import { RegisterComponent } from './pages/home/components/register/register.component';
 
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 // service
 
 

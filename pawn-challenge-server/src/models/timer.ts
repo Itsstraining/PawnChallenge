@@ -1,4 +1,4 @@
-import { ReplaySubject, Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 export class Timer {
   currentTime = 0

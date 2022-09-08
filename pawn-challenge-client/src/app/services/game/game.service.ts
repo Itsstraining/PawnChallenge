@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 import { Cell, Chess } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
 import { Timer } from 'src/app/models/timer';
@@ -21,16 +22,21 @@ export class GameService {
     this.player2 = this.newPlayer('user2', 'Phat123', 'a5', 'vhtmxc', false)
   }
 
-  startGame(player1: Player, player2: Player) {
+  startGame() {
     this.isGameStart = true;
-
-    player1.chessControl.time.currentTime = 60 * 15
-    player2.chessControl.time.currentTime = 60 * 15
+    this.player1.chessControl.time.currentTime = 60 * 15
+    this.player2.chessControl.time.currentTime = 60 * 15
     this.time.currentTime = this.timePerTurn
-    this.currentUserIDControll = player1.id
+    this.currentUserIDControll = this.player1.id
 
     this.time.startCountDown()
-    player1.chessControl.time.startCountDown()
+    this.player1.chessControl.time.startCountDown()
+  }
+  endGame() {
+    this.player1.chessControl.time.stop()
+    this.player2.chessControl.time.stop()
+    this.time.stop()
+    this.isGameStart = false
   }
   canPickChess(userChessControll: string, chessName: string) {
     if (this.isGameStart && this.isAlly(userChessControll, chessName) && userChessControll.includes(chessName)) {

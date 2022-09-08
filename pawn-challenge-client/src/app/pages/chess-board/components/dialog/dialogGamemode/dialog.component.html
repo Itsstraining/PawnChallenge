@@ -1,0 +1,38 @@
+<div style="padding:24px">
+  <h2 mat-dialog-title class="title">Play Online Chess</h2>
+<h3 mat-dialog-title class="subtitle">Choose game mode you want</h3>
+<div>
+  <mat-dialog-content class="mat-typography">
+  <div class="four-levels">
+    <label *ngFor="let item of arr; let i = index" class="row-select click" for="new" class="four-level">
+      <div (click)="changeIndexSelect(i)" style="width:100%;" style="position: relative;">
+        <div *ngIf="indexSelect == i" class="br-chess"></div>
+        <img class="img-chess" src="{{item.img}}" alt="pawn">
+        <span class="EachLevel">
+          {{item.title}}</span>
+      </div>
+    </label>
+
+    <!-- <label for="beginner" class="four-level">
+      <div style="width:100%;">
+        <img src="../../../assets/ImageGamemode-Win-Lose/knight.png" alt="knight">
+        <span class="EachLevel">
+          With BOT</span>
+      </div>
+    </label>
+    <label for="intermediate" class="four-level">
+      <div style="width:100%;">
+        <img src="../../../assets/ImageGamemode-Win-Lose/rook.png" alt="rook">
+        <span class="EachLevel">
+          Online with new friend</span>
+      </div>
+    </label> -->
+  </div>
+</mat-dialog-content>
+</div>
+
+
+<mat-dialog-actions style="margin:0 auto;width: 100%;display: flex; flex-direction: column;">
+  <button (click)="play()" type="button" class="btn buttonSignUP" style="color: white;">PLAY</button>
+</mat-dialog-actions>
+</div>
