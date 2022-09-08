@@ -16,7 +16,8 @@ export class HistoryMoveService {
 
   constructor(
     private gameSerivce: GameService,
-    private socket:Socket) {}
+    // private socket:Socket
+    ) {}
   createGrapPosition() {
     //x
     this.grapPositionX.set(0, 'a');
@@ -48,18 +49,18 @@ export class HistoryMoveService {
     return 'from: ' + grap.grapFrom + ' to: ' + grap.grapTo;
   }
 
-  sendDataMove(formP: Position, toP: Position) {
-    console.log(this.socket.emit('message', { formP, toP }));
-    return this.socket.emit('message', { formP, toP });
-  }
-  getDataMove() {
-    console.log(this.socket.fromEvent('message'));
-    return this.socket.fromEvent('message').pipe(map((data) => data));
-  }
-  connect() {
-    console.log(this.socket.connect());
-    return this.socket.connect();
-}
+//   sendDataMove(formP: Position, toP: Position) {
+//     console.log(this.socket.emit('message', { formP, toP }));
+//     return this.socket.emit('message', { formP, toP });
+//   }
+//   getDataMove() {
+//     console.log(this.socket.fromEvent('message'));
+//     return this.socket.fromEvent('message').pipe(map((data) => data));
+//   }
+//   connect() {
+//     console.log(this.socket.connect());
+//     return this.socket.connect();
+// }
   newGrap() {
     let grap: Grap = {
       id: '',

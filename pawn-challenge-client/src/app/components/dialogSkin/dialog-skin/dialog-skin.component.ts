@@ -9,7 +9,7 @@ import { ChessService } from 'src/app/services/chess/chess.service';
   styleUrls: ['./dialog-skin.component.scss']
 },)
 export class DialogSkinComponent implements OnInit {
-  table: Cell[][];
+  table: Cell[][] = [];
   Pieces: any[];
   Board: any[];
   indexPiece = 26;
@@ -19,8 +19,7 @@ export class DialogSkinComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogSkinComponent>) {
     this.indexPiece= parseInt(localStorage.getItem('indexPiece')??'26')
     this.indexBoard = parseInt(localStorage.getItem('indexBoard')??'10')
-    this.table = this.chessService.createBoard()
-    this.chessService.setChessToBoard1('XMTHVTMX|CCCCCCCC|        |        |        |        |        |        ', this.table)
+    this.table = this.chessService.setChessToBoard1('XMTHVTMX|CCCCCCCC|        |        |        |        |        |        ')
     this.Pieces = [
       {
         name: '3D-ChessKid',

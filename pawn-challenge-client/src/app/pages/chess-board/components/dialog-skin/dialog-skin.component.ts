@@ -21,8 +21,7 @@ export class DialogSkinComponent implements OnInit {
     ) {
     this.indexPiece= parseInt(localStorage.getItem('indexPiece')??'26')
     this.indexBoard = parseInt(localStorage.getItem('indexBoard')??'10')
-    this.table = this.chessService.createBoard()
-    this.chessService.setChessToBoard1('XMTHVTMX|CCCCCCCC|        |        |        |        |        |        ', this.table)
+    this.table =this.chessService.setChessToBoard1('xmthvtmx|cccccccc|        |        |        |        |        |        ')
 
   }
   showPlaySound: boolean = false;

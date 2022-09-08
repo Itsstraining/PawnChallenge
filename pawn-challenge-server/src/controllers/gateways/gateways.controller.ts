@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { ChessGateway } from 'src/socketIO/Chess/chess.gateway';
+import { ChatGateway } from '../../socketIO/Chat/chat.gateway';
 
 @Controller('gateways')
 export class GatewaysController {
-    constructor(private chessGateway: ChessGateway) {}
+    constructor(private chessGateway: ChatGateway) {}
 
     @Get('/chess')
     public async findAll() {
