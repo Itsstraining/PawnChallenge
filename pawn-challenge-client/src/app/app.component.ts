@@ -1,7 +1,6 @@
 import { AuthService } from './services/auth/auth.service';
-import { Component } from '@angular/core';
-import * as AuthActions from './RxJs/actions/auth.action';
-import { Auth } from './RxJs/states/auth.state';
+import { Component, OnInit } from '@angular/core';
+import * as authAction$ from './RxJs/actions/auth.action';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './pages/home/login/login.component';
@@ -12,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { RegisterComponent } from './pages/home/components/register/register.component';
+import { AuthState } from './RxJs/states/auth.state';
+import { onAuthStateChanged } from '@angular/fire/auth';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,7 +26,7 @@ export class AppComponent {
   email: string = '';
   password: string = '';
   constructor(
-    private store: Store<{ auth: Auth }>,
+    private store: Store<{ auth: AuthState }>,
     private AuthService: AuthService,
     public dialog: MatDialog,
     private Http: HttpClient
@@ -45,26 +46,40 @@ export class AppComponent {
           (user) =>
             (this.displayName =
               user.displayName != null ? user.displayName : user.email)
-        );
+
+        );console.log(this.displayName)
       } else {
         this.displayName = 'null';
       }
     });
   }
+  ngOnInit(): void {
+    console.log(this.displayName)
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.idToken$.subscribe((value) => {
+          this.token = value;
+          this.store.dispatch(authAction$.createUser({ idToken: this.token }));
+        });
+      }
+    });
+  }
 
+  token: string = '';
   idToken$ = this.store.select((state) => state.auth.idToken);
   logOut() {
-    this.store.dispatch(AuthActions.logout());
+    this.store.dispatch(authAction$.logOut());
+    this.router.navigate(['/']);
     console.log('logout');
   }
 
   openDialogLogin() {
     const dialogRef = this.dialog.open(LoginComponent, {
-      panelClass: 'dialogLogin', 
+      panelClass: 'dialogLogin',
       width: 'auto',
       height: 'auto',
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }

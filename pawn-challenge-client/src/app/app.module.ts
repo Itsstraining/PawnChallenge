@@ -32,18 +32,16 @@ import { LoginComponent } from './pages/home/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authEffects } from './RxJs/effects/auth.effect';
-import { AuthReducer } from './RxJs/reudcers/auth.reducer';
 import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.component';
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
 import { HttpClientModule } from '@angular/common/http';
-import { registerEffects } from './RxJs/effects/register.effect';
-import { RegisterReducer } from './RxJs/reudcers/register.reducer';
-import { PlayChesssComponent } from './pages/home/components/play-chesss/play-chesss.component';
-import { LearnComponent } from './pages/home/components/learn/learn.component';
-import { OnlineComponent } from './pages/home/components/play-chesss/online/online.component';
-import { RegisterComponent } from './pages/home/components/register/register.component';
-
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { RegisterComponent } from './pages/home/register/register.component';
+import { OnlineComponent } from './pages/home/components/play-chesss/online/online.component';
+import { LearnComponent } from './pages/home/components/learn/learn.component';
+import { PlayChesssComponent } from './pages/home/components/play-chesss/play-chesss.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { authReducer } from './RxJs/reudcers/auth.reducer';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 // service
 
@@ -73,12 +71,13 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FontAwesomeModule,
     FormsModule,
     StoreModule.forRoot({
-      auth: AuthReducer,
-      register: RegisterReducer,
-    }), 
-    EffectsModule.forRoot([authEffects, registerEffects]),
+      auth: authReducer,
+    }, {}),
+    EffectsModule.forRoot([authEffects,]),
     HttpClientModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    AngularFireModule.initializeApp(environment.firebase),
+
   ],
   providers: [
   ],

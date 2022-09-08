@@ -17,7 +17,7 @@ import { ChessGateway } from './socketIO/Chess/chess.gateway';
 @Module({
   imports: [
     MongooseModule.forRoot(env.environment.connectionString),
-    UserModule
+    UserModule,
   ],
 
   controllers: [AppController],
@@ -33,6 +33,18 @@ export class AppModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
+<<<<<<< HEAD
+        // { path: '/all', method: RequestMethod.GET },
+        // { path: '/login', method: RequestMethod.POST },
+        // { path: '/login/google', method: RequestMethod.POST },
+        // { path: '/register', method: RequestMethod.POST },
+        // { path: '/update', method: RequestMethod.PUT },
+        // { path: '/', method: RequestMethod.GET },
+        // { path: '*', method: RequestMethod.ALL },
+        
+      );
+      
+=======
       // { path: '/all', method: RequestMethod.GET },
       // { path: '/login', method: RequestMethod.POST },
       // { path: '/login/google', method: RequestMethod.POST },
@@ -41,5 +53,6 @@ export class AppModule {
       // { path: '/', method: RequestMethod.GET },
       // { path: '', method: RequestMethod.ALL },
     );
+>>>>>>> 5f7b702d256cfa424ae7b4af7319f731483db0b8
   }
 }

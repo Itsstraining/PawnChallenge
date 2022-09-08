@@ -2,21 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RegisterRoutingModule } from './register-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from 'src/app/material.module';
-
+import { RegisterComponent } from './register.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-
+    RegisterComponent
   ],
   imports: [
     CommonModule,
     RegisterRoutingModule,
-    MaterialModule,
     FormsModule,
-    ReactiveFormsModule
   ]
 })
 export class RegisterModule { }

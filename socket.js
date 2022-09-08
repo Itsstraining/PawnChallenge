@@ -3,7 +3,7 @@ const message = document.getElementById("message");
 const messages = document.getElementById("messages");
 
 const hanldeSubmitNewMessage = () => {
-//   console.log("submit");
+   console.log(socket.emit('message', { data: message.value }));
   socket.emit('message', { data: message.value });
 };
 

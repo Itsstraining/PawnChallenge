@@ -10,10 +10,7 @@ const routes: Routes = [
   { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chess/learn-chesss.module').then(m => m.LearnChesssModule) },
   { path: 'dialog-test', loadChildren: () => import('./pages/dialog-test/dialog-test.module').then(m => m.DialogTestModule) },
   { path: 'rule', loadChildren: () => import('./pages/rule/rule.module').then(m => m.RuleModule) },
-  { path: 'play-chesss', loadChildren: () => import('./pages/home/components/play-chesss/play-chesss.module').then(m => m.PlayChesssModule) },
-  { path: 'learn', loadChildren: () => import('./pages/home/components/learn/learn.module').then(m => m.LearnModule) },
-  { path: 'online', loadChildren: () => import('./pages/home/components/play-chesss/online/online.module').then(m => m.OnlineModule) },
-  { path: 'register', loadChildren: () => import('./pages/home/components/register/register.module').then(m => m.RegisterModule) },
+  { path: 'register', loadChildren: () => import('./pages/home/register/register.module').then(m => m.RegisterModule) },
 ];
 
 @NgModule({
