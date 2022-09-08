@@ -9,7 +9,7 @@
             <div style="width:196%">
                 <div class="input-group-component">
                     <input class="input-component input-group-space-left login-input" type="email" id="username"
-                        name="username" placeholder="Username or Email">
+                        name="username" placeholder="Username or Email" [(ngModel)]="email">
                     <span class="icon-font-chess input-group-icon input-group-left "><i
                             style="width: 3em;font-size: 1.5em;" class='fa fa-user'></i></span>
                 </div>
@@ -25,7 +25,8 @@
                 </div> -->
                 <div class="input-group-component">
                     <div class="input-box">
-                        <input class="input-component input-group-space-left login-input" placeholder="Password"  type="password" spellcheck="false" required>
+                      <input class="input-component input-group-space-left login-input" type="password" id="password"
+                      name="username" placeholder="Enter your Password" [(ngModel)]="password">
                         <!-- <i class="uil uil-eye-slash"></i> -->
                         <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;" class='fa fa-lock'></i></span>
                     </div>
@@ -43,9 +44,7 @@
                             toggle.classList.replace("uil-eye", "uil-eye-slash");
                             }
                         })
-
                     </script>
-
                 </div>
             </div>
             <div class="authentication-login-options">
@@ -57,7 +56,7 @@
             </div>
 
             <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large"
-                (click)="registerAccount()">Log In</button>
+              type="submit"  (click)="loginWithAccount()">Log In</button>
         </form>
 
         <div class="authentication-social-signin-v5-component">
@@ -74,14 +73,14 @@
                 </div>
             </div>
         </div>
-        <div class="input-group-component form-group">
+        <!-- <div class="input-group-component form-group">
           <input class="input-component input-group-space-left login-input" type="userName" id="userName" name="userName"
             placeholder="Username" [(ngModel)]="user.userName">
           <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;"
               class='fa fa-user'></i></span>
-        </div>
+        </div> -->
 
-        <div class="input-group-component form-group">
+        <!-- <div class="input-group-component form-group">
           <input class="input-component input-group-space-left login-input" type="password" id="password"
             name="password" placeholder="Password" [(ngModel)]="user.password">
           <span class="icon-font-chess input-group-icon input-group-left "><i style="width: 3em;font-size: 1.5em;"
@@ -92,19 +91,19 @@
             </span>
           </button>
         </div>
-      </div>
-      <div class="authentication-login-options">
+      </div> -->
+      <!-- <div class="authentication-login-options">
         <div class="form-checkbox-component">
           <input type="checkbox" id="remember me" name="remember me" class="form-checkbox-checkbox">
           <label class="form-checkbox-label">Remember me</label>
         </div>
         <p class="authentication-login-forgot  authentication-login-forgot-o">Forgot Password?</p>
-      </div>
+      </div> -->
 
-      <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large" type="submit"
-      (click)="register()"  > Log In</button>
+      <!-- <button class="login-submit-v5 ui_v5-button-component ui_v5-button-primary ui_v5-button-large" type="submit"
+      (click)="register()"  > Log In</button> -->
 
-    <div class="authentication-social-signin-v5-component">
+    <!-- <div class="authentication-social-signin-v5-component">
       <div class="authentication-social-signin-v5-separator">
         <span></span>
         <span class="authentication-social-signin-v5-paragraph ">OR</span>
@@ -116,6 +115,6 @@
           <button style="border: 0;"> <span style="font-size: 1.3em;">Log in with Google</span></button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 <!-- <h1>{{idToken$|async}}</h1> -->

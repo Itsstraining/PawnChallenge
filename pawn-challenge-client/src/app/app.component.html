@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div style="position: fixed; background: #262421; height: 100vh; overflow: auto">
       <div class="imgDiv">
-        <a href=""><img src="../assets/chess/Logo2.png" class="img"  alt="" /></a>
+        <a href=""><img src="../assets/chess/Logo2.png" class="img" alt="" /></a>
       </div>
       <ul>
         <li>
@@ -35,7 +35,7 @@
             <p>Social</p>
           </a>
         </li>
-        <li >
+        <li>
           <a href="dialog-test"><i class="Icon fi fi-ss-menu-dots fa-fw mr-3"></i>
             <p>More</p>
           </a>
@@ -43,18 +43,25 @@
 
         <li>
           <div>
-            <div (click)="openDialogLogin()"  class="button-footer-title" *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span style="font-size: 1em;margin-left: 2.8em;">Login </span> </div>
-            <div style="margin-top: 4em;"><button class="button-footer-title-2"  *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up </span></button></div>
-           <ng-template #elseBlock>
-            <div class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;"> Logout</span></div>
+            <div (click)="openDialogLogin()" class="button-footer-title"
+              *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span
+                style="font-size: 1em;margin-left: 2.8em;">Login </span>
+            </div>
+            <div (click)="openDialogRegister()" style="margin-top: 4em;">
+              <button class="button-footer-title-2"
+                *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up
+                </span></button></div>
+            <ng-template #elseBlock>
+              <div class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;">
+                  Logout</span></div>
 
-           </ng-template>
+            </ng-template>
 
-          <!-- <p>{{idToken$|async}}</p> -->
-          <!-- <br>
+            <!-- <p>{{idToken$|async}}</p> -->
+            <!-- <br>
           <p>{{displayName}}</p>
           <img src="{{photourl}}" alt=""> -->
-          <!-- <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button> -->
+            <!-- <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button> -->
           </div>
         </li>
       </ul>
@@ -65,11 +72,10 @@
   <div class="main_content1" id="main">
     <div class="info">
       <!-- <div> -->
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
       <!-- </div> -->
     </div>
   </div>
 
-   <!-- <div style="position:fixed;"><img class="image-chess-board" src="https://www.chess.com/bundles/web/images/offline-play/standardboard.1d6f9426.png" alt="" style="height:93%;"></div> -->
+  <!-- <div style="position:fixed;"><img class="image-chess-board" src="https://www.chess.com/bundles/web/images/offline-play/standardboard.1d6f9426.png" alt="" style="height:93%;"></div> -->
 </div>
-

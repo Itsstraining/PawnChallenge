@@ -33,7 +33,7 @@
 .login-component {
     max-width: 100%;
     overflow: hidden;
-    height: 64em;
+    height: auto;
     width: 48em;
 }
 
@@ -243,7 +243,7 @@
     height: 3em;
     justify-content: center;
     margin: -1.2em 0 2em;
-    
+
 }
 
 .authentication-social-signin-v5-separator>:first-child, .authentication-social-signin-v5-separator>:last-child {
