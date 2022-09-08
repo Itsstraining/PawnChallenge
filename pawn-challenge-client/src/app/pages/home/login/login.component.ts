@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import * as AuthActions from '../../../RxJs/actions/auth.action';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
+import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthState } from 'src/app/RxJs/states/auth.state';
 
