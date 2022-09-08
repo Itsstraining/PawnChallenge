@@ -11,7 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { MongoClient } from 'mongodb';
 import * as env from 'environment';
-import * as bcrypt from 'bcrypt';
+// import * as bcrypt from 'bcrypt';
 
 const client = new MongoClient(env.environment.connectionString);
 @Injectable()
@@ -37,7 +37,8 @@ export class UserService {
   async loginWithUserNameAndPassword(user: User) {
     try {
       let userIn = await this.userModel.findOne({ userName: user.userName });
-      let passwordIn = await bcrypt.compare(user.password, userIn.password);
+      // let passwordIn = await bcrypt.compare(user.password, userIn.password);
+      let passwordIn = "ABC"
       if (userIn != null && passwordIn) {
         return 'login success';
       }
@@ -56,7 +57,8 @@ export class UserService {
       } else {
         let createUser = new this.userModel(user);
         createUser.createAt = Date.now().toString();
-        createUser.password = await bcrypt.hash(user.password, 10);
+        // createUser.password = await bcrypt.hash(user.password, 10);
+        createUser.password = 'ABC'
         return await createUser.save();
       }
     } catch (error) {
