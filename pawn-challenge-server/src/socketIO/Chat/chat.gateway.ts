@@ -3,14 +3,29 @@ import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from
 import { Server } from "http";
 import { Socket } from "net";
 
+@WebSocketGateway({ cors: '*: *' })
 @WebSocketGateway()
 export class ChatGateway {
   @WebSocketServer()
   server: Server;
+  str = ''
+  _userArray = [
+    
+  ]
+  
 
-  @SubscribeMessage('message')
+  @SubscribeMessage('connectMess')
+  handleConnect(@MessageBody() message: string): void {
+    this.server.emit('message', message);
+    // IoAdapter
+  }
+
+  @SubscribeMessage('message1')
   handleMessage(@MessageBody() message: string): void {
     this.server.emit('message', message);
-    IoAdapter
+    console.log(message)
+    // IoAdapter
   }
+
+
 }

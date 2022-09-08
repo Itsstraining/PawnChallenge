@@ -1,4 +1,10 @@
 <div class="content-chess-app">
+  <div class="col-index">
+    <div *ngFor="let item of [8,7,6,5,4,3,2,1]" class="item">
+      <p>{{item}}</p>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-sm">
       <div class="containers"
@@ -17,8 +23,8 @@
             <div *ngIf="
             table[i][j].chess.name.toLowerCase() == 'v' &&
             gameService.getCurrentUser().chessControl.isCheckmat &&
-            chessService.isAlly(gameService.getCurrentUser().chessControl.chessNameCT, table[i][j].chess.name)" 
-            class="checkmatImg">
+            chessService.isAlly(gameService.getCurrentUser().chessControl.chessNameCT, table[i][j].chess.name)"
+              class="checkmatImg">
               <svg width="194" height="194" viewBox="0 0 194 194" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M97 187C146.706 187 187 146.706 187 97C187 47.2944 146.706 7 97 7C47.2944 7 7 47.2944 7 97C7 146.706 47.2944 187 97 187Z"
@@ -35,9 +41,14 @@
               [ngClass]="{'dots': !table[i][j].hasDotban, 'bans' : table[i][j].hasDotban }"></div>
           </div>
         </div>
+
+        <div class="row-index">
+          <div *ngFor="let item of ['a','b','c','d','e','f','g','h']" class="item">
+            <p>{{item.toUpperCase()}}</p>
+          </div>
+        </div>
       </div>
     </div>
-
 
   </div>
 

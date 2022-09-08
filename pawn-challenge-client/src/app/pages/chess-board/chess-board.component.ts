@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component'
 import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.component';
 import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
+import { SocketService } from 'src/app/services/socket/socket.service';
 
 @Component({
   selector: 'app-chess-board',
@@ -30,6 +31,8 @@ export class ChessBoardComponent implements OnInit {
     public skinChess: ChessSkinService,
     private historyMoveService: HistoryMoveService,
     public dialog: MatDialog,
+    private socketService: SocketService,
+
   ) {
     this.grap = this.historyMoveService.newGrap();
   }
@@ -97,7 +100,6 @@ export class ChessBoardComponent implements OnInit {
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
       this.historyMoveService.sendDataMove(this.grap);
-      console.log(this.grap.grapFrom);
     }
   }
 
@@ -133,7 +135,6 @@ export class ChessBoardComponent implements OnInit {
     this.grap.id = Date.now().toString();
     this.historyMoveService.addGrap(this.grap);
     this.historyMoveService.formatPosition(this.grap);
-    console.log(this.historyMoveService.formatPosition(this.grap));
   }
 
   openDialogToCapture(pawn: Chess) {

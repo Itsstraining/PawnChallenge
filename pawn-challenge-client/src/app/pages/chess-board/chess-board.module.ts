@@ -15,6 +15,7 @@ import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-
 import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.component';
 import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
 import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
+import { DialogComponent } from './components/dialog/dialogGamemode/dialog.component';
 @NgModule({
   declarations: [
     ChessBoardComponent,
@@ -23,7 +24,8 @@ import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose
     DialogToCaptureComponent,
     DialogWinComponent,
     DialogDrawComponent,
-    DialogLoseComponent
+    DialogLoseComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

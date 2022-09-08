@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GameService } from 'src/app/services/game/game.service';
 import { DialogSkinComponent } from '../dialog-skin/dialog-skin.component'
+import { DialogComponent } from '../dialog/dialogGamemode/dialog.component';
 
 @Component({
   selector: 'app-graps',
@@ -10,7 +11,7 @@ import { DialogSkinComponent } from '../dialog-skin/dialog-skin.component'
   styleUrls: ['./graps.component.scss']
 })
 export class GrapsComponent implements OnInit {
-  constructor(public dialog: MatDialog,public hs:HistoryMoveService,public playerService: GameService, public gameService: GameService) {
+  constructor(public dialog: MatDialog, public hs: HistoryMoveService, public playerService: GameService, public gameService: GameService) {
   }
 
   ngOnInit(): void {
@@ -22,6 +23,16 @@ export class GrapsComponent implements OnInit {
       height: 'auto',
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogNewGame() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: 'auto',
+      height: 'auto',
+    });
+    dialogRef.afterClosed().subscribe((result: String) => {
       console.log(`Dialog result: ${result}`);
     });
   }

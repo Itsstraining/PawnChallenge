@@ -11,7 +11,8 @@ import { AppService } from './app.service';
 import * as env from 'environment'
 import { UserModule } from './modules/user.module';
 import { AuthService } from './services/auth/auth.service';
-import { ChatGateway } from './socketIO/Gateways/chat.gateway';
+import { ChatGateway } from './socketIO/Chat/chat.gateway';
+import { ChessGateway } from './socketIO/Chess/chess.gateway';
 
 @Module({
   imports: [
@@ -20,20 +21,25 @@ import { ChatGateway } from './socketIO/Gateways/chat.gateway';
   ],
 
   controllers: [AppController],
-  providers: [AppService, AuthService, ChatGateway],
+  providers: [
+    AppService,
+    AuthService,
+    ChatGateway,
+    ChessGateway
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
-        // { path: '/all', method: RequestMethod.GET },
-        // { path: '/login', method: RequestMethod.POST },
-        // { path: '/login/google', method: RequestMethod.POST },
-        // { path: '/register', method: RequestMethod.POST },
-        // { path: '/update', method: RequestMethod.PUT },
-        // { path: '/', method: RequestMethod.GET },
-        { path: '', method: RequestMethod.ALL },
-      );
+      // { path: '/all', method: RequestMethod.GET },
+      // { path: '/login', method: RequestMethod.POST },
+      // { path: '/login/google', method: RequestMethod.POST },
+      // { path: '/register', method: RequestMethod.POST },
+      // { path: '/update', method: RequestMethod.PUT },
+      // { path: '/', method: RequestMethod.GET },
+      // { path: '', method: RequestMethod.ALL },
+    );
   }
 }

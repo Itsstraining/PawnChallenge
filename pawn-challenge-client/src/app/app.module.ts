@@ -39,7 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerEffects } from './RxJs/effects/register.effect';
 import { RegisterReducer } from './RxJs/reudcers/register.reducer';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 // service
 
 

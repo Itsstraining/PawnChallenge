@@ -19,8 +19,8 @@ export class ChessService {
 
   constructor(private gameService: GameService, private shareService: ShareService) {
     this.createChessAccess();
-    let strBoard = '    v   |        |        |        |        |        |        |XMTHVTMX'
-    // let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
+    // let strBoard = '    v   |        |        |        |        |        |        |XMTHVTMX'
+    let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
     this.table = this.setChessToBoard(strBoard, this.gameService.player1)
     this.createVectorMove();
     this.gameOver = new ReplaySubject(3);
