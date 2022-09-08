@@ -5,129 +5,73 @@
         <a href=""><img src="../assets/chess/Logo2.png" class="img" alt="" /></a>
       </div>
       <ul>
-        <li>
-          <a href="chessBoard"><i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-            <p>Play</p>
-          </a>
-        </li>
-        <li>
-          <a href="home"><i class="Icon fi fi-ss-puzzle-piece fa-fw mr-3"></i>
-            <p>Puzzles</p>
-          </a>
-        </li>
-        <li>
-          <a href="learn-chesss"><i class="Icon fi fi-sr-graduation-cap fa-fw mr-3"></i>
-            <p>Learn</p>
-          </a>
-        </li>
-        <li>
-          <a href="#"><i class="Icon fi fi-sr-eye fa-fw mr-3"></i>
-            <p>Watch</p>
-          </a>
-        </li>
-        <li>
-          <a href="#"><i class="Icon fi fi-rr-ballot fa-fw mr-3"></i>
-            <p>News</p>
-          </a>
-        </li>
-        <li>
-          <a href="#"><i class="Icon fi fi-ss-users fa-fw mr-3"></i>
-            <p>Social</p>
-          </a>
-        </li>
-        <li>
-          <a href="dialog-test"><i class="Icon fi fi-ss-menu-dots fa-fw mr-3"></i>
-            <p>More</p>
-          </a>
-        </li>
+        <ul>
+          <li>
+            <a href="chessBoard"><i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
+              <p>Play</p>
+            </a>
+          </li>
+          <li>
+            <a href="home"><i class="Icon fi fi-ss-puzzle-piece fa-fw mr-3"></i>
+              <p>Puzzles</p>
+            </a>
+          </li>
+          <li>
+            <a href="learn-chesss"><i class="Icon fi fi-sr-graduation-cap fa-fw mr-3"></i>
+              <p>Learn</p>
+            </a>
+          </li>
+          <li>
+            <a href="#"><i class="Icon fi fi-sr-eye fa-fw mr-3"></i>
+              <p>Watch</p>
+            </a>
+          </li>
+          <li>
+            <a href="#"><i class="Icon fi fi-rr-ballot fa-fw mr-3"></i>
+              <p>News</p>
+            </a>
+          </li>
+          <li>
+            <a href="#"><i class="Icon fi fi-ss-users fa-fw mr-3"></i>
+              <p>Social</p>
+            </a>
+          </li>
+          <li>
+            <a href="dialog-test"><i class="Icon fi fi-ss-menu-dots fa-fw mr-3"></i>
+              <p>More</p>
+            </a>
+          </li>
 
-   
-      <div class="imgDiv">
-        <a href=""><img src="../assets/chess/Logo2.png" class="img" alt="" /></a>
-      </div>
-      
-          <ul>
-            <li>
-              <a href="chessBoard"><i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-                <p>Play</p>
-              </a>
-            </li>
-            <li>
-              <a href="home"><i class="Icon fi fi-ss-puzzle-piece fa-fw mr-3"></i>
-                <p>Puzzles</p>
-              </a>
-            </li>
-            <li>
-              <a href="learn-chesss"><i class="Icon fi fi-sr-graduation-cap fa-fw mr-3"></i>
-                <p>Learn</p>
-              </a>
-            </li>
-            <li>
-              <a href="#"><i class="Icon fi fi-sr-eye fa-fw mr-3"></i>
-                <p>Watch</p>
-              </a>
-            </li>
-            <li>
-              <a href="#"><i class="Icon fi fi-rr-ballot fa-fw mr-3"></i>
-                <p>News</p>
-              </a>
-            </li>
-            <li>
-              <a href="#"><i class="Icon fi fi-ss-users fa-fw mr-3"></i>
-                <p>Social</p>
-              </a>
-            </li>
-            <li>
-              <a href="dialog-test"><i class="Icon fi fi-ss-menu-dots fa-fw mr-3"></i>
-                <p>More</p>
-              </a>
-            </li>
-
-            <li>
-
-              <div>
-                <div (click)="openDialogLogin()" class="button-footer-title"
-                  *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span
-                    style="font-size: 1em;margin-left: 2.8em;">Login </span> </div>
-                <div (click)="openDialogRegister()" style="margin-top: 4em;"><button (click)=" registerAccount()"
-                    class="button-footer-title-2" *ngIf="!(idToken$ | async) as idToken;"><span
-                      style="font-size: 1em;margin-left: 2.5em;">Sign Up
-                    </span></button></div>
-                <ng-template #elseBlock>
-                  <div class="button-footer-title-2" (click)="logOut()"><span
-                      style="font-size: 1em;margin-left: 2.8em;">
-                      Logout</span></div>
-
-                </ng-template>
-
-                <!-- <p>{{idToken$|async}}</p> -->
-                <!-- <br>
-          <div>
-            <div (click)="openDialogLogin()" class="button-footer-title"
-              *ngIf="!(idToken$ | async) as idToken; else elseBlock"><span
-                style="font-size: 1em;margin-left: 2.8em;">Login </span>
+          <li *ngIf="!auth.currentUser">
+            <div (click)="openDialogLogin()" class="button-footer-title">
+              <span style="font-size: 1em;margin-left: 2.8em;">
+                Login
+              </span>
             </div>
+
             <div (click)="openDialogRegister()" style="margin-top: 4em;">
-              <button class="button-footer-title-2"
-                *ngIf="!(idToken$ | async) as idToken;"><span style="font-size: 1em;margin-left: 2.5em;">Sign Up
-                </span></button></div>
-            <ng-template #elseBlock>
-              <div class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em;margin-left: 2.8em;">
-                  Logout</span></div>
+              <button (click)=" registerAccount()" class="button-footer-title-2"
+                *ngIf="!(idToken$ | async) as idToken;">
+                <span style="font-size: 1em;margin-left: 2.5em;">
+                  Sign Up
+                </span>
+              </button>
+            </div>
+          </li>
 
-            </ng-template>
+          <li style="padding-top: 4em;" *ngIf="auth.currentUser">
+            <div style="display: flex; justify-content: center;"
+              class="button-footer-title-2" (click)="logOut()">
+              <span style="font-size: 1em;">
+                Logout
+              </span>
+            </div>
+          </li>
 
-          < <p>{{idToken$|async}}</p> -->
-                <!-- <br>
-          <p>{{displayName}}</p>
-          <img src="{{photourl}}" alt=""> -->
-                <!-- <button class="button-footer-title-2" (click)="logOut()"><span style="font-size: 1em; margin-left: -1em;"> Logout</span></button> -->
-              </div>
-            </li>
-          </ul>
-          </ul>
-          <div class="social_media"></div>
-        
+        </ul>
+      </ul>
+      <div class="social_media"></div>
+
     </div>
   </div>
 
