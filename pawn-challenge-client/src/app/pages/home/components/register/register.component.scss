@@ -34,7 +34,7 @@
     max-width: 100%;
     overflow: hidden;
     height: 64em;
-    width: 77em;
+    width: 64em;
 }
 
 .section{
@@ -160,7 +160,7 @@
     width: 24em;
     height: 2em;
     border-radius: 0.3em;
-    margin-left: 4em;
+    margin-left: 1.6em;
 }
 
 .ui_v5-button-component.ui_v5-button-primary {
@@ -188,7 +188,7 @@
     font-weight: 600;
     justify-content: center;
     margin-bottom: var(0em);
-    max-width: 120%;
+    max-width: 165%;
     overflow: hidden;
     padding: var(.5em 3em,.5em 2em);
     position: relative;
@@ -228,7 +228,7 @@
     flex-direction: column;
     gap: 0.5em;
     justify-content: space-between;
-    max-width: 41em;
+    max-width: 45em;
 
 }
 
@@ -247,23 +247,23 @@
 
 .authentication-social-signin-v5-social-button {
     align-items: center;
-    border-radius: .5em;
+    border-radius: 0.5em;
     display: flex;
     font-size: 1.5em;
     font-weight: 600;
     justify-content: center;
     line-height: 1.2;
-    min-height: 4em;
+    min-height: 5em;
     position: relative;
     width: 100%;
-    right:-7em;
+    right: -4em;
 }
 .authentication-social-signin-v5-social-button .authentication-social-signin-v5-social-icon {
     position: absolute;
 }
 
 .authentication-social-signin-v5-social-icon {
-    height: 4.1em;
+    height: 3.6em;
     left: 2.4em;
     position: absolute;
     width: 3.4em;

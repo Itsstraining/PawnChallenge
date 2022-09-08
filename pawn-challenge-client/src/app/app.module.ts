@@ -43,6 +43,8 @@ import { LearnComponent } from './pages/home/components/learn/learn.component';
 import { OnlineComponent } from './pages/home/components/play-chesss/online/online.component';
 import { RegisterComponent } from './pages/home/components/register/register.component';
 
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 // service
 
 
@@ -73,9 +75,10 @@ import { RegisterComponent } from './pages/home/components/register/register.com
     StoreModule.forRoot({
       auth: AuthReducer,
       register: RegisterReducer,
-    }, {}),
+    }), 
     EffectsModule.forRoot([authEffects, registerEffects]),
     HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
   ],

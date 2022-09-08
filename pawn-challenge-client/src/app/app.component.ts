@@ -74,6 +74,7 @@ export class AppComponent {
       panelClass: 'dialogLogin', 
       width: 'auto',
       height: 'auto',
+      
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
