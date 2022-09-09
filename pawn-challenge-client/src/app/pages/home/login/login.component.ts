@@ -40,15 +40,15 @@ export class LoginComponent implements OnInit {
     );
     this.authService.getCurrentUser().then(
       (user) =>
-        (this.displayName =
-          user.displayName != null ? user.displayName : user.email)
+      (this.displayName =
+        user.displayName != null ? user.displayName : user.email)
     );
     this.authService.isUserLoggedIn.subscribe((value) => {
       if (value) {
         this.authService.getCurrentUser().then(
           (user) =>
-            (this.displayName =
-              user.displayName != null ? user.displayName : user.email)
+          (this.displayName =
+            user.displayName != null ? user.displayName : user.email)
         );
       } else {
         this.displayName = 'null';
@@ -65,29 +65,32 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     this.store.dispatch(AuthActions.login());
-    // console.log(this.user)
+    this.idToken$.subscribe(e => {
+      if (e != '')
+        this.dialog.closeAll()
+    })
   }
 
 
-  loginWithAccount(){
+  loginWithAccount() {
     console.log('aaaaaaa')
-    if(this.email ==''){
-    alert('Please enter email');
-    return;
+    if (this.email == '') {
+      alert('Please enter email');
+      return;
     }
-    if(this.password ==''){
+    if (this.password == '') {
       alert('Please enter password');
       return;
-      }
+    }
 
-      this.authService.loginWithAccount(this.email, this.password);
-      // this.store.dispatch(AuthActions.login());
-      this.email = '';
-      this.password = '';
-      let x = this.authService.getIdToken();
-      console.log(x.subscribe((value) => {
-        console.log(value)
-      }))
+    this.authService.loginWithAccount(this.email, this.password);
+    // this.store.dispatch(AuthActions.login());
+    this.email = '';
+    this.password = '';
+    let x = this.authService.getIdToken();
+    console.log(x.subscribe((value) => {
+      console.log(value)
+    }))
   }
 
 }

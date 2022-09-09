@@ -48,8 +48,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    DialogComponent, 
+    AppComponent,
+    DialogComponent,
     DialogSkinComponent,
     DialogLoseComponent,
     DialogWinComponent,

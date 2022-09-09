@@ -4,8 +4,6 @@ import * as authAction$ from './RxJs/actions/auth.action';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './pages/home/login/login.component';
-import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
-import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { AuthState } from './RxJs/states/auth.state';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,7 +32,7 @@ export class AppComponent implements OnInit {
     public dialog: MatDialog,
     private Http: HttpClient,
     private router: Router,
-    private auth: Auth,
+    public auth: Auth,
   ) {
 
     this.user={
@@ -71,7 +70,7 @@ export class AppComponent implements OnInit {
       if (user) {
         this.idToken$.subscribe((value) => {
           this.token = value;
-          this.store.dispatch(authAction$.createUser({ idToken: this.token }));
+          // this.store.dispatch(authAction$.createUser({ idToken: this.token }));
         });
       }
     });
@@ -96,9 +95,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  register(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
-  }
+  // register(user: User): Observable<User[]> {
+  //   return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
+  // }
   loginWithUserNameAndPassword(user: User): Observable<User[]> {
     return this.Http.post<User[]>(`${environment.endPoint}/user/login`, user);
   }

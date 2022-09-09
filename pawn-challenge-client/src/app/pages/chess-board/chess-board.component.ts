@@ -110,19 +110,11 @@ export class ChessBoardComponent implements OnInit {
     }
     return false
   }
-
-
-
   getCurrentUser() {
     return this.gameService.getCurrentUser()
   }
 
-  connectSocket(formP: Position, toP: Position) {
-    // this.historyMoveService.sendDataMove(formP, toP);
-  }
   startGame() {
-    // let strBoard = '    v  x|        |        |        |        |        |        |XMTHVTMX'
-    // this.chessService.table = this.chessService.setChessToBoard(strBoard, this.gameService.player1)
     this.gameService.startGame();
   }
 
