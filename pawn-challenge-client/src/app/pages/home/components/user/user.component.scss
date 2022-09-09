@@ -42,3 +42,12 @@ body {
     padding-right: .25em!important;
     font-size: 1em;
 }
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 9em;
+}
