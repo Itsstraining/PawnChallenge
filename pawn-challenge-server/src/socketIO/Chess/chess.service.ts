@@ -113,7 +113,12 @@ export class ChessService {
         }
     }
 
-    inviteToGame(client, server: Server) {
+    inviteToRoom(client, server: Server, sidUserInvit){
+        
+    }
+
+    joinRoom(client, server: Server) {
+
     }
 
     createRoom(client, server: Server) {

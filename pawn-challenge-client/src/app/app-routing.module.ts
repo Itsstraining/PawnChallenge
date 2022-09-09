@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'dialog-test', loadChildren: () => import('./pages/dialog-test/dialog-test.module').then(m => m.DialogTestModule) },
   { path: 'rule', loadChildren: () => import('./pages/rule/rule.module').then(m => m.RuleModule) },
   { path: 'register', loadChildren: () => import('./pages/home/register/register.module').then(m => m.RegisterModule) },
+  { path: 'info', loadChildren: () => import('./pages/home/info/info.module').then(m => m.InfoModule) },
 ];
 
 @NgModule({

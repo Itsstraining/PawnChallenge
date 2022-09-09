@@ -1,0 +1,100 @@
+.card-info{
+  margin: 10em;
+  width: 90em;
+}
+.b1 {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin-right: 1em;
+  margin-top: 2em;
+
+}
+.avatar {
+  vertical-align: middle;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  margin: 3%;
+}
+
+// .avatar{
+//   border-radius: 50%;
+//   width: 20em;
+//   height: 20em;
+// }
+
+.info-user{
+  display:flex;
+}
+.infomation-user{
+
+ font-size: 20px ;
+}
+.info-form{
+  max-height: 70%;
+  max-width: 80%;
+  background-color: #eeeee4;
+  margin: 20px auto 40px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  background:  0% 0% / cover rgb(255, 251, 242);
+  box-shadow: rgb(65 69 88 / 10%) 0px 7px 14px, rgb(0 0 0 / 7%) 0px 3px 6px;
+}
+.elo-flag{
+  display: flex;
+  padding-top: 10%;
+
+
+}
+.update{
+  font-size: 16px;
+
+}
+.user-setting{
+  display: flex;
+
+
+}
+.space{
+  padding-top: 10%;
+}
+.name-user{
+  font-size: 200%;
+ padding-top: 20px;
+
+}
+
+.badgesActions{
+  margin-left: 20px;
+  display: flex;
+}
+.achieved-bagde{
+
+  list-style: none;
+}
+.nobull1{
+  padding-right: 10%;
+  display: flex;
+  list-style-type: none;
+}
+.nobull2{
+
+  display: flex;
+  list-style-type: none;
+}
+.userStart  ul li {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  margin: 25px 0px 0px;
+  align-content: center;
+  width: 13.5%;
+}
+.icon{
+  width: 50px;
+}
+.popularOpponent{
+  padding-left: 40px;
+}

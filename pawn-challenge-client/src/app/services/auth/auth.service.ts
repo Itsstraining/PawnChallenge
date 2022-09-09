@@ -1,3 +1,4 @@
+import { User } from './../../../../../pawn-challenge-server/src/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -34,12 +35,16 @@ export class AuthService {
       this.auth.onAuthStateChanged(function (user) {
         if (user) {
           resolve(user);
+          console.log(user.photoURL);
         } else {
           reject('No user logged in');
         }
       });
     });
   }
+
+  user!: User
+  hasUser = false;
   login() {
     // console.log(this.getIdToken());
     return from(
@@ -50,7 +55,8 @@ export class AuthService {
             new GoogleAuthProvider()
           );
           let idToken = await credential.user.getIdToken();
-          console.log(idToken);
+          // console.log(idToken);
+          window.location.reload();
           resolve(idToken);
         } catch (error) {
           reject('login error');
@@ -62,8 +68,9 @@ export class AuthService {
     return from(
       new Promise<string>(async (resolve, reject) => {
         try {
-          await signOut(this.auth);
+          await this.auth.signOut();
           resolve('log out successfull');
+          window.location.reload();
         } catch {
           reject('Can not login with Google');
         }
@@ -78,7 +85,7 @@ export class AuthService {
             if (user) {
               let user = getAuth().currentUser;
               let idToken = await user!.getIdToken(true);
-              console.log(idToken);
+              // console.log(idToken);
               resolve(idToken);
             } else {
               resolve('');
