@@ -2,28 +2,28 @@
     <div class="containers">
         <img src="../../../assets/ImageGamemode-Win-Lose/Win.png" alt="Win" style="width: 100%;  ">
         <div class="x" (click)="closeDialog()"><i class="fi fi-sr-cross"></i></div>
-        <div class="title">THẮNG CUỘC</div>
+        <div class="title">WINER</div>
     </div>
 
     <div class="position">
         <div style="z-index: 1">
-            <img src="../../../assets/chess/avatar/a1.png" alt="a1" class="avatar green">
-            <div class="nickname">Nickname1</div>
+            <img src="../../../assets/chess/avatar/{{gameS.player1.img}}.png" alt="a1" class="avatar green">
+            <div class="nickname">{{gameS.player1.name}}</div>
         </div>
         <span class="score">1</span>
         <span class="score">-</span>
         <span class="score">0</span>
         <div style="z-index: 1">
-            <img src="../../../assets/chess/avatar/a2.png" alt="a2" class="avatar gray">
-            <div class="nickname">Nickname2</div>
+            <img src="../../../assets/chess/avatar/{{gameS.player2.img}}.png" alt="a2" class="avatar gray">
+            <div class="nickname">{{gameS.player2.name}}</div>
         </div>
     </div>
 
-    <div class="reason">
-        Thắng do: 
-    </div>
+    <!-- <div class="reason">
+        Thắng do:
+    </div> -->
 
     <div style="display:flex;justify-content:center;margin-top: 1em;font-size: 3em">
-        <div type="button" class="buttonNew1">Làm ván mới</div>
+        <div type="button" class="buttonNew1">New Game</div>
     </div>
 </div>

@@ -44,19 +44,19 @@
   <div class="scrollbar" id="style-1">
     <div class="force-overflow">
       <table>
-        <tr *ngFor="let item of hs.grapsHalf; let i = index">
+        <tr *ngFor="let item of hService.grapsHalf; let i = index">
           <td class="fa-fw mr-3">
-            <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-            {{ hs.graps[i*2].grapFrom }}
+            <i class="Icon fi {{hService.graps[i*2].icon}} fa-fw mr-3"></i>
+            {{ hService.graps[i*2].grapFrom }}
             <fa-icon [icon]="['fas', 'caret-right']" class="fa-fw mr-3" style="margin-left: 10px"></fa-icon>
-            {{ hs.graps[i*2].grapTo }}
+            {{ hService.graps[i*2].grapTo }}
           </td>
 
-          <td *ngIf="hs.graps[i*2+1] != undefined" class="fa-fw mr-3">
-            <i class="Icon fi fi-sr-chess-rook-alt fa-fw mr-3"></i>
-            {{ hs.graps[i*2+1].grapFrom }}
+          <td *ngIf="hService.graps[i*2+1] != undefined" class="fa-fw mr-3">
+            <i class="Icon fi {{hService.graps[i*2+1].icon}} fa-fw mr-3"></i>
+            {{ hService.graps[i*2+1].grapFrom }}
             <fa-icon [icon]="['fas', 'caret-right']" class="fa-fw mr-3" style="margin-left: 10px"></fa-icon>
-            {{ hs.graps[i*2+1].grapTo }}
+            {{ hService.graps[i*2+1].grapTo }}
           </td>
         </tr>
       </table>
@@ -64,7 +64,16 @@
   </div>
 
   <div class="row-setting">
+    <div style="display: flex;align-items: center;">
+      <div (click)="openDialogNewGame()" class="box-start">
+        <div class="bt-start">
+          <p>START</p>
+        </div>
+      </div>
+      <div (click)="openDialogNewGame()" style="margin-top: -0.5em; cursor: pointer;">
+        <p style="font-size: 1.6em;font-weight: 500;">MOD: {{getModDes()}}</p>
+      </div>
+    </div>
     <div class="bt-setting" (click)="openDialogSkin()"><i class="fi fi-sr-settings"></i></div>
-    <div class="bt-add click" (click)="openDialogNewGame()"><i class="fi fi-br-plus"></i></div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { StringLike } from '@firebase/util';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 import { ReplaySubject } from 'rxjs';
 import { Cell, Chess } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
@@ -8,6 +10,11 @@ import { Timer } from 'src/app/models/timer';
   providedIn: 'root'
 })
 export class GameService {
+  modSelect = -1
+  mods: Map<number, { id: number, des: string, img: string }> = new Map()
+
+
+  // 0 offline || 1 with BOT || 2 online
   isGameStart = false
   currentUserIDControll = ''
   time = new Timer()
@@ -18,26 +25,53 @@ export class GameService {
   player2: Player
 
   constructor() {
-    this.player1 = this.newPlayer('user1', 'Vinh123', 'a13', 'VHTMXC', true)
-    this.player2 = this.newPlayer('user2', 'Phat123', 'a5', 'vhtmxc', false)
+    this.player1 = this.newPlayer('', '', 'a5', 'VHTMXC', true, false, false)
+    this.player2 = this.newPlayer('', '', 'a5', 'vhtmxc', false, false, false)
+
+    this.mods.set(0, {
+      id: 0,
+      des: 'Call off with friend',
+      img: 'pawn.png'
+    })
+    this.mods.set(1, {
+      id: 1,
+      des: 'With BOT',
+      img: 'knight.png'
+    })
+    this.mods.set(2, {
+      id: 2,
+      des: 'Online with new friend',
+      img: 'rook.png'
+    })
   }
 
-  startGame() {
+  getMod(index: number) {
+    return this.mods.get(index) ?? {
+      id: -1,
+      des: '',
+      img: '',
+    }
+  }
+
+  startGame(player1: Player, player2: Player) {
     this.isGameStart = true;
-    this.player1.chessControl.time.currentTime = 60 * 15
-    this.player2.chessControl.time.currentTime = 60 * 15
+
+    player1.chessControl.time.currentTime = 60 * this.timePerTurn
+    player2.chessControl.time.currentTime = 60 * this.timePerTurn
     this.time.currentTime = this.timePerTurn
-    this.currentUserIDControll = this.player1.id
+    this.currentUserIDControll = player1.id
 
     this.time.startCountDown()
-    this.player1.chessControl.time.startCountDown()
+    player1.chessControl.time.startCountDown()
   }
-  endGame() {
-    this.player1.chessControl.time.stop()
-    this.player2.chessControl.time.stop()
-    this.time.stop()
+  endGame(player1: Player, player2: Player) {
     this.isGameStart = false
+    player1.chessControl.time.stop()
+    player2.chessControl.time.stop()
+    this.time.stop()
+    this.time = new Timer()
   }
+
   canPickChess(userChessControll: string, chessName: string) {
     if (this.isGameStart && this.isAlly(userChessControll, chessName) && userChessControll.includes(chessName)) {
       return true
@@ -56,7 +90,7 @@ export class GameService {
         player2.chessControl.time.startCountDown()
       }
     }
-    else {
+    else if (this.currentUserIDControll == player2.id) {
       this.currentUserIDControll = player1.id
       //p2 => p1
       player2.chessControl.time.pause()
@@ -68,12 +102,13 @@ export class GameService {
       }
     }
     this.time.currentTime = this.timePerTurn
+    console.log('turn for '+this.currentUserIDControll)
   }
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2
     return c3.toUpperCase() == c3 || c3.toLocaleLowerCase() == c3
   }
-  newPlayer(id: string, name: string, img: string, control: string, isBase: boolean) {
+  newPlayer(id: string, name: string, img: string, control: string, isBase: boolean, isBot: boolean, isNewPlayer: boolean) {
     let player: Player = {
       id: id,
       name: name,
@@ -85,6 +120,8 @@ export class GameService {
         time: new Timer(),
         chessSDie: [],
         isCheckmat: false,
+        isBot: isBot,
+        isNewPlayer: isNewPlayer
       }
     }
     return player
@@ -105,6 +142,6 @@ export class GameService {
       }
       return this.player2
     }
-    return this.newPlayer('', '', '', '', false)
+    return this.newPlayer('', '', '', '', false, false, false)
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { GameService } from 'src/app/services/game/game.service';
 @Component({
   selector: 'app-dialog-win',
   templateUrl: './dialog-win.component.html',
@@ -7,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogWinComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogWinComponent>) { }
+  constructor(public dialogRef: MatDialogRef<DialogWinComponent>, public gameS:GameService) { }
 
   ngOnInit(): void {
   }

@@ -11,8 +11,7 @@ import { AppService } from './app.service';
 import * as env from 'environment'
 import { UserModule } from './modules/user.module';
 import { AuthService } from './services/auth/auth.service';
-// import { ChatGateway } from './socketIO/Chat/chat.gateway';
-// import { ChessGateway } from './socketIO/Chess/chess.gateway';
+import { ChessGateway } from './socketIO/Chess/chess.gateway';
 
 @Module({
   imports: [
@@ -24,8 +23,7 @@ import { AuthService } from './services/auth/auth.service';
   providers: [
     AppService,
     AuthService,
-    // ChatGateway,
-    // ChessGateway
+    ChessGateway
   ],
 })
 export class AppModule {

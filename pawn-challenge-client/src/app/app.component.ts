@@ -13,6 +13,7 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { RegisterComponent } from './pages/home/register/register.component';
 import { Observable } from 'rxjs';
+import { SocketService } from './services/socket/socket.service';
 
 
 
@@ -34,7 +35,8 @@ export class AppComponent {
     public dialog: MatDialog,
     private Http: HttpClient,
     public auth: Auth,
-    private router: Router
+    private router: Router,
+    private socketService: SocketService // init!!!!!
   ) {
 
     this.AuthService.getCurrentUser().then(

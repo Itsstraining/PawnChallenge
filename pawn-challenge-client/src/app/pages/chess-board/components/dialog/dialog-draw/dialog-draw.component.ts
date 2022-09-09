@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { GameService } from 'src/app/services/game/game.service';
 
 @Component({
   selector: 'app-dialog-draw',
@@ -8,7 +9,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogDrawComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogDrawComponent>) { }
+  constructor(public dialogRef: MatDialogRef<DialogDrawComponent>, public gameS:GameService) {
+
+  }
 
   ngOnInit(): void {
   }
