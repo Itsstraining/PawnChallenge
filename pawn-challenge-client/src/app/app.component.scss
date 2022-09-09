@@ -196,13 +196,15 @@ li a{
 }
 
 .dropdown-content a {
-  color: black;
+  color: rgb(255, 255, 255);
   padding: 1.2em 1.6em;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown-content a:hover {
+  background-color: #5a5858;
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
