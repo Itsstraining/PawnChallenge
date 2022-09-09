@@ -16,7 +16,8 @@ export class HistoryMoveService {
 
   constructor(
     private gameSerivce: GameService,
-    private socket:Socket) {}
+    // private socket:Socket
+    ) {}
   createGrapPosition() {
     //x
     this.grapPositionX.set(0, 'a');
@@ -48,12 +49,12 @@ export class HistoryMoveService {
     return 'from: ' + grap.grapFrom + ' to: ' + grap.grapTo;
   }
 
-  sendDataMove(grap: Grap) {
-    this.socket.emit('move', grap);
-  }
-  getDataMove() {
-    return this.socket.fromEvent('move').pipe(map((data) => data));
-  }
+  // sendDataMove(grap: Grap) {
+  //   this.socket.emit('move', grap);
+  // }
+  // getDataMove() {
+  //   return this.socket.fromEvent('move').pipe(map((data) => data));
+  // }
 
   newGrap() {
     let grap: Grap = {

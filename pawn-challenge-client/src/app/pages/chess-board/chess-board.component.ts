@@ -97,7 +97,7 @@ export class ChessBoardComponent implements OnInit {
 
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
-      this.historyMoveService.sendDataMove(this.grap);
+      // this.historyMoveService.sendDataMove(this.grap);
       console.log(this.grap.grapFrom);
     }
   }
