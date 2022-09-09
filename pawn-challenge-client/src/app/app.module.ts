@@ -36,11 +36,8 @@ import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.compon
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-<<<<<<< HEAD
 import { AngularFireModule } from '@angular/fire/compat';
 import { authReducer } from './RxJs/reudcers/auth.reducer';
-=======
->>>>>>> 5f7b702d256cfa424ae7b4af7319f731483db0b8
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 // service
 

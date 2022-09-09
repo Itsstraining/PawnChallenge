@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/home-pages/home-pages.module').then(m => m.HomePagesModule) },
   { path: 'login', loadChildren: () => import('./pages/home/login/login.module').then(m => m.LoginModule) },
 
-  { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chesss/learn-chesss.module').then(m => m.LearnChesssModule) },
+  { path: 'learn-chesss', loadChildren: () => import('./pages/home/learn-chess/learn-chesss.module').then(m => m.LearnChesssModule) },
   { path: 'dialog-test', loadChildren: () => import('./pages/dialog-test/dialog-test.module').then(m => m.DialogTestModule) },
   { path: 'rule', loadChildren: () => import('./pages/rule/rule.module').then(m => m.RuleModule) },
   { path: 'register', loadChildren: () => import('./pages/home/register/register.module').then(m => m.RegisterModule) },
