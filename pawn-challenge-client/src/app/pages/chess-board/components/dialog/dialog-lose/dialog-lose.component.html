@@ -1,0 +1,29 @@
+<div style="min-height:45em ;">
+  <div class="containers">
+    <img src="../../../assets/ImageGamemode-Win-Lose/Lose.png" alt="Win" style="width: 100%">
+    <div class="x" (click)="closeDialog()"><i class="fi fi-sr-cross"></i></div>
+    <div class="title">THUA CUỘC</div>
+  </div>
+
+  <div class="position">
+    <div style="z-index: 1">
+      <img src="../../../assets/chess/avatar/{{gameS.player1.img}}.png" alt="a1" class="avatar gray">
+      <div class="nickname">{{gameS.player1.name}}</div>
+    </div>
+    <span class="score">0</span>
+    <span class="score">-</span>
+    <span class="score">1</span>
+    <div style="z-index: 1">
+      <img src="../../../assets/chess/avatar/{{gameS.player2.img}}.png" alt="a2" class="avatar green">
+      <div class="nickname">{{gameS.player2.name}}</div>
+    </div>
+  </div>
+
+  <!-- <div class="reason">
+        Thua do:
+    </div> -->
+
+  <div style="display:flex;justify-content:center;margin-top: 1em;font-size: 3em">
+    <div type="button" class="buttonNew1">New Game</div>
+  </div>
+</div>

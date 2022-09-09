@@ -5,11 +5,13 @@
   margin-top: 0em;
   cursor: pointer;
 }
+
 .imgDiv {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .wrapper {
   display: flex;
 
@@ -29,8 +31,8 @@
     width: calc(100% - 20em);
     min-height: 100vh;
     // background-color: #312e2b;
-    background-image: linear-gradient(to top, #312e2b, #817f7e);
 
+    background-image: linear-gradient(to top, #312e2b, #817f7e);
   }
 }
 
@@ -153,4 +155,12 @@
 
 ::ng-deep.mat-dialog-container {
   padding: 0px !important;
+}
+
+li a{
+  padding-left: 1em;
+  margin-top: 0.7em;
+  i{
+    padding-right: 0.3em;
+  }
 }

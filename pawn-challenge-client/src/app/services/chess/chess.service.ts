@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { faGalacticSenate } from '@fortawesome/free-brands-svg-icons';
+import { ReplaySubject } from 'rxjs';
 import { Cell, Chess, Position } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
 import { GameService } from '../game/game.service';
@@ -9,20 +10,21 @@ import { ShareService } from '../share/share.service';
   providedIn: 'root',
 })
 export class ChessService {
-  kingB!: Chess
-  kingW!: Chess
   chessAccess: Map<string, Chess> = new Map<string, Chess>();
-  table: Cell[][]
+  table: Cell[][] = []
   chessVector: Map<string, Position> = new Map<string, Position>();
+  fromPosition: Position = { x: -1, y: -1 };
+  toPosition: Position = { x: -1, y: -1 };
+  gameOver: ReplaySubject<{ isDraw: boolean, winer: Player }>
 
+  strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
 
   constructor(private gameService: GameService, private shareService: ShareService) {
     this.createChessAccess();
-    this.table = this.createBoard()
-    let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
-    // let strBoard = 'v       |        |        |        |        |        |CCCCCCCC|XMTHVTMX'
-    this.table = this.setChessToBoard(strBoard, this.table, this.gameService.player1)
+    this.createTable(this.table)
+    this.setBoardWithString(this.strBoard, this.table, this.gameService.player1)
     this.createVectorMove();
+    this.gameOver = new ReplaySubject(3);
   }
 
   getEffDots(chess: Chess, table: Cell[][]): boolean[][] {
@@ -57,12 +59,17 @@ export class ChessService {
       ruleStr = ''
       if (
         chess.firstStep &&
+        this.onBoard({ x: chess.position.x + baseV.x, y: chess.position.y + baseV.y }) &&
         !table[chess.position.y + baseV.y][chess.position.x + baseV.x].hasChess &&
+        this.onBoard({ x: chess.position.x + 2 * baseV.x, y: chess.position.y + 2 * baseV.y }) &&
         !table[chess.position.y + 2 * baseV.y][chess.position.x + 2 * baseV.x].hasChess
       ) {
         ruleStr = `1 ${base}/1 ${base}-${base}`
       }
-      else if (!table[chess.position.y + baseV.y][chess.position.x + baseV.x].hasChess) {
+      else if (
+        this.onBoard({ x: chess.position.x + baseV.x, y: chess.position.y + baseV.y }) &&
+        !table[chess.position.y + baseV.y][chess.position.x + baseV.x].hasChess
+      ) {
         ruleStr = `1 ${base}`
       }
       vLeft = this.chessVector.get(base + 'left') ?? { x: 0, y: 0 }
@@ -75,6 +82,7 @@ export class ChessService {
       if (this.onBoard(pRight) && table[pRight.y][pRight.x].hasChess) {
         ruleStr += `/1 ${base}right`
       }
+
       //---Pawn
     }
     let temp = ruleStr.split('/')
@@ -132,8 +140,33 @@ export class ChessService {
         }
       }
     }
+
+    // bắt tốt qua đường
+    if (chess.name.toLowerCase() == 'c') {
+      if (chess.isPawnUp && chess.position.y == 3) {
+        if (
+          this.fromPosition.y == 1 &&
+          this.toPosition.y == 3 &&
+          (this.toPosition.x - chess.position.x == -1 || this.toPosition.x - chess.position.x == 1) &&
+          table[this.toPosition.y][this.toPosition.x].chess.name.toLowerCase() == 'c' &&
+          !this.isAlly(table[this.toPosition.y][this.toPosition.x].chess.name, chess.name)
+        ) {
+          dots[2][this.toPosition.x] = true
+        }
+      } else if (!chess.isPawnUp && chess.position.y == 4) {
+        if (
+          this.fromPosition.y == 6 &&
+          this.toPosition.y == 4 &&
+          table[this.toPosition.y][this.toPosition.x].chess.name.toLowerCase() == 'c' &&
+          !this.isAlly(table[this.toPosition.y][this.toPosition.x].chess.name, chess.name)
+        ) {
+          dots[5][this.toPosition.x] = true
+        }
+      }
+    }
     return dots
   }
+  //nhập thành
   setCastlingStr(chessKing: Chess, table: Cell[][]) {
     if (
       !chessKing.firstStep ||
@@ -181,6 +214,18 @@ export class ChessService {
       table[fromP.y][fromP.x].hasChess = false
       table[fromP.y][fromP.x].chess = this.newChess()
 
+      if (chess.name.toLowerCase() == 'c') {
+        if (
+          !table[toPosition.y][toPosition.x].hasChess && //không cờ
+          toPosition.x != fromP.x //ko di thẳng, đi chéo
+        ) {
+          let y = 0
+          chess.isPawnUp ? y = toPosition.y + 1 : y = toPosition.y - 1
+          table[y][toPosition.x].chess = this.newChess()
+          table[y][toPosition.x].hasChess = false
+        }
+      }
+
       chess.firstStep = false;
       chess.position = toPosition
       table[toPosition.y][toPosition.x].hasChess = true
@@ -200,7 +245,7 @@ export class ChessService {
       return true
     } else {
       if (toPosition != chess.position) {
-        this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
+        this.shareService.openSnackbar('Invalid move!', 'OK');
       }
       return false
     }
@@ -215,72 +260,74 @@ export class ChessService {
     table[toPosition.y][toPosition.x].hasChess = true
     table[toPosition.y][toPosition.x].chess = chess
   }
-  //xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX
-  setChessToBoard(txtTable: string, chessTable: Cell[][], player: Player): Cell[][] {
-    let res = [...chessTable]
+  resetTable(table: Cell[][], player: Player) {
+    for (let i = 0; i < table.length; i++) {
+      for (let j = 0; j < table[i].length; j++) {
+        table[i][j] = this.newCell(i, j)
+      }
+    }
+    this.setBoardWithString(this.strBoard, table, player)
+  }
+  setBoardWithString(txtTable: string, table: Cell[][], player: Player): Cell[][] {
     try {
       let rows = txtTable.split('|')
       for (let i = 0; i < 8; i++) {
         let chessTxtS = rows[i].split('')
         for (let j = 0; j < 8; j++) {
+
           if (chessTxtS[j] != ' ') {
             let temp = this.chessAccess.get(chessTxtS[j])
             if (temp != undefined) {
-
               if (temp.name.toLocaleLowerCase() == 'c') {
                 if (this.isAlly(temp.name, player.chessControl.chessNameCT)) {
                   temp.isPawnUp = player.isBase
                 }
               }
-
-              let id = res[i][j].chess.id
-              res[i][j].chess = { ...temp }
+              let id = table[i][j].id
+              table[i][j].chess = { ...temp }
               if (id == '') {
-                res[i][j].chess.id = temp.name + i + j
+                table[i][j].chess.id = temp.name + i + j
               }
-              res[i][j].hasChess = true
-              res[i][j].chess.position = res[i][j].position
-
-              if (temp.name == 'v') {
-                this.kingB = res[i][j].chess
-              }
-              else if (temp.name == 'V') {
-                this.kingW = res[i][j].chess
-              }
+              table[i][j].hasChess = true
+              table[i][j].chess.position = table[i][j].position
             }
           }
-
-          if (res[i][j].id == '') {
-            res[i][j].id = `[${res[i][j].position.x},${res[i][j].position.y}]`
+          if (table[i][j].id == '') {
+            table[i][j].id = `[${table[i][j].position.x},${table[i][j].position.y}]`
           }
         }
-
       }
     } catch (error) {
       console.log(error)
     }
-    return res
+    return table
   }
-  setChessToBoard1(stringBoard: string, board: Cell[][]) {
+  setChessToBoard1(stringBoard: string) {
+    let table: Cell[][] = []
     let temp = stringBoard.split('|');
     for (let i = 0; i < 8; i++) {
       let chessName = temp[i].split('');
+      let arr: Cell[] = []
       for (let j = 0; j < 8; j++) {
-        if (chessName[j] !== ' ') {
-          board[i][j].hasChess = true;
+        let cell = this.newCell(i, j)
+        if (chessName[j] != ' ') {
+          cell.hasChess = true;
         }
-        board[i][j].chess.id = `${chessName[j]}[${i},${j}]`;
-        board[i][j].chess.name = chessName[j];
+        cell.chess.id = `${chessName[j]}[${i},${j}]`;
+        cell.chess.name = chessName[j];
         let chess = this.chessAccess.get(chessName[j]) ?? {
           id: '',
           name: '',
           img: '',
           icon: '',
         };
-        board[i][j].chess.img = chess.img;
-        board[i][j].chess.position = { x: j, y: i };
+        cell.chess.img = chess.img;
+        cell.chess.position = { x: j, y: i };
+        arr.push(cell)
       }
+      table.push(arr)
     }
+    return table
   }
   //chess => vua
   isCheckmat(chess: Chess, table: Cell[][]) {
@@ -295,10 +342,10 @@ export class ChessService {
     }
     return res
   }
-  isCheckmatAll(chess: Chess, table: Cell[][]): boolean {
+  isCheckmatAll(chessEnemy: Chess, table: Cell[][]): boolean {
     for (let i = 0; i < table.length; i++) {
       for (let j = 0; j < table[i].length; j++) {
-        if (this.isAlly(chess.name, table[i][j].chess.name)) {
+        if (this.isAlly(chessEnemy.name, table[i][j].chess.name)) {
           if (this.isCheckmat(table[i][j].chess, table)) {
             return true
           }
@@ -367,6 +414,56 @@ export class ChessService {
       }
     }
   }
+  //phong cờ
+  toCapture(pawn: Chess, toChessName: string, table: Cell[][]) {
+    let chess = this.chessAccess.get(toChessName)
+    if (chess != undefined) {
+      chess.firstStep = false
+      chess.id = pawn.id
+      chess.position = pawn.position
+      table[pawn.position.y][pawn.position.x].chess = { ...chess }
+    }
+  }
+  setDrawOrWin(table: Cell[][], currentPlayer: Player) {
+    let breakFor = false
+    let noTurn = true
+    for (let i = 0; i < table.length; i++) {
+      if (breakFor) break
+      for (let j = 0; j < table[i].length; j++) {
+        if (breakFor) break
+        if (table[i][j].hasChess && this.isAlly(currentPlayer.chessControl.chessNameCT, table[i][j].chess.name)) {
+          let dots = this.getEffDots(table[i][j].chess, table)
+          let dotsban = this.getDotban(table[i][j].chess, table, dots)
+          for (let ii = 0; ii < dots.length; ii++) {
+            if (breakFor) break
+            for (let jj = 0; jj < dots[ii].length; jj++) {
+              if (breakFor) break
+              if (dots[ii][jj] && !dotsban[ii][jj]) {
+                noTurn = false
+                breakFor = true
+              }
+            }
+          }
+        }
+      }
+    }
+    if (noTurn) {
+      if (currentPlayer.chessControl.isCheckmat) {
+        console.log('het co')
+        this.gameOver.next({
+          isDraw: false,
+          winer: currentPlayer
+        })
+      } else if (!currentPlayer.chessControl.isCheckmat) {
+        this.gameOver.next({
+          isDraw: true,
+          winer: currentPlayer
+        })
+      }
+    }
+  }
+
+  ///////////////////////
   createVectorMove() {
     this.chessVector.set('left', { x: -1, y: 0 });
     this.chessVector.set('right', { x: 1, y: 0 });
@@ -403,33 +500,24 @@ export class ChessService {
     result += ' ---- ---- ---- ---- ---- ---- ---- ---- \n'
     console.log(result);
   }
-  createBoard() {
-    let result: Cell[][] = [];
-    for (let i = 0; i < 8; i++) {
-      let temp = [];
-      for (let j = 0; j < 8; j++) {
-        let newCell: Cell = {
-          id: '',
-          position: { x: j, y: i },
-          hasChess: false,
-          chess: {
-            id: '',
-            name: '',
-            img: '',
-            icon: '',
-            firstStep: true,
-            position: { x: 0, y: 0 },
-            isPawnUp: false,
-          },
-          hasDot: false,
-          hasDotban: false,
-        };
-        temp.push(newCell);
-      }
-      result.push(temp);
-    }
-    // this.printBoard(result);
-    return result;
+  newCell(i: number, j: number) {
+    let newCell: Cell = {
+      id: '',
+      position: { x: j, y: i },
+      hasChess: false,
+      chess: {
+        id: '',
+        name: '',
+        img: '',
+        icon: '',
+        firstStep: true,
+        position: { x: 0, y: 0 },
+        isPawnUp: false,
+      },
+      hasDot: false,
+      hasDotban: false,
+    };
+    return newCell;
   }
   newChess() {
     let chess: Chess = {
@@ -460,13 +548,22 @@ export class ChessService {
       }
     }
   }
+  createTable(table: Cell[][]) {
+    for (let i = 0; i < 8; i++) {
+      let arr: Cell[] = []
+      for (let j = 0; j < 8; j++) {
+        arr.push(this.newCell(i, j))
+      }
+      table.push(arr)
+    }
+  }
   createChessAccess() {
     //black
     this.chessAccess.set('x', {
       id: '',
       name: 'x',
       img: 'br.png',
-      icon: '',
+      icon: 'fi-sr-chess-rook',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -475,7 +572,7 @@ export class ChessService {
       id: '',
       name: 'h',
       img: 'bq.png',
-      icon: '',
+      icon: 'fi-sr-chess-queen',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -484,7 +581,7 @@ export class ChessService {
       id: '',
       name: 't',
       img: 'bb.png',
-      icon: '',
+      icon: 'fi-sr-chess-bishop',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -493,7 +590,7 @@ export class ChessService {
       id: '',
       name: 'v',
       img: 'bk.png',
-      icon: '',
+      icon: 'fi-sr-chess-king',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -502,7 +599,7 @@ export class ChessService {
       id: '',
       name: 'm',
       img: 'bn.png',
-      icon: '',
+      icon: 'fi-sr-chess-knight',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -511,7 +608,7 @@ export class ChessService {
       id: '',
       name: 'c',
       img: 'bp.png',
-      icon: '',
+      icon: 'fi-sr-chess-pawn',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -522,7 +619,7 @@ export class ChessService {
       id: '',
       name: 'X',
       img: 'wr.png',
-      icon: '',
+      icon: 'fi-rr-chess-rook',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -531,7 +628,7 @@ export class ChessService {
       id: '',
       name: 'H',
       img: 'wq.png',
-      icon: '',
+      icon: 'fi-rr-chess-queen',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -540,7 +637,7 @@ export class ChessService {
       id: '',
       name: 'T',
       img: 'wb.png',
-      icon: '',
+      icon: 'fi-rr-chess-bishop',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -549,7 +646,7 @@ export class ChessService {
       id: '',
       name: 'V',
       img: 'wk.png',
-      icon: '',
+      icon: 'fi-rr-chess-king',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -558,7 +655,7 @@ export class ChessService {
       id: '',
       name: 'M',
       img: 'wn.png',
-      icon: '',
+      icon: 'fi-rr-chess-knight',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -567,7 +664,7 @@ export class ChessService {
       id: '',
       name: 'C',
       img: 'wp.png',
-      icon: '',
+      icon: 'fi-br-chess-pawn',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false

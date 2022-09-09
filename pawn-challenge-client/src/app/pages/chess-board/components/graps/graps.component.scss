@@ -15,7 +15,6 @@
   height: 9em;
   border-radius: 10px;
   margin-top: 2em;
-
 }
 .chart {
   background-image: conic-gradient(
@@ -47,7 +46,7 @@ p {
   }
 }
 .scrollbar {
-  background-color: #2C2929;
+  background-color: #2c2929;
   height: 50em;
   width: 100%;
   padding: auto;
@@ -103,16 +102,56 @@ tr:nth-child(even) {
 .Icon {
   font-size: 1.2em;
 }
-.row-setting{
+.row-setting {
   width: 100%;
   display: flex;
   padding: 3.5em 4em;
-  i{
-    font-size: 3em;
-    color: #838383;
-    cursor: pointer;
+  justify-content: space-between;
+  .bt-setting {
+    i {
+      font-size: 3em;
+      color: #838383;
+      cursor: pointer;
+    }
   }
-  i:hover{
+  .bt-setting i:hover {
     color: #c9c9c9;
+  }
+  .bt-add {
+    background-color: #403e3e;
+    padding: 1.2em 1.95em 0.7em 2em;
+    border-radius: 0.4em;
+    margin-top: -1.2em;
+    i {
+      font-size: 2.6em;
+    }
+  }
+  .bt-add:hover {
+    background-color: #3c3c3c;
+    color: #bdbdbd;
+  }
+}
+.box-start {
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.32);
+  border-radius: 15px;
+  margin-top: -0.7em;
+  .bt-start {
+    cursor: pointer;
+    border-radius: 0.5em;
+    background-color: #769656;
+    padding: 1.5em 3em;
+    p {
+      color: white;
+      padding: 0;
+      margin: 0;
+      font-size: 2em;
+    }
+  }
+  .bt-start:hover {
+    background-color: #79a053;
   }
 }

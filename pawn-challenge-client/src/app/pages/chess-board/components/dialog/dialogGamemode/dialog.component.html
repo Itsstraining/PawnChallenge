@@ -1,0 +1,79 @@
+<div style="padding:24px">
+  <h2 mat-dialog-title class="title">Play Online Chess</h2>
+  <h3 mat-dialog-title class="subtitle">Choose game mode you want</h3>
+  <div>
+    <mat-dialog-content class="mat-typography">
+      <div *ngFor="let item of [0,1,2]; let i = index" class="four-levels">
+        <label class="row-select click" for="new" class="four-level">
+          <div (click)="changeIndexSelect(i)" style="width:100%;" style="position: relative;">
+            <div *ngIf="index == i" class="br-chess"></div>
+            <img class="img-chess" src="../../../../../../assets/ImageGamemode-Win-Lose/{{gameService.getMod(i).img}}" alt="pawn">
+            <span class="EachLevel">
+              {{gameService.getMod(i).des}}
+            </span>
+          </div>
+        </label>
+
+        <div *ngIf="index == i && i==0" style="margin-top: 1em;">
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Name player1</mat-label>
+            <input [style.fontSize.em]=1.4 [style.padding.em]=0.4  matInput type="text" [(ngModel)]="userName1">
+            <button *ngIf="userName1" matSuffix mat-icon-button aria-label="Clear" (click)="userName1=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="index == i && i==0">
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Name player2</mat-label>
+            <input [style.fontSize.em]=1.4 [style.padding.em]=0.4  matInput type="text" [(ngModel)]="userName2">
+            <button *ngIf="userName2" matSuffix mat-icon-button aria-label="Clear" (click)="userName2=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="index == i && i==2" style="margin-top: 1em; position: relative;">
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Invite user</mat-label>
+            <input [style.fontSize.em]=1.4 [style.padding.em]=0.4 matInput type="text" [(ngModel)]="friendID" autocomplete="off">
+          </mat-form-field>
+          <div style="
+            position: absolute;
+            right: 0;
+            margin-right: 6.6em;
+            top: 0;
+            margin-top: 1.6em;
+            color: #606060;
+            ">
+            <i style="font-size: 2.2em;" class="fi fi-sr-eye"></i>
+          </div>
+
+          <div style="
+          padding-left: 1.5em;
+          display: flex;
+          justify-content: space-between;
+          padding-right: 6.7em;">
+            <div>
+              <p style=" font-size: 1.5em;">Your ID :{{'  '+shareService.cutString(socketService.socketID,14) }}</p>
+            </div>
+            <div><i (click)="clickCopy()" [cdkCopyToClipboard]="socketService.socketID"
+                class="fi fi-sr-copy-alt btCopy"></i></div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </mat-dialog-content>
+  </div>
+
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <div style="border-top: #c3c3c3 2px solid; width: 29em; margin: 1em 0;"></div>
+  </div>
+
+  <mat-dialog-actions style="margin:0 auto;width: 100%;display: flex; flex-direction: column;">
+    <button (click)="play()" type="button" class="btn buttonSignUP" style="color: white;">PLAY</button>
+  </mat-dialog-actions>
+</div>
