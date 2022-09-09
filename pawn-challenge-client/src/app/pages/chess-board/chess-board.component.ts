@@ -133,9 +133,9 @@ export class ChessBoardComponent implements OnInit {
     return this.gameService.getCurrentUser()
   }
 
-  startGame() {
-    this.gameService.startGame();
-  }
+  // startGame() {
+  //   this.gameService.startGame();
+  // }
 
   backgroundTurn(fromP: Position, toP: Position) {
     this.chessService.fromPosition = fromP;
