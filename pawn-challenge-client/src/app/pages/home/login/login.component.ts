@@ -8,6 +8,8 @@ import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthState } from 'src/app/RxJs/states/auth.state';
+import { ThisReceiver } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private store: Store<{ auth: AuthState }>,
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.user = {
       id: '',
@@ -67,7 +70,9 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(AuthActions.login());
     this.idToken$.subscribe(e => {
       if (e != '')
-        this.dialog.closeAll()
+      alert('Login success')
+        this.dialog.closeAll();
+        this.router.navigateByUrl('/');
     })
   }
 
