@@ -18,7 +18,7 @@ export class ShareService {
   }
 
   cutString(str: string, max: number) {
-    if (str.length <= max) return
+    if (str.length <= max) return str
     return str.substring(0, max - 3) + '...';
   }
 
@@ -28,5 +28,9 @@ export class ShareService {
       x = Math.floor(Math.random() * (max - min) + min);
     } while (x == igno)
     return x
+  }
+
+  getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min) + min);
   }
 }

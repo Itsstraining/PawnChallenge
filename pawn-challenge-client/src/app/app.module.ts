@@ -37,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { AngularFireModule } from '@angular/fire/compat';
 import { authReducer } from './RxJs/reudcers/auth.reducer';
+import { LoadingModule } from './components/loadding/loading/loading.module';
 const config: SocketIoConfig = { url: environment.endPoint, options: {} };
 // service
 
@@ -66,7 +67,7 @@ const config: SocketIoConfig = { url: environment.endPoint, options: {} };
     HttpClientModule,
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebase),
-
+    LoadingModule
   ],
   providers: [
   ],

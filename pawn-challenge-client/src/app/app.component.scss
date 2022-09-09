@@ -40,7 +40,6 @@
   font-size: 2em;
 }
 
-
 .wrapper .sidebar h2 {
   color: #fff;
   text-transform: uppercase;
@@ -113,10 +112,8 @@
   display: list-item;
 }
 
-
 @media (max-height: 500px) {
   .social_media {
-
     display: none !important;
   }
 }
@@ -156,10 +153,19 @@
   padding: 0px !important;
 }
 
-li a{
+li a {
   padding-left: 1em;
   margin-top: 0.7em;
-  i{
+  i {
     padding-right: 0.3em;
+  }
+}
+
+.socID {
+  margin: 2em 0px 0 2em;
+  cursor: pointer;
+  p {
+    font-size: 1.8em;
+    color: white;
   }
 }

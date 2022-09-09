@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Socket } from 'ngx-socket-io';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from '../auth/auth.service';
+import { ShareService } from '../share/share.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +13,26 @@ export class SocketService {
   roomID = ''
   ffishID = ''
 
-  constructor(private socket: Socket, private auth: Auth) {
+  constructor(private socket: Socket, private auth: AuthService, private shareService: ShareService) {
     this.connectServer()
   }
 
   connectServer() {
-    let user = { id: this.randomID(), name: '' }
-    if (this.auth.currentUser != null) {
-      user.id = this.auth.currentUser.uid
-      user.name = this.auth.currentUser.displayName ?? ''
+    if (this.auth.user.id == '') {
+      return
     }
-    let data = { user: user }
+    if (this.socketID != '') return
+    let data = { user: this.auth.user }
     this.socket.emit('connectServer', data)
     this.socket.fromEvent<any>('onConnected').subscribe((e) => {
       this.socketID = e
       console.log(`my socket: [${e}]`)
+
+      this.socket.emit('createRoom')
+      this.socket.fromEvent<any>('onCreateRoomSucess').subscribe((e) => {
+        this.roomID = e
+        console.log(`my room: [${e}]`)
+      })
     })
   }
 

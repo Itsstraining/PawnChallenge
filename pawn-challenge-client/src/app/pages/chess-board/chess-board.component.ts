@@ -8,12 +8,10 @@ import { ChessSkinService } from 'src/app/services/chess-skin/chess-skin.service
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.component';
 import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
-import { SocketService } from 'src/app/services/socket/socket.service';
-import { DialogGameModComponent } from './components/dialog/dialogGamemode/dialog.component';
-import { Player } from 'src/app/models/player.model';
 import { ShareService } from 'src/app/services/share/share.service';
 import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
 import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
+import { DialogInviteComponent } from './components/dialog/dialogInvite/dialog-invite/dialog-invite.component';
 
 @Component({
   selector: 'app-chess-board',
@@ -167,6 +165,11 @@ export class ChessBoardComponent implements OnInit {
         }
       }
     })
+
+
+    this.dialog.open(DialogInviteComponent, {
+      width: '33em',
+    }).afterClosed().subscribe((data)=>{console.log(data)})
   }
   openDialogLose() {
     this.dialog.open(DialogLoseComponent, {
@@ -174,6 +177,9 @@ export class ChessBoardComponent implements OnInit {
       width: '42em',
     });
   }
+
+
+
   openDialogWin() {
     this.dialog.open(DialogWinComponent, {
       panelClass: 'dialogDraw',

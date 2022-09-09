@@ -11,18 +11,24 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ShareService } from '../share/share.service';
+import { SocketService } from '../socket/socket.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  user = { id: '', name: '', img: '' }
   constructor(
-    private Http: HttpClient,
     private auth: Auth,
     private router: Router,
-    private afAuth: AngularFireAuth
-  ) {}
+    private afAuth: AngularFireAuth,
+    private shareService: ShareService,
+  ) {
+
+  }
   public isUserLoggedIn: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+
   getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
       this.auth.onAuthStateChanged(function (user) {

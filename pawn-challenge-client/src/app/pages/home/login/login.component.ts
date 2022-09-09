@@ -66,8 +66,7 @@ export class LoginComponent implements OnInit {
   logIn() {
     this.store.dispatch(AuthActions.login());
     this.idToken$.subscribe(e => {
-      if (e != '')
-        this.dialog.closeAll()
+      this.dialog.closeAll()
     })
   }
 

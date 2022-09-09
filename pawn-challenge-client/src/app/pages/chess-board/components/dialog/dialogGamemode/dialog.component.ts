@@ -13,7 +13,7 @@ export class DialogGameModComponent implements OnInit {
   userName1 = '';
   userName2 = '';
   friendID = '';
-  index = -1
+  index = this.gameService.modSelect
   constructor(
     private dialogRef: MatDialogRef<DialogGameModComponent>,
     public socketService: SocketService,

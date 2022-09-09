@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { AuthSettings } from '@angular/fire/auth';
 import { StringLike } from '@firebase/util';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { ReplaySubject } from 'rxjs';
 import { Cell, Chess } from 'src/app/models/chess.model';
 import { Player } from 'src/app/models/player.model';
 import { Timer } from 'src/app/models/timer';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  modSelect = -1
-  mods: Map<number, { id: number, des: string, img: string }> = new Map()
+  modSelect = 2
+  mods: Map<number, { id: number, des: string, des1: string, img: string }> = new Map()
 
 
   // 0 offline || 1 with BOT || 2 online
@@ -20,27 +22,30 @@ export class GameService {
   time = new Timer()
   //
   timePerTurn = 30
-
+  user = this.authService.user
   player1: Player
-  player2: Player
+  player2!: Player
 
-  constructor() {
-    this.player1 = this.newPlayer('', '', 'a5', 'VHTMXC', true, false, false)
-    this.player2 = this.newPlayer('', '', 'a5', 'vhtmxc', false, false, false)
+  constructor(private authService: AuthService) {
+    this.player1 = this.newPlayer(this.user.id, this.user.name, this.user.img, 'VHTMXC', true, false, false)
+    this.player2 = this.newPlayer('', '', '', 'VHTMXC', true, false, false)
 
     this.mods.set(0, {
       id: 0,
       des: 'Call off with friend',
+      des1: 'CALL OF',
       img: 'pawn.png'
     })
     this.mods.set(1, {
       id: 1,
       des: 'With BOT',
+      des1: 'WITH BOT',
       img: 'knight.png'
     })
     this.mods.set(2, {
       id: 2,
       des: 'Online with new friend',
+      des1: 'ONLINE',
       img: 'rook.png'
     })
   }
@@ -49,6 +54,7 @@ export class GameService {
     return this.mods.get(index) ?? {
       id: -1,
       des: '',
+      des1: '',
       img: '',
     }
   }
@@ -102,7 +108,7 @@ export class GameService {
       }
     }
     this.time.currentTime = this.timePerTurn
-    console.log('turn for '+this.currentUserIDControll)
+    console.log('turn for ' + this.currentUserIDControll)
   }
   isAlly(c1: string, c2: string) {
     let c3 = c1 + c2

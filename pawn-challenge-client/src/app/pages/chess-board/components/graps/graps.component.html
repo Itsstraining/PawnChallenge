@@ -15,7 +15,20 @@
     <div *ngIf="gameService.isGameStart && playerService.player2.id == this.gameService.currentUserIDControll"
       class="chart" style="margin-top: 2em; position: absolute"
       [style]="'animation: timer ' + gameService.timePerTurn + 's infinite linear;'"></div>
-    <img src="../../../../../assets/chess/avatar/{{playerService.player2.img}}.png" class="img" alt="Avatar" />
+    <img *ngIf="playerService.player2.img != ''"
+      src="../../../../../assets/chess/avatar/{{playerService.player2.img}}.png" class="img" alt="Avatar" />
+    <div style="cursor: pointer; padding-top: 6em;" (click)="openDialogNewGame()">
+      <!-- <app-loading *ngIf="playerService.player2.img == ''"></app-loading> -->
+      <div style="">
+        <p >Watting peole...</p>
+      </div>
+      <div style="margin-top: 1.1em;
+      display: flex;
+      justify-content: center;">
+        <p style="font-size: 1em; color: #a5a5a5;">Click to invite</p>
+      </div>
+    </div>
+
     <br />
     <p style="margin-top: 0.5em; font-size: 2em; color: aqua">{{playerService.player2.name}}</p>
   </div>
@@ -64,16 +77,16 @@
   </div>
 
   <div class="row-setting">
-    <div style="display: flex;align-items: center;">
-      <div (click)="openDialogNewGame()" class="box-start">
-        <div class="bt-start">
-          <p>START</p>
-        </div>
-      </div>
-      <div (click)="openDialogNewGame()" style="margin-top: -0.5em; cursor: pointer;">
-        <p style="font-size: 1.6em;font-weight: 500;">MOD: {{getModDes()}}</p>
+    <div class="box-start">
+      <div (click)="clickStart()" class="bt-start">
+        <p>START</p>
       </div>
     </div>
+
+    <div (click)="openDialogNewGame()" style="margin-top: -0.5em; cursor: pointer; margin-left: -2em;">
+      <p style="font-size: 1.6em;font-weight: 500;">GAME MOD: [{{' '+getModDes() +' '}}]</p>
+    </div>
+
     <div class="bt-setting" (click)="openDialogSkin()"><i class="fi fi-sr-settings"></i></div>
   </div>
 </div>

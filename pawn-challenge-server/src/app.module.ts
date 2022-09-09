@@ -12,6 +12,7 @@ import * as env from 'environment'
 import { UserModule } from './modules/user.module';
 import { AuthService } from './services/auth/auth.service';
 import { ChessGateway } from './socketIO/Chess/chess.gateway';
+import { ChessService } from './socketIO/Chess/chess.service';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ChessGateway } from './socketIO/Chess/chess.gateway';
   providers: [
     AppService,
     AuthService,
+    ChessService,
     ChessGateway
   ],
 })

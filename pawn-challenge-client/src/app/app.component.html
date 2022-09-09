@@ -1,6 +1,7 @@
 <div class="wrapper">
   <div class="sidebar">
-    <div style="position: fixed; background: #262421; height: 100vh; overflow: auto;background-image: linear-gradient(to bottom, #312e2b, #817f7e);">
+    <div
+      style="position: fixed; background: #262421; height: 100vh; overflow: auto;background-image: linear-gradient(to bottom, #312e2b, #817f7e);">
       <div class="imgDiv">
         <a style="padding: 2em 0 1.5em;" href=""><img src="../assets/chess/Logo2.png" class="img" alt="" /></a>
       </div>
@@ -60,13 +61,21 @@
           </li>
 
           <li style="padding-top: 4em;" *ngIf="auth.currentUser">
-            <div style="display: flex; justify-content: center;"
-              class="button-footer-title-2" (click)="logOut()">
+            <div style="display: flex; justify-content: center;" class="button-footer-title-2" (click)="logOut()">
               <span style="font-size: 1em;">
                 Logout
               </span>
             </div>
           </li>
+
+          <div class="socID" (click)="clickCopy()" [cdkCopyToClipboard]="socketService.socketID">
+            <div>
+              <p>ConnectID:</p>
+            </div>
+            <div>
+              <p>{{shareService.cutString(socketService.socketID,15)}}</p>
+            </div>
+          </div>
 
         </ul>
       </ul>

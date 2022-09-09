@@ -27,7 +27,7 @@ export class GrapsComponent implements OnInit {
   }
 
   getModDes() {
-    let str = this.gameService.getMod(this.gameService.modSelect).des
+    let str = this.gameService.getMod(this.gameService.modSelect).des1
     if (str == '') return 'Mod need to chosse..'
     return str
   }
@@ -42,40 +42,42 @@ export class GrapsComponent implements OnInit {
     });
   }
 
+  clickStart() {
+    if (this.gameService.modSelect == 0 || this.gameService.modSelect == 1 || this.gameService.modSelect == 2) {
+
+      let ran1 = this.shareService.getRandomIntAndIgno(1, 19, 20)
+      this.gameService.player1 = this.gameService.newPlayer(
+        '', '',
+        'a' + this.shareService.getRandomIntAndIgno(1, 19, ran1).toString(),
+        'VHTMXC', true, false, false
+      )
+      this.chessS.resetTable(this.chessS.table, this.gameService.player1)
+      this.hService.graps.length = 0
+      this.hService.grapsHalf.length = 0
+
+      if (this.gameService.modSelect == 0) {
+        this.gameService.player2 = this.gameService.newPlayer(
+          '', '',
+          'a' + ran1.toString(), 'vhtmxc',
+          false, false, false
+        )
+        this.gameService.startGame(
+          this.gameService.player1,
+          this.gameService.player2,
+        )
+      } else if (this.gameService.modSelect == 1) {
+
+      }
+    }
+  }
+
   openDialogNewGame() {
     const dialogRef = this.dialog.open(DialogGameModComponent, {
       width: 'auto',
       height: 'auto',
     });
     dialogRef.afterClosed().subscribe((e: { mess: string, mod: number, name1: string, name2: string }) => {
-      if (e.mod == 0 || e.mod == 1 || e.mod == 2) {
-        let ran1 = this.shareService.getRandomIntAndIgno(1, 19, 20)
-        console.log(`Dialog result: ${e.mess}`);
-        if (e.mod == 0 || e.mod == 1) {
-          this.gameService.player1 = this.gameService.newPlayer(
-            e.name1, e.name1,
-            'a' + this.shareService.getRandomIntAndIgno(1, 19, ran1).toString(),
-            'VHTMXC', true, false, false
-          )
-          this.chessS.resetTable(this.chessS.table, this.gameService.player1)
-          this.hService.graps.length = 0
-          this.hService.grapsHalf.length = 0
 
-          if (e.mod == 0) {
-            this.gameService.player2 = this.gameService.newPlayer(
-              e.name2, e.name2,
-              'a' + ran1.toString(), 'vhtmxc',
-              false, false, false
-            )
-            this.gameService.startGame(
-              this.gameService.player1,
-              this.gameService.player2,
-            )
-          } else if (e.mod == 1) {
-
-          }
-        }
-      }
     });
   }
 

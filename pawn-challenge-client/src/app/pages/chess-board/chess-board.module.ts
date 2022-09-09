@@ -16,6 +16,8 @@ import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose
 import { DialogGameModComponent } from './components/dialog/dialogGamemode/dialog.component';
 import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
 import { DialogSkinComponent1 } from './components/dialog-skin/dialog-skin.component';
+import { LoadingModule } from 'src/app/components/loadding/loading/loading.module';
+import { DialogInviteComponent } from './components/dialog/dialogInvite/dialog-invite/dialog-invite.component';
 @NgModule({
   declarations: [
     ChessBoardComponent,
@@ -25,7 +27,8 @@ import { DialogSkinComponent1 } from './components/dialog-skin/dialog-skin.compo
     DialogDrawComponent,
     DialogLoseComponent,
     DialogGameModComponent,
-    DialogToCaptureComponent
+    DialogToCaptureComponent,
+    DialogInviteComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { DialogSkinComponent1 } from './components/dialog-skin/dialog-skin.compo
     FontAwesomeModule,
     MaterialModule,
     FormsModule,
+    LoadingModule
   ]
 })
 export class ChessBoardModule {

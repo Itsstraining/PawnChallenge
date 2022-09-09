@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { RegisterComponent } from './pages/home/register/register.component';
 import { Observable } from 'rxjs';
 import { SocketService } from './services/socket/socket.service';
+import { ShareService } from './services/share/share.service';
 
 
 
@@ -31,31 +32,52 @@ export class AppComponent {
   password: string = '';
   constructor(
     private store: Store<{ auth: AuthState }>,
-    private AuthService: AuthService,
+    private authService: AuthService,
     public dialog: MatDialog,
     private Http: HttpClient,
     public auth: Auth,
     private router: Router,
-    private socketService: SocketService // init!!!!!
+    public socketService: SocketService, // init!!!!!
+    public shareService: ShareService
   ) {
 
-    this.AuthService.getCurrentUser().then(
+    ////////////////////////////////////////////////////////////////
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.socketService.connectServer()
+        this.authService.user.id = user.uid
+        this.authService.user.name = user.displayName ?? ''
+        localStorage.setItem('id', user.uid)
+        localStorage.setItem('name', user.displayName ?? '')
+      }
+    })
+    this.authService.user.id = localStorage.getItem('id') ?? ''
+    this.authService.user.name = localStorage.getItem('name') ?? ''
+    this.authService.user.img = localStorage.getItem('img') ?? ''
+    if (this.authService.user.img == '') {
+      this.authService.user.img = 'a' + this.shareService.getRandomInt(1, 19).toString()
+      localStorage.setItem('img', this.authService.user.img)
+    }
+    ////////////////////////////////////////////////////////////////
+
+
+    this.authService.getCurrentUser().then(
       (user) =>
         (this.photourl = user.photourl != null ? user.photourl : user.photo)
     );
-    this.AuthService.getCurrentUser().then(
+    this.authService.getCurrentUser().then(
       (user) =>
-        (this.displayName =
-          user.displayName != null ? user.displayName : user.email)
+      (this.displayName =
+        user.displayName != null ? user.displayName : user.email)
     );
-    this.AuthService.isUserLoggedIn.subscribe((value) => {
+    this.authService.isUserLoggedIn.subscribe((value) => {
       if (value) {
-        this.AuthService.getCurrentUser().then(
+        this.authService.getCurrentUser().then(
           (user) =>
-            (this.displayName =
-              user.displayName != null ? user.displayName : user.email)
+          (this.displayName =
+            user.displayName != null ? user.displayName : user.email)
 
-        );console.log(this.displayName)
+        ); console.log(this.displayName)
       } else {
         this.displayName = 'null';
       }
@@ -71,6 +93,9 @@ export class AppComponent {
         });
       }
     });
+  }
+  clickCopy() {
+    this.shareService.openSnackbar('copied', '✔️')
   }
 
   token: string = '';
@@ -124,7 +149,7 @@ export class AppComponent {
       return;
     }
     // this.store.dispatch(AuthActions.register({ user: newForm }));
-}
+  }
 
 
 }

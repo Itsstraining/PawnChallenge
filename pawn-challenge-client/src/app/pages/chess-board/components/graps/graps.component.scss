@@ -105,8 +105,10 @@ tr:nth-child(even) {
 .row-setting {
   width: 100%;
   display: flex;
-  padding: 3.5em 4em;
+  padding: 0 4em;
   justify-content: space-between;
+  height: 12em;
+  align-items: center;
   .bt-setting {
     i {
       font-size: 3em;
