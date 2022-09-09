@@ -10,27 +10,39 @@ import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { RegisterComponent } from './pages/home/components/register/register.component';
 import { AuthState } from './RxJs/states/auth.state';
-import { onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   formRegister!: FormGroup;
   title = 'PawnChallengeClient';
   displayName = '';
   photourl = '';
+  user: User;
   email: string = '';
   password: string = '';
+
   constructor(
     private store: Store<{ auth: AuthState }>,
     private AuthService: AuthService,
     public dialog: MatDialog,
-    private Http: HttpClient
+    private Http: HttpClient,
+    private router: Router,
+    private auth: Auth,
   ) {
+
+    this.user={
+      id: '',
+      createAt: '',
+      email: '',
+      password: '',
+      userName: '',
+    };
     this.AuthService.getCurrentUser().then(
       (user) =>
         (this.photourl = user.photourl != null ? user.photourl : user.photo)
@@ -84,17 +96,6 @@ export class AppComponent {
     });
   }
 
-  openDialogRegister() {
-    const dialogRef = this.dialog.open(RegisterComponent, {
-      panelClass: 'dialogLogin', 
-      width: 'auto',
-      height: 'auto',
-      
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   register(user: User): Observable<User[]> {
     return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
   }
@@ -102,21 +103,7 @@ export class AppComponent {
     return this.Http.post<User[]>(`${environment.endPoint}/user/login`, user);
   }
   
-  registerAccount() {
-    let newForm = {
-      ...this.formRegister.value,
-    };
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
-    }
 
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-    this.store.dispatch(AuthActions.register({ user: newForm }));
-}
 
 
 }
