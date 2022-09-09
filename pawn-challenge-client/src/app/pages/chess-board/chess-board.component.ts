@@ -57,22 +57,9 @@ export class ChessBoardComponent implements OnInit {
       this.addGrap(toPostion)
       // lưu màu nước đi
       this.backgroundTurn(fromP, toPostion);
-<<<<<<< HEAD
       // di chuyển lỗi
       this.connectSocket(fromP, toPostion);
     }
-=======
-      if (this.chess.name.toLowerCase() == 'c' && (this.chess.position.y == 0 || this.chess.position.y == 7)) {
-        this.openDialogToCapture(this.chess)
-      }
-      else {
-        this.gameService.changeCurrentPlayer(this.gameService.player1, this.gameService.player2);
-        let isCheckmat = this.chessService.isCheckmatAll(this.chess, this.table)
-        if (isCheckmat) {
-          this.getCurrentUser().chessControl.isCheckmat = true
-        }
-      }
->>>>>>> 5f7b702d256cfa424ae7b4af7319f731483db0b8
 
       this.chessService.setDrawOrWin(this.table, this.gameService.getCurrentUser())
     }
@@ -105,10 +92,6 @@ export class ChessBoardComponent implements OnInit {
 
       this.historyMoveService.createGrapPosition();
       this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
-<<<<<<< HEAD
-=======
-      this.historyMoveService.sendDataMove(this.grap);
->>>>>>> 5f7b702d256cfa424ae7b4af7319f731483db0b8
     }
   }
 

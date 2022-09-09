@@ -77,7 +77,6 @@ export class LoginComponent implements OnInit {
       alert('Please enter password');
       return;
       }
-
       this.authService.loginWithAccount(this.email, this.password);
       // this.store.dispatch(AuthActions.login());
       this.email = '';
