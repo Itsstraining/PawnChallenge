@@ -11,17 +11,18 @@ import { ShareService } from '../share/share.service';
 })
 export class ChessService {
   chessAccess: Map<string, Chess> = new Map<string, Chess>();
-  table: Cell[][]
+  table: Cell[][] = []
   chessVector: Map<string, Position> = new Map<string, Position>();
   fromPosition: Position = { x: -1, y: -1 };
   toPosition: Position = { x: -1, y: -1 };
   gameOver: ReplaySubject<{ isDraw: boolean, winer: Player }>
 
+  strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
+
   constructor(private gameService: GameService, private shareService: ShareService) {
     this.createChessAccess();
-    // let strBoard = '    v   |        |        |        |        |        |        |XMTHVTMX'
-    let strBoard = 'xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX'
-    this.table = this.setChessToBoard(strBoard, this.gameService.player1)
+    this.createTable(this.table)
+    this.setBoardWithString(this.strBoard, this.table, this.gameService.player1)
     this.createVectorMove();
     this.gameOver = new ReplaySubject(3);
   }
@@ -230,7 +231,7 @@ export class ChessService {
       table[toPosition.y][toPosition.x].hasChess = true
       table[toPosition.y][toPosition.x].chess = chess
 
-      if (chess.name.toLowerCase() == 'v' && chess.firstStep) {
+      if (chess.name.toLowerCase() == 'v') {
         if (toPosition.x == 2 && toPosition.y == 0) {
           this.moveNoDot(table[0][0].chess, { x: 3, y: 0 }, table)
         } else if (toPosition.x == 6 && toPosition.y == 0) {
@@ -244,7 +245,7 @@ export class ChessService {
       return true
     } else {
       if (toPosition != chess.position) {
-        this.shareService.openSnackbar('Nước đi không hợp lệ!', 'OK');
+        this.shareService.openSnackbar('Invalid move!', 'OK');
       }
       return false
     }
@@ -259,16 +260,21 @@ export class ChessService {
     table[toPosition.y][toPosition.x].hasChess = true
     table[toPosition.y][toPosition.x].chess = chess
   }
-  //xmthvtmx|cccccccc|        |        |        |        |CCCCCCCC|XMTHVTMX
-  setChessToBoard(txtTable: string, player: Player): Cell[][] {
-    let res: Cell[][] = []
+  resetTable(table: Cell[][], player: Player) {
+    for (let i = 0; i < table.length; i++) {
+      for (let j = 0; j < table[i].length; j++) {
+        table[i][j] = this.newCell(i, j)
+      }
+    }
+    this.setBoardWithString(this.strBoard, table, player)
+  }
+  setBoardWithString(txtTable: string, table: Cell[][], player: Player): Cell[][] {
     try {
       let rows = txtTable.split('|')
       for (let i = 0; i < 8; i++) {
         let chessTxtS = rows[i].split('')
-        let arr: Cell[] = []
         for (let j = 0; j < 8; j++) {
-          let cell = this.newCell(i, j)
+
           if (chessTxtS[j] != ' ') {
             let temp = this.chessAccess.get(chessTxtS[j])
             if (temp != undefined) {
@@ -277,26 +283,24 @@ export class ChessService {
                   temp.isPawnUp = player.isBase
                 }
               }
-              let id = cell.id
-              cell.chess = { ...temp }
+              let id = table[i][j].id
+              table[i][j].chess = { ...temp }
               if (id == '') {
-                cell.chess.id = temp.name + i + j
+                table[i][j].chess.id = temp.name + i + j
               }
-              cell.hasChess = true
-              cell.chess.position = cell.position
+              table[i][j].hasChess = true
+              table[i][j].chess.position = table[i][j].position
             }
           }
-          if (cell.id == '') {
-            cell.id = `[${cell.position.x},${cell.position.y}]`
+          if (table[i][j].id == '') {
+            table[i][j].id = `[${table[i][j].position.x},${table[i][j].position.y}]`
           }
-          arr.push(cell)
         }
-        res.push(arr)
       }
     } catch (error) {
       console.log(error)
     }
-    return res
+    return table
   }
   setChessToBoard1(stringBoard: string) {
     let table: Cell[][] = []
@@ -544,13 +548,22 @@ export class ChessService {
       }
     }
   }
+  createTable(table: Cell[][]) {
+    for (let i = 0; i < 8; i++) {
+      let arr: Cell[] = []
+      for (let j = 0; j < 8; j++) {
+        arr.push(this.newCell(i, j))
+      }
+      table.push(arr)
+    }
+  }
   createChessAccess() {
     //black
     this.chessAccess.set('x', {
       id: '',
       name: 'x',
       img: 'br.png',
-      icon: '',
+      icon: 'fi-sr-chess-rook',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -559,7 +572,7 @@ export class ChessService {
       id: '',
       name: 'h',
       img: 'bq.png',
-      icon: '',
+      icon: 'fi-sr-chess-queen',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -568,7 +581,7 @@ export class ChessService {
       id: '',
       name: 't',
       img: 'bb.png',
-      icon: '',
+      icon: 'fi-sr-chess-bishop',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -577,7 +590,7 @@ export class ChessService {
       id: '',
       name: 'v',
       img: 'bk.png',
-      icon: '',
+      icon: 'fi-sr-chess-king',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -586,7 +599,7 @@ export class ChessService {
       id: '',
       name: 'm',
       img: 'bn.png',
-      icon: '',
+      icon: 'fi-sr-chess-knight',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -595,7 +608,7 @@ export class ChessService {
       id: '',
       name: 'c',
       img: 'bp.png',
-      icon: '',
+      icon: 'fi-sr-chess-pawn',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -606,7 +619,7 @@ export class ChessService {
       id: '',
       name: 'X',
       img: 'wr.png',
-      icon: '',
+      icon: 'fi-rr-chess-rook',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -615,7 +628,7 @@ export class ChessService {
       id: '',
       name: 'H',
       img: 'wq.png',
-      icon: '',
+      icon: 'fi-rr-chess-queen',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -624,7 +637,7 @@ export class ChessService {
       id: '',
       name: 'T',
       img: 'wb.png',
-      icon: '',
+      icon: 'fi-rr-chess-bishop',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -633,7 +646,7 @@ export class ChessService {
       id: '',
       name: 'V',
       img: 'wk.png',
-      icon: '',
+      icon: 'fi-rr-chess-king',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -642,7 +655,7 @@ export class ChessService {
       id: '',
       name: 'M',
       img: 'wn.png',
-      icon: '',
+      icon: 'fi-rr-chess-knight',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false
@@ -651,7 +664,7 @@ export class ChessService {
       id: '',
       name: 'C',
       img: 'wp.png',
-      icon: '',
+      icon: 'fi-br-chess-pawn',
       firstStep: true,
       position: { x: 0, y: 0 },
       isPawnUp: false

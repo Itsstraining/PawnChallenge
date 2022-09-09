@@ -5,10 +5,12 @@ export class Timer {
   isStart = false
   private isPause = false
   private intervalId: any
-  isTimeOut: ReplaySubject<boolean>
+  $timeOut: ReplaySubject<boolean>
+  isTimeOut: boolean
 
   constructor() {
-    this.isTimeOut = new ReplaySubject(3);
+    this.$timeOut = new ReplaySubject(3);
+    this.isTimeOut = false
   }
   startCountDown() {
     this.isStart = true
@@ -16,7 +18,8 @@ export class Timer {
       if (!this.isPause) {
         this.currentTime--
         if (this.currentTime === 0) {
-          this.isTimeOut.next(true)
+          this.isTimeOut = true
+          this.$timeOut.next(true)
           clearInterval(this.intervalId)
         }
       }

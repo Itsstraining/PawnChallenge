@@ -46,32 +46,7 @@
   }
 }
 
-.box-start {
-  position: absolute;
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.32);
-  border-radius: 15px;
-  .bt-start {
-    cursor: pointer;
-    border-radius: 0.5em;
-    background-color: #769656;
-    padding: 1.5em 3em;
-    p {
-      color: white;
-      padding: 0;
-      margin: 0;
-      font-size: 2em;
-    }
-  }
-  .bt-start:hover {
-    background-color: #79a053;
-  }
-}
+
 
 .content-chess-app {
   display: flex;
