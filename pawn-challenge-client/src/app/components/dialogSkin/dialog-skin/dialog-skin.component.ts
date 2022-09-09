@@ -93,7 +93,7 @@ export class DialogSkinComponent implements OnInit {
       },
       {
         name: 'Game Room',
-        folderName: 'Game Room',
+        folderName: 'Game-Room',
         isSelect: false
       },
       {

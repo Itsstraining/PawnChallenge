@@ -91,7 +91,7 @@ export class ChessSkinService {
         isSelect: false
       },
       {
-        name: 'Game Room',
+        name: 'GameRoom',
         folderName: 'Game-Room',
         isSelect: false
       },

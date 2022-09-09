@@ -38,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { AngularFireModule } from '@angular/fire/compat';
 import { authReducer } from './RxJs/reudcers/auth.reducer';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: environment.endPoint, options: {} };
 // service
 
 
