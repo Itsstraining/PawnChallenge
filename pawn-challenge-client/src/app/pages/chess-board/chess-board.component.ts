@@ -43,25 +43,25 @@ export class ChessBoardComponent implements OnInit {
   }
 
   //Cầm 1 con cờ
-  mousedownImg(chess: Chess, ev: any) {
-    if (!this.gameService.isGameStart) { this.shareService.openSnackbar("Just click START", 'OK'); return }
-    if (this.gameService.getCurrentUser().chessControl.isBot) return
-    if (this.gameService.getCurrentUser().chessControl.isNewPlayer) return
-    this.chessService.clearDot();
-    if (ev.which != 1) {
-      return;
-    }
+  // mousedownImg(chess: Chess, ev: any) {
+  //   if (!this.gameService.isGameStart) { this.shareService.openSnackbar("Just click START", 'OK'); return }
+  //   if (this.gameService.getCurrentUser().chessControl.isBot) return
+  //   if (this.gameService.getCurrentUser().chessControl.isNewPlayer) return
+  //   this.chessService.clearDot();
+  //   if (ev.which != 1) {
+  //     return;
+  //   }
 
-    this.chess = chess;
-    if (this.gameService.canPickChess(this.getCurrentUser().chessControl.chessNameCT, chess.name)) {
-      this.grap = this.historyMoveService.newGrap();
-      this.chess = chess;
-      let dots = this.chessService.getEffDots(chess, this.table)
-      this.chessService.setDotsToTable(dots, this.table);
-      let dotsban = this.chessService.getDotban(chess, this.table, dots)
-      this.chessService.setDotsbanToTable(dotsban, this.table)
-    }
-  }
+  //   this.chess = chess;
+  //   if (this.gameService.canPickChess(this.getCurrentUser().chessControl.chessNameCT, chess.name)) {
+  //     this.grap = this.historyMoveService.newGrap();
+  //     this.chess = chess;
+  //     let dots = this.chessService.getEffDots(chess, this.table)
+  //     this.chessService.setDotsToTable(dots, this.table);
+  //     let dotsban = this.chessService.getDotban(chess, this.table, dots)
+  //     this.chessService.setDotsbanToTable(dotsban, this.table)
+  //   }
+  // }
 
   //Thả 1 con cờ
   drop(ev: any, toPostion: Position) {
@@ -93,6 +93,35 @@ export class ChessBoardComponent implements OnInit {
     this.chessService.clearDot();
   }
 
+  dragend(ev: any) {
+    if (ev.which != 1) {
+      return;
+    }
+  }
+
+  //Cầm 1 con cờ
+  mousedownImg(chess: Chess, ev: any) {
+    this.chessService.clearDot();
+    if (ev.which != 1) {
+      return;
+    }
+    this.chess = chess;
+    if (
+      this.gameService.canPickChess(this.getCurrentUser().chessControl.chessNameCT, chess.name)
+    ) {
+      this.grap = this.historyMoveService.newGrap();
+      this.chess = chess;
+      let dots = this.chessService.getEffDots(chess, this.table)
+      this.chessService.setDotsToTable(dots, this.table);
+      let dotsban = this.chessService.getDotban(chess, this.table, dots)
+      this.chessService.setDotsbanToTable(dotsban, this.table)
+
+      this.historyMoveService.createGrapPosition();
+      this.grap.grapFrom = this.historyMoveService.toFormatPosition(chess.position);
+      // this.historyMoveService.sendDataMove(this.grap);
+    }
+  }
+
   isCheckmat(nameChess: string) {
     let user = this.getCurrentUser()
     if (user.chessControl.isCheckmat && this.chessService.isAlly(user.chessControl.chessNameCT, nameChess)) {
@@ -102,6 +131,10 @@ export class ChessBoardComponent implements OnInit {
   }
   getCurrentUser() {
     return this.gameService.getCurrentUser()
+  }
+
+  startGame() {
+    this.gameService.startGame();
   }
 
   backgroundTurn(fromP: Position, toP: Position) {

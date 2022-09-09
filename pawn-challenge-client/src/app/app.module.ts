@@ -36,12 +36,12 @@ import { DialogLoseComponent } from './components/dialog-lose/dialog-lose.compon
 import { DialogWinComponent } from './components/dialog-win/dialog-win.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { RegisterComponent } from './pages/home/register/register.component';
 import { OnlineComponent } from './pages/home/components/play-chesss/online/online.component';
 import { LearnComponent } from './pages/home/components/learn/learn.component';
 import { PlayChesssComponent } from './pages/home/components/play-chesss/play-chesss.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { authReducer } from './RxJs/reudcers/auth.reducer';
+import { UserComponent } from './pages/home/components/user/user.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 // service
 
@@ -58,6 +58,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PlayChesssComponent,
     LearnComponent,
     OnlineComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
