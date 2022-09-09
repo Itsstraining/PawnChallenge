@@ -10,7 +10,6 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { DialogComponent } from './components/dialogGamemode/dialog.component';
 import { MaterialModule } from './material.module';
-import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-skin.component';
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -43,7 +42,13 @@ const config: SocketIoConfig = { url: environment.endPoint, options: {} };
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
+  declarations: [
+    AppComponent,
+    DialogComponent,
+    DialogLoseComponent,
+    DialogWinComponent,
+    HomePagesComponent,
+    LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

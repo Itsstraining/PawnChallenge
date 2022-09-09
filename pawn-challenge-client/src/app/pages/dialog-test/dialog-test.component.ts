@@ -4,7 +4,6 @@ import { DialogDrawComponent } from 'src/app/components/dialog-draw/dialog-draw.
 import { DialogLoseComponent } from 'src/app/components/dialog-lose/dialog-lose.component';
 import { DialogWinComponent } from 'src/app/components/dialog-win/dialog-win.component';
 import { DialogComponent } from 'src/app/components/dialogGamemode/dialog.component';
-import { DialogSkinComponent } from 'src/app/components/dialogSkin/dialog-skin/dialog-skin.component';
 
 @Component({
   selector: 'app-dialog-test',
@@ -13,8 +12,7 @@ import { DialogSkinComponent } from 'src/app/components/dialogSkin/dialog-skin/d
 })
 export class DialogTestComponent implements OnInit {
   constructor(public dialog: MatDialog) {
-    this.openDialogSkin();
-   }
+  }
   openDialogGamemode() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: 'auto',
@@ -25,20 +23,9 @@ export class DialogTestComponent implements OnInit {
     });
   }
 
-
-  openDialogSkin() {
-    const dialogRef = this.dialog.open(DialogSkinComponent, {
-      width: 'auto',
-      height: 'auto',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
   openDialogWin() {
     const dialogRef = this.dialog.open(DialogWinComponent, {
-      panelClass: 'dialogWin', 
+      panelClass: 'dialogWin',
       width: '42em',
     });
     dialogRef.afterClosed().subscribe(result => {
