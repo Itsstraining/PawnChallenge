@@ -14,18 +14,18 @@ import { DialogWinComponent } from './components/dialog/dialog-win/dialog-win.co
 import { DialogDrawComponent } from './components/dialog/dialog-draw/dialog-draw.component';
 import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
 import { DialogGameModComponent } from './components/dialog/dialogGamemode/dialog.component';
-import { DialogSkinComponent } from './components/dialog/dialog-skin/dialog-skin.component';
-import { DialogToCaptureComponent } from './components/dialog/dialog-to-capture/dialog-to-capture.component';
+import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
+import { DialogSkinComponent1 } from './components/dialog-skin/dialog-skin.component';
 @NgModule({
   declarations: [
     ChessBoardComponent,
     GrapsComponent,
-    DialogSkinComponent,
-    DialogToCaptureComponent,
+    DialogSkinComponent1,
     DialogWinComponent,
     DialogDrawComponent,
     DialogLoseComponent,
-    DialogGameModComponent
+    DialogGameModComponent,
+    DialogToCaptureComponent
   ],
   imports: [
     CommonModule,

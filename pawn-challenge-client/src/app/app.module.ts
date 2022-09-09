@@ -10,7 +10,6 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { DialogComponent } from './components/dialogGamemode/dialog.component';
 import { MaterialModule } from './material.module';
-import { DialogSkinComponent } from './components/dialogSkin/dialog-skin/dialog-skin.component';
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -38,12 +37,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { AngularFireModule } from '@angular/fire/compat';
 import { authReducer } from './RxJs/reudcers/auth.reducer';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: environment.endPoint, options: {} };
 // service
 
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent, DialogSkinComponent,DialogLoseComponent,DialogWinComponent,HomePagesComponent,LoginComponent],
+  declarations: [
+    AppComponent,
+    DialogComponent,
+    DialogLoseComponent,
+    DialogWinComponent,
+    HomePagesComponent,
+    LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

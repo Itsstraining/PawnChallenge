@@ -5,7 +5,7 @@ import { GameService } from 'src/app/services/game/game.service';
 import { DialogGameModComponent } from '../dialog/dialogGamemode/dialog.component';
 import { ChessService } from 'src/app/services/chess/chess.service';
 import { ShareService } from 'src/app/services/share/share.service';
-import { DialogSkinComponent } from '../dialog/dialog-skin/dialog-skin.component';
+import { DialogSkinComponent1 } from '../dialog-skin/dialog-skin.component';
 
 @Component({
   selector: 'app-graps',
@@ -33,7 +33,7 @@ export class GrapsComponent implements OnInit {
   }
 
   openDialogSkin() {
-    const dialogRef = this.dialog.open(DialogSkinComponent, {
+    const dialogRef = this.dialog.open(DialogSkinComponent1, {
       width: 'auto',
       height: 'auto',
     });

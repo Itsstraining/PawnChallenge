@@ -12,8 +12,8 @@ import { SocketService } from 'src/app/services/socket/socket.service';
 import { DialogGameModComponent } from './components/dialog/dialogGamemode/dialog.component';
 import { Player } from 'src/app/models/player.model';
 import { ShareService } from 'src/app/services/share/share.service';
-import { DialogToCaptureComponent } from './components/dialog/dialog-to-capture/dialog-to-capture.component';
 import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
+import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
 
 @Component({
   selector: 'app-chess-board',
