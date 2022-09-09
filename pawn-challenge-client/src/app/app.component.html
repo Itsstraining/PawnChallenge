@@ -49,14 +49,14 @@
               </span>
             </div>
 
-            <div (click)="openDialogRegister()" style="margin-top: 4em;">
+            <!-- <div (click)="openDialogRegister()" style="margin-top: 4em;">
               <button (click)=" registerAccount()" class="button-footer-title-2"
                 *ngIf="!(idToken$ | async) as idToken;">
                 <span style="font-size: 1em;margin-left: 2.5em;">
                   Sign Up
                 </span>
               </button>
-            </div>
+            </div> -->
           </li>
 
           <li style="padding-top: 4em;" *ngIf="auth.currentUser">
@@ -71,13 +71,27 @@
         </ul>
       </ul>
       <div class="social_media"></div>
-
     </div>
   </div>
+
+
 
   <div class="main_content1" id="main">
     <div class="info">
       <!-- <div> -->
+      <div class="hearder2" >
+        <div class="dropdown" style="float:right;">
+          <button class="dropbtn">
+            <div *ngIf="displayName" class="name" style="font-size: 1em; padding-top: 0.2em;">
+              {{displayName}}
+            </div>
+          </button>
+          <div class="dropdown-content">
+            <a href="info">Thông tin của bạn </a>
+
+          </div>
+        </div>
+      </div>
       <router-outlet></router-outlet>
       <!-- </div> -->
     </div>

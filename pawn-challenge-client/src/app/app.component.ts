@@ -15,8 +15,6 @@ import { RegisterComponent } from './pages/home/register/register.component';
 import { Observable } from 'rxjs';
 import { SocketService } from './services/socket/socket.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,38 +29,42 @@ export class AppComponent {
   password: string = '';
   constructor(
     private store: Store<{ auth: AuthState }>,
-    private AuthService: AuthService,
+    public AuthService: AuthService,
     public dialog: MatDialog,
     private Http: HttpClient,
     public auth: Auth,
     private router: Router,
     private socketService: SocketService // init!!!!!
   ) {
-
     this.AuthService.getCurrentUser().then(
       (user) =>
         (this.photourl = user.photourl != null ? user.photourl : user.photo)
     );
+
     this.AuthService.getCurrentUser().then(
       (user) =>
-        (this.displayName =
-          user.displayName != null ? user.displayName : user.email)
+      (this.displayName =
+        user.displayName != null ? user.displayName : user.email)
     );
+
     this.AuthService.isUserLoggedIn.subscribe((value) => {
       if (value) {
         this.AuthService.getCurrentUser().then(
           (user) =>
-            (this.displayName =
-              user.displayName != null ? user.displayName : user.email)
-
-        );console.log(this.displayName)
+          (this.displayName =
+            user.displayName != null ? user.displayName : user.email)
+        );
+        console.log(this.displayName);
       } else {
-        this.displayName = 'null';
+        this.displayName = '';
       }
     });
+
+
   }
   ngOnInit(): void {
-    console.log(this.displayName)
+    // console.log(this.displayName)
+    console.log(this.photourl);
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.idToken$.subscribe((value) => {
@@ -97,14 +99,16 @@ export class AppComponent {
       panelClass: 'dialogLogin',
       width: 'auto',
       height: 'auto',
-
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
   register(user: User): Observable<User[]> {
-    return this.Http.post<User[]>(`${environment.endPoint}/user/register`, user);
+    return this.Http.post<User[]>(
+      `${environment.endPoint}/user/register`,
+      user
+    );
   }
   loginWithUserNameAndPassword(user: User): Observable<User[]> {
     return this.Http.post<User[]>(`${environment.endPoint}/user/login`, user);
@@ -124,7 +128,5 @@ export class AppComponent {
       return;
     }
     // this.store.dispatch(AuthActions.register({ user: newForm }));
-}
-
-
+  }
 }
