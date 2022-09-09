@@ -1,42 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { GameService } from 'src/app/services/game/game.service';
+import { ShareService } from 'src/app/services/share/share.service';
+import { SocketService } from 'src/app/services/socket/socket.service';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
-  indexSelect = 0
-  arr = [
-    {
-      title: "Call off with friend",
-      img: "../../../assets/ImageGamemode-Win-Lose/pawn.png"
-    },
-    {
-      title: "With BOT",
-      img: "../../../assets/ImageGamemode-Win-Lose/knight.png"
-    },
-    {
-      title: "Online with new friend",
-      img: "../../../assets/ImageGamemode-Win-Lose/rook.png"
-    },
-  ]
-  constructor(private dialogRef: MatDialogRef<DialogComponent>) { }
+export class DialogGameModComponent implements OnInit {
+  userName1 = '';
+  userName2 = '';
+  friendID = '';
+  index = -1
+  constructor(
+    private dialogRef: MatDialogRef<DialogGameModComponent>,
+    public socketService: SocketService,
+    public shareService: ShareService,
+    public gameService: GameService
+  ) { }
 
   ngOnInit(): void {
   }
-
   changeIndexSelect(i: number) {
-    this.indexSelect = i
+    this.index = i
   }
 
   play() {
-    let str = ''
-    this.indexSelect == 0 ? str = 'call-off'
-      : this.indexSelect == 1 ? str = 'with-BOT'
-        : this.indexSelect == 2 ? str = 'online'
-          : str = ''
-    this.dialogRef.close(str)
+    if(this.index == -1) return
+    this.gameService.modSelect = this.index
+    if (this.userName1 == '') this.userName1 = 'Player 1'
+    if (this.userName2 == '') this.userName2 = 'Player 2'
+    this.dialogRef.close({ mess: this.gameService.getMod(this.gameService.modSelect), mod: this.gameService.modSelect, name1: this.userName1, name2: this.userName2 })
   }
+
+  clickCopy() {
+    this.shareService.openSnackbar('copied', '✔️')
+  }
+
 }

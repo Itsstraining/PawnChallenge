@@ -15,5 +15,7 @@ export interface ChessControl {
   time: Timer
   chessSDie: String[]
   isCheckmat: boolean
+  isBot: boolean // for play with bot
+  isNewPlayer: boolean // for play online
 }
 

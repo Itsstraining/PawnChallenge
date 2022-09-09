@@ -12,6 +12,13 @@ import { AuthState } from './RxJs/states/auth.state';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+<<<<<<< HEAD
+=======
+import { SocketService } from './services/socket/socket.service';
+
+
+
+>>>>>>> 4afeb657dc1b3a1f7295f4701ed8061c14f6c9c5
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,6 +40,11 @@ export class AppComponent implements OnInit {
     private Http: HttpClient,
     private router: Router,
     public auth: Auth,
+<<<<<<< HEAD
+=======
+    private router: Router,
+    private socketService: SocketService // init!!!!!
+>>>>>>> 4afeb657dc1b3a1f7295f4701ed8061c14f6c9c5
   ) {
 
     this.user={

@@ -7,44 +7,51 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class SocketService {
-  $onMessage = this.socket.fromEvent<any>('onMessage');
-  constructor(private socket: Socket, private auth: Auth,) {
-    this.$onMessage.subscribe(e => {
-      console.log(e)
-    })
+  socketID = ''
+  roomID = ''
+  ffishID = ''
 
-    this.connectSocketServer()
+  constructor(private socket: Socket, private auth: Auth) {
+    this.connectServer()
   }
-  connectSocketServer() {
-    let user = { id: '', userName: '' }
+
+  connectServer() {
+    let user = { id: this.randomID(), name: '' }
     if (this.auth.currentUser != null) {
-      user.id = this.auth.currentUser.uid ?? this.getRandomId()
-      user.userName = this.auth.currentUser.displayName ?? ''
-    } else {
-      user.id = this.getRandomId()
-      user.userName = ''
+      user.id = this.auth.currentUser.uid
+      user.name = this.auth.currentUser.displayName ?? ''
     }
-    let data = { socketIO: 'kljasdasashdas', user: { id: 'asdasd', name: 'asdasdas' } }
+    let data = { user: user }
     this.socket.emit('connectServer', data)
+    this.socket.fromEvent<any>('onConnected').subscribe((e) => {
+      this.socketID = e
+      console.log(`my socket: [${e}]`)
+    })
   }
-  createRoom() {
 
+  createBOTXiangqi() {
+    this.socket.emit('createBOTXiangqi')
+    this.socket.fromEvent<any>('onCreateBOTXiangqi').subscribe((data: { mess: string, roomID: string, ffishid: string }) => {
+      console.log(data.mess)
+      this.roomID = data.roomID
+      this.ffishID = data.ffishid
+    })
   }
-  joinRoom() {
+  setMoveOnBOT(moveStr: string) {
+    let data = { ffishID: this.ffishID, move: moveStr }
+    this.socket.emit('setMoveOnBOT', data)
+    return this.socket.fromEvent<any>('onSetMoveOnBOT')
+  }
+  killFfish() {
+    this.socket.emit('killFfish', this.ffishID)
+  }
 
-  }
-  startGame2Player() {
 
+  randomID() {
+    let id = Date.now().toString()
+    return id + '-' + this.getRandomInt(0, 99).toString();
   }
-  startGameWithBot() {
-
-  }
-  moveChess() {
-
-  }
-  str = 'abcdefghijklmnopqrstuvwxyz'
-  getRandomId(): string {
-    let random = Math.floor(Math.random() * (this.str.length - 0 + 1) + 0); // The maximum is inclusive and the minimum is inclusive
-    return Date.now().toString() + this.str[random]
+  getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max++ - min) + min);
   }
 }
