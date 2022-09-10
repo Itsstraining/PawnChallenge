@@ -18,7 +18,7 @@ import { SocketService } from '../socket/socket.service';
   providedIn: 'root',
 })
 export class AuthService {
-  user = { id: '', name: '', img: '' }
+  user1 = { id: '', name: '', img: '' }
   constructor(
     private auth: Auth,
     private router: Router,

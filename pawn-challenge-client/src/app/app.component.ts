@@ -42,19 +42,19 @@ export class AppComponent {
     ////////////////////////////////////////////////////////////////
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.socketService.connectServer()
-        this.authService.user.id = user.uid
-        this.authService.user.name = user.displayName ?? ''
+        this.authService.user1.id = user.uid
+        this.authService.user1.name = user.displayName ?? ''
         localStorage.setItem('id', user.uid)
         localStorage.setItem('name', user.displayName ?? '')
+        this.socketService.connectServer()
       }
     })
-    this.authService.user.id = localStorage.getItem('id') ?? ''
-    this.authService.user.name = localStorage.getItem('name') ?? ''
-    this.authService.user.img = localStorage.getItem('img') ?? ''
-    if (this.authService.user.img == '') {
-      this.authService.user.img = 'a' + this.shareService.getRandomInt(1, 19).toString()
-      localStorage.setItem('img', this.authService.user.img)
+    this.authService.user1.id = localStorage.getItem('id') ?? ''
+    this.authService.user1.name = localStorage.getItem('name') ?? ''
+    this.authService.user1.img = localStorage.getItem('img') ?? ''
+    if (this.authService.user1.img == '') {
+      this.authService.user1.img = 'a' + this.shareService.getRandomInt(1, 19).toString()
+      localStorage.setItem('img', this.authService.user1.img)
     }
     ////////////////////////////////////////////////////////////////
 
@@ -100,6 +100,7 @@ export class AppComponent {
         });
       }
     });
+
   }
   clickCopy() {
     this.shareService.openSnackbar('copied', '✔️')

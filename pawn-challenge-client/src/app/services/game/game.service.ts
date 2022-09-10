@@ -14,7 +14,8 @@ import { AuthService } from '../auth/auth.service';
 export class GameService {
   modSelect = 2
   mods: Map<number, { id: number, des: string, des1: string, img: string }> = new Map()
-
+  enouPlayerOline = false
+  ownOfRoom = false
 
   // 0 offline || 1 with BOT || 2 online
   isGameStart = false
@@ -22,7 +23,7 @@ export class GameService {
   time = new Timer()
   //
   timePerTurn = 30
-  user = this.authService.user
+  user = this.authService.user1
   player1: Player
   player2!: Player
 
@@ -69,6 +70,10 @@ export class GameService {
 
     this.time.startCountDown()
     player1.chessControl.time.startCountDown()
+  }
+  startGameMode2(player1: Player, player2: Player) {
+    this.isGameStart = true;
+    this.currentUserIDControll = player1.id
   }
   endGame(player1: Player, player2: Player) {
     this.isGameStart = false
@@ -120,6 +125,24 @@ export class GameService {
       name: name,
       elo: 0,
       img: img,
+      isBase: isBase,
+      chessControl: {
+        chessNameCT: control,
+        time: new Timer(),
+        chessSDie: [],
+        isCheckmat: false,
+        isBot: isBot,
+        isNewPlayer: isNewPlayer
+      }
+    }
+    return player
+  }
+  newPlayer1(playerC: Player, control: string, isBase: boolean, isBot: boolean, isNewPlayer: boolean) {
+    let player: Player = {
+      id: playerC.id,
+      name: playerC.name,
+      elo: 0,
+      img: playerC.img,
       isBase: isBase,
       chessControl: {
         chessNameCT: control,

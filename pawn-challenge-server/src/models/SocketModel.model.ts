@@ -4,18 +4,19 @@ import { Timer } from "./timer"
 export class UserGame {
     uid: string
     roomId: string //roomId == '' => chưa tham gia phòng
-
     socketId: string
     name: string
     inGame: boolean
     chessControl: ChessControl
-    constructor(uid: string, name: string, socketId, roomId: string, inGame: boolean, chessControl: ChessControl) {
+    img: string
+    constructor(uid: string, name: string, socketId, roomId: string, inGame: boolean, chessControl: ChessControl, img: string) {
         this.uid = uid
         this.socketId = socketId
         this.name = name
         this.roomId = roomId
         this.inGame = inGame
         this.chessControl = chessControl
+        this.img = img
     }
 }
 

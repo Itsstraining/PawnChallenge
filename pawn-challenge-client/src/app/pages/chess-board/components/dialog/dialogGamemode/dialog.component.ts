@@ -28,7 +28,7 @@ export class DialogGameModComponent implements OnInit {
   }
 
   play() {
-    if(this.index == -1) return
+    if (this.index == -1) return
     this.gameService.modSelect = this.index
     if (this.userName1 == '') this.userName1 = 'Player 1'
     if (this.userName2 == '') this.userName2 = 'Player 2'
@@ -37,6 +37,18 @@ export class DialogGameModComponent implements OnInit {
 
   clickCopy() {
     this.shareService.openSnackbar('copied', '✔️')
+  }
+
+  invitTo() {
+    console.log(this.friendID)
+    this.socketService.socket.emit('invite', this.friendID)
+    this.socketService.socket.fromEvent('onInviteSS').subscribe((e) => {
+      if (e) {
+        this.shareService.openSnackbar(`Invite to [${this.friendID}] success`, 'ok')
+      }else{
+        this.shareService.openSnackbar(`Not found user [${this.friendID}]`, 'ok')
+      }
+    })
   }
 
 }

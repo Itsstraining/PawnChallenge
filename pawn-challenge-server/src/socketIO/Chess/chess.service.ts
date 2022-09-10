@@ -3,6 +3,7 @@ import { ChessControl, Room, UserGame } from 'src/models/SocketModel.model';
 import { Timer } from 'src/models/timer';
 import { Server } from "http";
 import * as ffish from 'ffish';
+import console from 'console';
 
 @Injectable()
 export class ChessService {
@@ -16,16 +17,16 @@ export class ChessService {
         this._ffishMap = new Map()
     }
 
-    connect(client, server: Server, user: { id, name, avatar }) {
+    connect(client, server: Server, user: { id, name, img }) {
         try {
             this._userGameMap.set(client.id, new UserGame(
                 user.id ?? '',
                 user.name ?? '',
                 client.id,
                 '', false,
-                new ChessControl('', '', new Timer())
+                new ChessControl('', '', new Timer()),
+                user.img
             ))
-            console.log(user.id + ': ' + user.name + '   ->' + this._userGameMap.size.toString())
             client.emit('onConnected', client.id)
         } catch (error) {
             console.log(error)
@@ -80,7 +81,7 @@ export class ChessService {
                 this._roomMap.get(this._userGameMap.get(client.id).roomId).ffishID = ffishID
             }
             let data = { mess: 'Create success', roomID: this._userGameMap.get(client.id).roomId, ffishid: ffishID }
-            console.log(`Có ${this._ffishMap.size} con cá (0.o)`)
+            // console.log(`Có ${this._ffishMap.size} con cá (0.o)`)
             client.emit('onCreateBOTXiangqi', data)
         } catch (error) {
             console.log(error)
@@ -113,11 +114,18 @@ export class ChessService {
         }
     }
 
-    inviteToRoom(client, server: Server, sidUserInvit){
-        
-    }
-
-    joinRoom(client, server: Server) {
+    invite(client, server: Server, sidUserInvit: string) {
+        let userInvite = this._userGameMap.get(sidUserInvit)
+        if (userInvite != null && client.id != sidUserInvit) {
+            client.emit('onInviteSS', true)
+            server.emit('onInvite', {
+                currenID: sidUserInvit,
+                roomID: this._userGameMap.get(client.id).roomId,
+                nameInvite: this._userGameMap.get(client.id).name
+            })
+        } else {
+            client.emit('onInviteSS', false)
+        }
 
     }
 
@@ -137,14 +145,45 @@ export class ChessService {
             room.roomID = roomID
             room.socketID1 = client.id
             this._roomMap.set(roomID, room)
-            server.emit('onCreateRoomSucess', roomID)
+            client.emit('onCreateRoomSucess', roomID)
         } catch (error) {
             console.log(error)
         }
     }
 
+    joinRoom(client, server: Server, roomID: string) {
+        try {
+            if (this._roomMap.get(this._userGameMap.get(client.id).roomId).roomID != '') {
+                this._roomMap.delete(this._userGameMap.get(client.id).roomId)
+            }
+            let getRoom = this._roomMap.get(roomID)
+            getRoom.socketID2 = client.id
+            this._userGameMap.get(client.id).roomId = roomID
+            this._roomMap.set(getRoom.roomID, getRoom)
+            server.emit('onJoinSucces',
+                {
+                    roomID: roomID,
+                    player: { username: this._userGameMap.get(getRoom.socketID1).name, img: this._userGameMap.get(getRoom.socketID1).img }
+                    , room: this._roomMap.get(roomID)
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    moveWithPlayer(client, server: Server, moveStr, roomID) {
+        server.emit('onChessMove', roomID, moveStr)
+    }
 
 
+
+    getUserBySID(client, server: Server, sid: string) {
+        try {
+            client.emit('onGetUserBySID', this._userGameMap.get(sid))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
     initBOTXiangqi() {

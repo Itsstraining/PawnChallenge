@@ -22,9 +22,10 @@ export class ChessGateway implements OnGatewayDisconnect {
 
   @SubscribeMessage('connectServer')
   handleConncectServer(
-    @MessageBody() data: { user: { id, name, avatar } },
+    @MessageBody() data: { user: { id, name, img } },
     @ConnectedSocket() client: any,
   ): void {
+    console.log(data)
     this.chessService.connect(client, this.server, data.user)
   }
 
@@ -54,4 +55,74 @@ export class ChessGateway implements OnGatewayDisconnect {
   ): void {
     this.chessService.createRoom(client, this.server)
   }
+
+  @SubscribeMessage('invite') invite(
+    @MessageBody() sid: string,
+    @ConnectedSocket() client: any,
+  ): void {
+    this.chessService.invite(client, this.server, sid)
+  }
+
+  @SubscribeMessage('joinRoom') joinRoom(
+    @MessageBody() rid: string,
+    @ConnectedSocket() client: any,
+  ): void {
+    console.log(rid)
+    this.chessService.joinRoom(client, this.server, rid)
+  }
+
+  @SubscribeMessage('getUserBySID') getUserBySID(
+    @MessageBody() sid: string,
+    @ConnectedSocket() client: any,
+  ): void {
+    this.chessService.getUserBySID(client, this.server, sid)
+  }
+
+  @SubscribeMessage('moveWithPlayer') moveWithPlayer(
+    @MessageBody() data: { roomID: string, moveStr: string },
+    @ConnectedSocket() client: any,
+  ): void {
+    this.chessService.moveWithPlayer(client, this.server, data.moveStr, data.roomID)
+  }
+
+
+
+  // createBOTXiangqi(client, server: Server) {
+  //   let ffishID = this.randomID('engine')
+  //   let ffish = {
+  //     id: ffishID,
+  //     board: this.initBOTXiangqi()
+  //   }
+  //   this.chessService._ffishMap.set(ffishID, ffish)
+  //   if (this.chessService._userGameMap.get(client.id) != null && this.chessService._userGameMap.get(client.id).roomId == '') {
+  //     let idRoom = this.randomID('room')
+  //     let room: Room = new Room()
+  //     room.socketID1 = client.id
+  //     room.roomID = idRoom
+  //     room.ffishID = ffishID
+  //     this.chessService._roomMap.set(idRoom, room)
+  //     this.chessService._userGameMap.get(client.id).roomId = idRoom
+  //   } else if (this.chessService._userGameMap.get(client.id) != null && this.chessService._userGameMap.get(client.id).roomId != '') {
+  //     let fishID = this.chessService._roomMap.get(this.chessService._userGameMap.get(client.id).roomId).ffishID
+  //     if (fishID != '') {
+  //       this.chessService._ffishMap.delete(fishID)
+  //     }
+  //     this.chessService._roomMap.get(this.chessService._userGameMap.get(client.id).roomId).ffishID = ffishID
+  //   }
+  //   let data = { mess: 'Create success', roomID: this.chessService._userGameMap.get(client.id).roomId, ffishid: ffishID }
+  //   client.emit('onCreateBOTXiangqi', data)
+  // }
+  initBOTXiangqi() {
+    let board = new ffish.Board("xiangqi", "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR[] w - - 0 1");
+    // console.log(board.toVerboseString())
+    return board
+  }
+  randomID(str: string) {
+    let id = Date.now().toString()
+    return id + '-' + str + this.getRandomInt(0, 99).toString();
+  }
+  getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max++ - min) + min);
+  }
 }
+

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Socket } from 'ngx-socket-io';
-import { User } from 'src/app/models/user.model';
 import { AuthService } from '../auth/auth.service';
 import { ShareService } from '../share/share.service';
 
@@ -13,16 +12,16 @@ export class SocketService {
   roomID = ''
   ffishID = ''
 
-  constructor(private socket: Socket, private auth: AuthService, private shareService: ShareService) {
+  constructor(public socket: Socket, private auth: AuthService, private shareService: ShareService) {
     this.connectServer()
   }
 
   connectServer() {
-    if (this.auth.user.id == '') {
+    if (this.auth.user1.id == '') {
       return
     }
     if (this.socketID != '') return
-    let data = { user: this.auth.user }
+    let data = { user: this.auth.user1 }
     this.socket.emit('connectServer', data)
     this.socket.fromEvent<any>('onConnected').subscribe((e) => {
       this.socketID = e
@@ -43,6 +42,10 @@ export class SocketService {
       this.roomID = data.roomID
       this.ffishID = data.ffishid
     })
+  }
+  setMoveOnPlayer(moveStr: string) {
+    let data = { roomID: this.roomID, moveStr: moveStr }
+    this.socket.emit('moveWithPlayer', data)
   }
   setMoveOnBOT(moveStr: string) {
     let data = { ffishID: this.ffishID, move: moveStr }

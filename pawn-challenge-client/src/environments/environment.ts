@@ -14,7 +14,8 @@ export const environment = {
     measurementId: 'G-E9HG4B1B53',
   },
   production: false,
-  endPoint: 'http://localhost:3000/',
+  // endPoint: 'http://localhost:3000/',
+
 };
 
 /*

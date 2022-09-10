@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-invite',
@@ -8,7 +8,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogInviteComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<DialogInviteComponent>,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public nameInvite:string,private dialogRef: MatDialogRef<DialogInviteComponent>,) {
+    console.log('alo')
+  }
 
   ngOnInit(): void {
   }

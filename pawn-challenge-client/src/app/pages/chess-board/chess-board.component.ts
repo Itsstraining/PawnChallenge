@@ -12,6 +12,7 @@ import { ShareService } from 'src/app/services/share/share.service';
 import { DialogLoseComponent } from './components/dialog/dialog-lose/dialog-lose.component';
 import { DialogToCaptureComponent } from './components/dialog-to-capture/dialog-to-capture.component';
 import { DialogInviteComponent } from './components/dialog/dialogInvite/dialog-invite/dialog-invite.component';
+import { SocketService } from 'src/app/services/socket/socket.service';
 
 @Component({
   selector: 'app-chess-board',
@@ -33,7 +34,8 @@ export class ChessBoardComponent implements OnInit {
     public skinChess: ChessSkinService,
     private historyMoveService: HistoryService,
     public dialog: MatDialog,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private socketService: SocketService
 
   ) {
     this.grap = this.historyMoveService.newGrap();
@@ -85,6 +87,8 @@ export class ChessBoardComponent implements OnInit {
           this.getCurrentUser().chessControl.isCheckmat = true
         }
       }
+      let moveStr = ''
+      this.socketService.setMoveOnPlayer(moveStr)
 
       this.chessService.setDrawOrWin(this.table, this.gameService.getCurrentUser())
     }
@@ -166,31 +170,107 @@ export class ChessBoardComponent implements OnInit {
       }
     })
 
+    this.socketService.socket.fromEvent<{ currenID: string, nameInvite: string, roomID: string }>('onInvite').subscribe((e) => {
+      if (e.currenID == this.socketService.socketID) {
+        this.dialog.open(DialogInviteComponent, {
+          width: '33em',
+          data: e.nameInvite
+        }).afterClosed().subscribe((data) => {
+          if (data.isAccept) {
+            this.socketService.roomID = e.roomID
+            this.socketService.socket.emit('joinRoom', e.roomID)
+          }
+        })
+      }
+    })
 
-    this.dialog.open(DialogInviteComponent, {
-      width: '33em',
-    }).afterClosed().subscribe((data)=>{console.log(data)})
-  }
-  openDialogLose() {
-    this.dialog.open(DialogLoseComponent, {
-      panelClass: 'dialogDraw',
-      width: '42em',
-    });
+
+    this.socketService.socket.fromEvent<{
+      roomID: string, player: { username: string, img: string }, room: {
+        roomID: string
+        socketID1: string
+        socketID2: string
+        ffishID: string
+        board: ''
+      }
+    }>('onJoinSucces').subscribe((e) => {
+      if (this.socketService.roomID == e.roomID) {
+        if (e.room.socketID1 == this.socketService.socketID) {// chu phong
+          this.gameService.ownOfRoom = true
+          this.gameService.player1 = this.gameService.newPlayer1(
+            this.gameService.player1, 'VHTMXC',
+            true, false, false
+          )
+          this.socketService.socket.emit('getUserBySID', e.room.socketID2)
+          this.socketService.socket.fromEvent<{ name: string, img: string }>('onGetUserBySID').subscribe((e) => {
+            this.gameService.player2 = this.gameService.newPlayer(
+              e.name, e.name,
+              e.img, 'vhtmxc',
+              false, false, true
+            )
+          })
+          this.gameService.enouPlayerOline = true
+        }
+        else if (e.room.socketID2 == this.socketService.socketID) {
+          this.gameService.ownOfRoom = false
+          this.gameService.player2 = this.gameService.newPlayer1(
+            this.gameService.player1, 'vhtmxc',
+            true, false, false
+          )
+          this.gameService.player1 = this.gameService.newPlayer(
+            e.player.username, e.player.username,
+            e.player.img, 'VHTMXC',
+            false, false, true
+          )
+          this.gameService.enouPlayerOline = true
+        }
+      }
+
+    })
+
   }
 
+  playerMove() {
+  //   let res = this.historyMoveService.grapStrToPosition(dataRes.moveTo)
+  //   this.chessService.moveNoDot(this.table[res.fromP.y][res.fromP.x].chess, res.toPosition, this.table)
+
+  //   this.chess = this.table[res.toPosition.y][res.toPosition.x].chess
+
+  //   this.chessService.fromPosition = res.fromP
+  //   this.chessService.toPosition = res.toPosition
+  //   this.grap = this.historyMoveService.newGrap();
+  //   this.addGrapToHistoryService(this.chessService.fromPosition, this.chessService.toPosition)
+
+  //   this.gameService.getCurrentUser().chessControl.isCheckmat = false
+  //   this.gameService.changeCurrentPlayer(this.gameService.player1, this.gameService.player2)
+
+  //   let isCheckmat = this.chessService.isCheckmatAll(this.chess, this.table)
+  //   if (isCheckmat) {
+  //     this.gameService.getCurrentUser().chessControl.isCheckmat = true
+  //   }
+  //   this.chessService.setDrawOrWin(this.table, this.gameService.getCurrentUser())
+  // }
+}
 
 
-  openDialogWin() {
-    this.dialog.open(DialogWinComponent, {
-      panelClass: 'dialogDraw',
-      width: '42em',
-    });
-  }
+openDialogLose() {
+  this.dialog.open(DialogLoseComponent, {
+    panelClass: 'dialogDraw',
+    width: '42em',
+  });
+}
 
-  drag(ev: any) {
-    ev.dataTransfer.setData("text", ev.target.id);
-  }
-  allowDrop(ev: Event) {
-    ev.preventDefault();
-  }
+openDialogWin() {
+  this.dialog.open(DialogWinComponent, {
+    panelClass: 'dialogDraw',
+    width: '42em',
+  });
+}
+
+drag(ev: any) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+allowDrop(ev: Event) {
+  ev.preventDefault();
+}
 }
